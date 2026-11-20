@@ -1,4 +1,70 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Indaga Studios</title>
-<style>body{margin:0;background:#121214;color:#ededed;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Inter",sans-serif}main{max-width:720px;margin:0 auto;padding:48px 16px}a{color:#fff}</style></head>
-<body><main><h1>Indaga Studios</h1><p>Independent comics and animation studio.</p><p><a href="postest/">Postest</a></p></main></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DAGA's digibook · Daniela Gamarra · AI Filmmaker, Director & Visual Developer</title>
+<meta name="description" content="Daga (Daniela Gamarra): AI filmmaker, director and visual developer in Toronto. Queer animated stories, games, comics, illustration and creative tools. Digital sketchbook portfolio and CV.">
+<meta name="theme-color" content="#0c0e1a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DAGA's digibook · portfolio + CV">
+<meta property="og:description" content="Queer animated stories, made with a human-first AI pipeline: the artist leads, the tools follow.">
+<meta property="og:url" content="https://danielagamarra.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://danielagamarra.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2eee4'/%3E%3Ctext x='32' y='45' font-family='monospace' font-size='38' font-weight='800' text-anchor='middle' fill='%23161410'%3ED%3C/text%3E%3Cpath d='M12 52 C 24 47, 40 56, 52 50' stroke='%23c8f53a' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Daniela Gamarra","alternateName":"Daga","jobTitle":"AI Filmmaker, Director & Visual Developer","address":{"@type":"PostalAddress","addressLocality":"Toronto","addressCountry":"CA"},"url":"https://danielagamarra.github.io/","sameAs":["https://www.instagram.com/in.daga","https://www.tiktok.com/@in.daga","https://www.linkedin.com/in/daniela-gamarra-saenz"],"alumniOf":["University of British Columbia","Pontifical Catholic University of Peru"]}
+</script>
+</head>
+<body>
+<!-- top bar -->
+<header class="bar">
+  <a class="brand" href="#cover" data-go="cover"><span class="brand-d">DAGA</span><span class="brand-s">'s digibook</span></a>
+  <div class="bar-tools">
+    <button class="tool" id="btn-doodle" aria-pressed="false" title="Doodle on the digibook">✎ <span>doodle</span></button>
+    <button class="tool" id="btn-fit" title="See every page">⌖ <span>all pages</span></button>
+    <button class="tool tool-cv" id="btn-cv" title="Read it as a CV">≡ <span>CV mode</span></button>
+  </div>
+</header>
+
+<!-- sketchbook index tabs -->
+<nav class="tabs" id="tabs" aria-label="Digibook pages"></nav>
+
+<!-- doodle palette -->
+<div class="palette" id="palette" hidden>
+  <button data-ink="ink" class="on" aria-label="Ink pen"><i style="background:var(--ink)"></i></button>
+  <button data-ink="blue" aria-label="Blue pen"><i style="background:var(--blue)"></i></button>
+  <button data-ink="red" aria-label="Red pen"><i style="background:var(--red)"></i></button>
+  <button data-ink="lime" aria-label="Highlighter"><i style="background:var(--lime)"></i></button>
+  <button data-act="undo" aria-label="Undo">↶</button>
+  <button data-act="clear" aria-label="Clear doodles">✕</button>
+  <span class="palette-hint">draw anywhere · your doodles stay on this device</span>
+</div>
+
+<!-- the desk (infinite canvas) -->
+<main class="desk" id="desk">
+  <div class="world" id="world">
+    <svg class="ink-layer" id="ink-layer" aria-hidden="true"></svg>
+  </div>
+</main>
+
+<div class="hud" id="hud" aria-hidden="true"></div>
+<div class="hint" id="hint">drag to move · scroll to pan · pinch or ⌘ + scroll to zoom</div>
+
+<!-- project page (detail) -->
+<div class="sheet-wrap" id="sheet-wrap" hidden>
+  <article class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"></article>
+</div>
+
+<!-- CV mode -->
+<section class="cv" id="cv" hidden aria-label="Curriculum vitae"></section>
+
+<noscript><p style="padding:24px;font:16px/1.5 sans-serif">Daga (Daniela Gamarra) · AI Filmmaker, Director & Visual Developer · Toronto. This digibook needs JavaScript. LinkedIn: linkedin.com/in/daniela-gamarra-saenz</p></noscript>
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>

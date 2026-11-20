@@ -1,0 +1,29 @@
+name: Substack posts
+
+on:
+  schedule:
+    - cron: '17 * * * *'   # every hour
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+  push:
+    paths: ['assets/content.js']
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/substack.mjs
+      - name: Commit if changed
+        run: |
+          if git diff --quiet assets/writing.json; then echo "nothing new"; exit 0; fi
+          git config user.name "substack-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/writing.json
+          git commit -m "Update Substack posts"
+          git push
