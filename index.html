@@ -45,13 +45,17 @@
   <button data-ink="lime" aria-label="Highlighter"><i style="background:var(--lime)"></i></button>
   <button data-act="undo" aria-label="Undo">↶</button>
   <button data-act="clear" aria-label="Clear doodles">✕</button>
+  <button data-act="save" class="save" hidden>⤓ save for everyone</button>
   <span class="palette-hint">draw anywhere · your doodles stay on this device</span>
 </div>
 
 <!-- the desk (infinite canvas) -->
 <main class="desk" id="desk">
   <div class="world" id="world">
+    <svg class="wlayer" id="sketch-bg" aria-hidden="true"></svg>
+    <svg class="wlayer" id="shared-ink" aria-hidden="true"></svg>
     <svg class="ink-layer" id="ink-layer" aria-hidden="true"></svg>
+    <svg class="wlayer" id="trail" aria-hidden="true"></svg>
   </div>
 </main>
 

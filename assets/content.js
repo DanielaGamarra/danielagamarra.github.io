@@ -4,6 +4,8 @@
 //  - img:  path to an image (e.g. "assets/img/aota.webp"). It shows as
 //          ASCII art and turns into the real picture on hover.
 //  - motif: emoji used to draw the ASCII thumb when there is no img yet.
+//  - video: a YouTube or Vimeo link (unlisted is fine). It plays inside
+//          the project page. Add vertical: true for 9:16 episodes.
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
 // =====================================================================
@@ -156,7 +158,7 @@ export const projects = [
     kind: 'Interactive experience · 2SLGBTQ+ inclusion',
     role: 'Lead designer, producer',
     year: '2021–2025',
-    motif: '💗',
+    motif: '🌈',
     blurb: 'An educational interactive experience about 2SLGBTQ+ inclusion, made at Indaga Studios.',
   },
   {

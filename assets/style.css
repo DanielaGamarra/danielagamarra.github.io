@@ -113,6 +113,33 @@ mark { background: linear-gradient(transparent 12%, var(--lime) 12%, var(--lime)
 .world { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
 .ink-layer { position: absolute; left: -20000px; top: -20000px; width: 40000px; height: 40000px; overflow: visible; pointer-events: none; z-index: 30; }
 .ink-layer path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+/* pencil sketches, shared doodles, drawing-hand trail */
+.wlayer { position: absolute; left: -20000px; top: -20000px; width: 40000px; height: 40000px; overflow: visible; pointer-events: none; }
+#sketch-bg { z-index: 0; }
+#shared-ink { z-index: 29; }
+#trail { z-index: 31; }
+.wlayer path, .sketch-over path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#shared-ink path { stroke-linecap: round; stroke-linejoin: round; }
+.sketch-over { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 6; }
+.sk path { stroke: var(--pencil); stroke-width: 1.4; opacity: .62; }
+.sk path.b { opacity: .3; }
+.sk.red path { stroke: var(--red); stroke-width: 2.4; opacity: .85; }
+.sk.red path.b { opacity: .35; }
+.skt { font: 700 26px var(--hand); fill: var(--pencil); opacity: .75; }
+.skt.red { fill: var(--red); opacity: .95; }
+.skt.big { font-size: 34px; }
+.trail-seg { stroke: var(--lime); stroke-width: 5; opacity: .9; mix-blend-mode: var(--tape-blend); }
+.trail-seg.old { opacity: .32; }
+#hand { opacity: 0; transition: opacity .35s; }
+#hand .h { fill: var(--paper); stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; }
+#hand .ln { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
+#hand .nib { fill: var(--lime); stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; }
+body.flow .wlayer, body.flow .sketch-over { display: none; }
+.palette .save { width: auto !important; padding: 0 12px; font: 700 12px var(--mono); background: var(--lime); color: var(--on-lime); border-radius: 999px; white-space: nowrap; }
+.play { color: var(--red); font-weight: 800; }
+.sheet .video { position: relative; aspect-ratio: 16 / 9; margin: 0 0 14px; background: #000; }
+.sheet .video.vertical { aspect-ratio: 9 / 16; max-height: 70vh; margin-inline: auto; }
+.sheet .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 body.doodling .desk { cursor: crosshair; }
 body.doodling .page, body.doodling .card { pointer-events: none; }
 
@@ -164,7 +191,6 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .card:hover .thumb::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(42,60,255,.08) 3px 4px); animation: scan 3s linear infinite; }
 @keyframes scan { to { background-position: 0 40px; } }
 .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s; }
-.card:hover .card:hover .thumb::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(42,60,255,.08) 3px 4px); animation: scan 3s linear infinite; }
 @keyframes scan { to { background-position: 0 40px; } }
 .thumb img { opacity: 1; }
 .kind { font: 700 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--pencil); }

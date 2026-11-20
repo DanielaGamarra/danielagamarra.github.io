@@ -379,7 +379,7 @@ function cardEl(p) {
   el.style.transform = 'rotate(var(--r))';
   el.innerHTML = `
     <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ''}</div>
-    <div class="kind">${esc(p.kind)}</div>
+    <div class="kind">${esc(p.kind)}${p.video ? ' · <b class="play">▶ watch</b>' : ''}</div>
     <h3>${esc(p.title)}</h3>
     ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ''}
     <p>${esc(p.blurb)}</p>
@@ -437,9 +437,9 @@ function buildCover() {
       </div>
     </div>
     <div class="cover-cta">
-      <a class="cta dark" href="#films" data-go="films">see the work →</a>
+      <a class="cta dark" href="#films" data-go="films">▶ watch</a>
+      <a class="cta" href="#about" data-go="about">contact ✉</a>
       <a class="cta" href="#cv" data-cv>read it as a CV</a>
-      <a class="cta" href="mailto:${esc(C.site.email)}">say hola ✉</a>
     </div>
     <div class="stats">${C.site.stats.map((s) => `<div class="stat"><b>${esc(s.n)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>`;
   el.append(
@@ -586,6 +586,9 @@ function refreshAll() {
   $$('.card').forEach(setRough);
   heroAscii.resize(); flow.render(); bubble && bubble.render();
   thumbs.forEach((a) => a.resize());
+  seedSketch();
+  clearTrail();
+  sharedRender();
   inkRender();
 }
 
@@ -637,6 +640,7 @@ function goTo(id, smooth = true) {
   if (FLOW) { el.scrollIntoView({ behavior: smooth && !REDUCE ? 'smooth' : 'auto', block: 'start' }); return; }
   const t = viewFor(el._rect, { maxZ: id === 'cover' ? 1 : 0.95, alignTop: true });
   smooth ? flyTo(t) : (Object.assign(cam, t), applyCam());
+  if (smooth) drawTrail(id);
 }
 function fitAll() { flyTo(viewFor(bounds, { maxZ: 1, alignTop: false, pad: 40 }), 1100); }
 
@@ -764,8 +768,9 @@ function smoothPath(pts) {
 function inkRender(onlyLast) {
   inkLayer.setAttribute('viewBox', '-20000 -20000 40000 40000');
   if (onlyLast && inkLayer.lastElementChild && stroke) { inkLayer.lastElementChild.setAttribute('d', smoothPath(stroke.pts)); return; }
-  inkLayer.innerHTML = strokes.map((s) => { const [c, w, o] = INK[s.c] || INK.ink; return `<path d="${smoothPath(s.pts)}" stroke="${c}" stroke-width="${w}" opacity="${o}"${s.c === 'lime' ? ' style="mix-blend-mode:var(--tape-blend)"' : ''}/>`; }).join('');
+  inkLayer.innerHTML = strokes.map(strokeSvg).join('');
 }
+function strokeSvg(s) { const [c, w, o] = INK[s.c] || INK.ink; return `<path d="${smoothPath(s.pts)}" stroke="${c}" stroke-width="${w}" opacity="${o}"${s.c === 'lime' ? ' style="mix-blend-mode:var(--tape-blend)"' : ''}/>`; }
 function setDoodle(on) {
   doodling = on && !FLOW;
   document.body.classList.toggle('doodling', doodling);
@@ -778,6 +783,7 @@ $('#palette').addEventListener('click', (e) => {
   if (b.dataset.ink) { inkColor = b.dataset.ink; $$('#palette [data-ink]').forEach((x) => x.classList.toggle('on', x === b)); }
   if (b.dataset.act === 'undo') { strokes.pop(); store.set('daga-doodles', strokes); inkRender(); }
   if (b.dataset.act === 'clear') { strokes = []; store.set('daga-doodles', strokes); inkRender(); }
+  if (b.dataset.act === 'save') saveForEveryone();
 });
 $('#btn-fit').addEventListener('click', fitAll);
 function setTheme(t) {
@@ -805,6 +811,7 @@ function openSheet(p) {
     <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}">` : ''}</div>
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
     <h2 id="sheet-title">${esc(p.title)}</h2>
+    ${p.video && embedUrl(p.video) ? `<div class="video${p.vertical ? ' vertical' : ''}"><iframe src="${esc(embedUrl(p.video))}" title="${esc(p.title)} video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : ''}
     ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ''}
     <span class="role">${esc(p.role)}</span>
     <p>${esc(p.blurb)}</p>
@@ -819,6 +826,13 @@ function openSheet(p) {
   $('.close', sheet).addEventListener('click', closeSheet);
   $('.close', sheet).focus();
   history.replaceState(null, '', '#' + p.id);
+}
+function embedUrl(u) {
+  const y = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/);
+  if (y) return `https://www.youtube-nocookie.com/embed/${y[1]}`;
+  const v = u.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/(\w+))?/);
+  if (v) return `https://player.vimeo.com/video/${v[1]}${v[2] ? `?h=${v[2]}` : ''}`;
+  return '';
 }
 function closeSheet() {
   sheetWrap.hidden = true;
@@ -875,6 +889,182 @@ document.addEventListener('click', (e) => {
   if (cv) { e.preventDefault(); setCV(true); }
 });
 
+
+// ------------------------------------------------------------ pencil sketches over pages + space
+// Seeded (same every visit) grey pencil doodles: in the space between
+// pages, hanging off page corners, circling page numbers and ringing the
+// featured project of each page with a red marker note.
+const sketchBg = $('#sketch-bg'), sharedInk = $('#shared-ink'), trailLayer = $('#trail');
+const WVB = '-20000 -20000 40000 40000';
+[sketchBg, sharedInk, trailLayer].forEach((s) => s.setAttribute('viewBox', WVB));
+Object.assign(DOODLES, {
+  comet: 'M78 22 C 86 22, 90 28, 90 32 C 90 38, 84 42, 78 42 C 72 42, 68 36, 68 32 C 68 26, 72 22, 78 22 Z M70 40 C 50 56, 30 70, 8 84 M72 30 C 52 40, 34 50, 14 60 M80 44 C 70 62, 56 78, 38 94',
+  crosshair: 'M50 8 L50 92 M8 50 L92 50 M36 50 C 36 42, 42 36, 50 36 C 58 36, 64 42, 64 50 C 64 58, 58 64, 50 64 C 42 64, 36 58, 36 50 Z',
+  asteroid: 'M30 20 C 50 8, 74 16, 84 34 C 94 54, 86 78, 64 86 C 42 94, 18 82, 14 60 C 10 42, 16 30, 30 20 Z M36 40 C 40 36, 46 38, 46 44 M60 60 C 64 56, 70 60, 68 66 M58 30 l2 2',
+});
+const allPages = () => [$('#cover'), ...pageEls];
+function relBox(node, page) {
+  let x = 0, y = 0, n = node;
+  while (n && n !== page) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+  return { x, y, w: node.offsetWidth, h: node.offsetHeight };
+}
+function sk(name, x, y, w, rot = 0, cls = '') {
+  const d = DOODLES[name], s = (w / 100).toFixed(3);
+  return `<g class="sk ${cls}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)}) scale(${s}) translate(-50 -50)"><path d="${d}" vector-effect="non-scaling-stroke"/><path class="b" d="${d}" transform="translate(1.4 -1) rotate(1.2 50 50)" vector-effect="non-scaling-stroke"/></g>`;
+}
+const skText = (t, x, y, rot = -3, cls = '') => `<text class="skt ${cls}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" transform="rotate(${rot} ${x.toFixed(1)} ${y.toFixed(1)})">${esc(t)}</text>`;
+function looseOval(cx, cy, rx, ry, seed) {
+  const r = rng(seed), a0 = r() * 6.28, n = 28, pts = [];
+  for (let i = 0; i <= n + 5; i++) {
+    const a = a0 + (i / n) * Math.PI * 2, k = 1 + (r() - 0.5) * 0.05 + i * 0.0015;
+    pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]);
+  }
+  return smoothPath(pts);
+}
+const BG_PICKS = ['planet', 'rocket', 'ufo', 'orbit', 'constellation', 'satellite', 'sparkle', 'star', 'comet', 'crosshair', 'asteroid', 'spiral', 'squiggle', 'eye'];
+const BG_NOTES = ['unexplored ✦', 'here be dragons', 'note to self: sleep', 'more pages soon', 'berlin was here', 'sector unmapped', 'x marks nothing', 'ideas go here'];
+const FEATURE_NOTES = { aota: 'start here!', 'hd-web': 'I built this', cusco: 'my own game!', mod: '100% by hand', indaga: 'my studio' };
+function seedSketch() {
+  if (FLOW) { sketchBg.innerHTML = ''; $$('.sketch-over').forEach((s) => s.remove()); return; }
+  const rects = allPages().map((el) => el._rect);
+  const r = rng('sketch'), out = [], spots = [];
+  const B = { x: bounds.x - 520, y: bounds.y - 420, w: bounds.w + 1040, h: bounds.h + 840 };
+  const clear = (x, y, mx, my) => rects.every((q) => x < q.x - mx || x > q.x + q.w + mx || y < q.y - my || y > q.y + q.h + my);
+  let notes = 0;
+  for (let i = 0; i < 2000 && spots.length < 52; i++) {
+    const x = B.x + r() * B.w, y = B.y + r() * B.h;
+    const note = notes < BG_NOTES.length && r() < 0.2;
+    const w = 46 + r() * 74;
+    if (note ? !clear(x, y, 150, 40) : !clear(x, y, w * 0.6 + 16, w * 0.6 + 16)) continue;
+    if (spots.some(([sx, sy]) => Math.hypot(sx - x, sy - y) < 190)) continue;
+    spots.push([x, y]);
+    if (note) out.push(skText(BG_NOTES[notes++], x, y, (r() - 0.5) * 12));
+    else out.push(sk(BG_PICKS[(r() * BG_PICKS.length) | 0], x, y, w, (r() - 0.5) * 50));
+  }
+  sketchBg.innerHTML = out.join('');
+
+  for (const el of allPages()) {
+    let o = el.querySelector(':scope > .sketch-over');
+    if (!o) { o = document.createElementNS(NS, 'svg'); o.setAttribute('class', 'sketch-over'); o.setAttribute('aria-hidden', 'true'); el.append(o); }
+    const W = el.offsetWidth, H = el.offsetHeight, pr = rng('over-' + el.id);
+    o.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    let s = '';
+    const no = $('.page-no', el);
+    if (no && el.id !== 'cover') {
+      const b = relBox(no, el);
+      s += `<g class="sk"><path d="${looseOval(b.x + b.w / 2, b.y + b.h / 2, b.w / 2 + 14, b.h / 2 + 10, el.id)}" vector-effect="non-scaling-stroke"/></g>`;
+    }
+    // one doodle hanging off the page edge, half on the paper, half in space
+    const right = pr() > 0.5;
+    s += sk(BG_PICKS[(pr() * BG_PICKS.length) | 0], right ? W + 6 : -6, right ? H * (0.45 + pr() * 0.4) : H * (0.25 + pr() * 0.5), 80 + pr() * 30, (pr() - 0.5) * 40);
+    const f = $('.card.featured', el);
+    if (f && FEATURE_NOTES[f.dataset.id]) {
+      const b = relBox(f, el), cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+      s += `<g class="sk red"><path d="${looseOval(cx, cy, b.w / 2 + 16, b.h / 2 + 12, f.dataset.id)}" vector-effect="non-scaling-stroke"/></g>`;
+      s += skText(FEATURE_NOTES[f.dataset.id], b.x + b.w - 30, b.y - 30, -5, 'red big');
+      s += sk('arrowDown', b.x + b.w - 70, b.y - 4, 56, -30, 'red');
+    }
+    o.innerHTML = s;
+  }
+}
+
+// ------------------------------------------------------------ the drawing hand
+// Every time you travel to a page, a hand with a marker draws one line
+// from the last title you visited to the new one and underlines it.
+const HAND = `<g id="hand" aria-hidden="true"><g transform="translate(-20 -220)">
+  <path class="nib" d="M20 220 L30 196 L44 210 Z"/>
+  <path class="h" d="M30 196 L130 96 L144 110 L44 210 Z"/><path class="ln" d="M52 174 L66 188"/>
+  <path class="h" d="M200 -10 C 170 20, 140 50, 118 76 C 100 96, 80 118, 62 140 C 54 150, 58 162, 70 160 C 84 150, 96 140, 108 132 C 116 140, 118 152, 110 160 C 102 168, 90 172, 80 176 C 70 180, 70 192, 82 192 C 110 186, 150 176, 190 160 C 210 152, 230 150, 260 152 L260 -10 Z"/>
+  <path class="ln" d="M64 150 C 68 145, 74 147, 74 152 M120 100 C 127 105, 129 111, 126 118 M112 160 C 120 164, 128 166, 136 166 M128 180 C 134 177, 140 177, 146 179 M214 -10 C 224 40, 238 92, 260 126"/>
+</g></g>`;
+let trailLast = null, trailRun = 0, hand = null;
+function anchorOf(id) {
+  const el = document.getElementById(id);
+  if (!el || !el._rect) return null;
+  const t = id === 'cover' ? $('.ascii-name', el) : $('.page-title', el);
+  if (!t) return null;
+  const b = relBox(t, el), q = el._rect, w = id === 'cover' ? b.w * 0.78 : b.w;
+  return { id, x0: q.x + b.x - 12, x1: q.x + b.x + w + 18, y: q.y + b.y + b.h + (id === 'cover' ? 2 : 12) };
+}
+function clearTrail() { $$('.trail-seg', trailLayer).forEach((p) => p.remove()); trailLast = null; trailRun++; if (hand) hand.style.opacity = 0; }
+function drawTrail(id) {
+  if (FLOW || document.body.classList.contains('cv-on')) return;
+  const a = anchorOf(id);
+  if (!a || (trailLast && trailLast.id === id)) return;
+  if (!hand) { trailLayer.insertAdjacentHTML('beforeend', HAND); hand = $('#hand', trailLayer); }
+  const r = rng(id + trailRun), n = Math.max(4, Math.round((a.x1 - a.x0) / 70)), u = [];
+  for (let i = 0; i <= n; i++) u.push([a.x0 + ((a.x1 - a.x0) * i) / n, a.y + (r() - 0.5) * 8 - (i === n ? 12 : 0)]);
+  let d = smoothPath(u);
+  if (trailLast) {
+    const s = [trailLast.x1, trailLast.y], e = u[0];
+    const dx = e[0] - s[0], dy = e[1] - s[1], L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L;
+    const k = Math.min(380, L * 0.28) * (trailRun % 2 ? 1 : -1);
+    const m = [s[0] + dx / 2 + nx * k * 0.5, s[1] + dy / 2 + ny * k * 0.5];
+    d = `M${s[0].toFixed(1)} ${s[1].toFixed(1)} C${(s[0] + dx * 0.1 + nx * k).toFixed(1)} ${(s[1] + dy * 0.1 + ny * k).toFixed(1)} ${(m[0] - dx * 0.2).toFixed(1)} ${(m[1] - dy * 0.2).toFixed(1)} ${m[0].toFixed(1)} ${m[1].toFixed(1)} S${(e[0] - dx * 0.12 - nx * k * 0.4).toFixed(1)} ${(e[1] - dy * 0.12 - ny * k * 0.4).toFixed(1)} ${e[0].toFixed(1)} ${e[1].toFixed(1)} ` + d.replace(/^M[^QL]*/, '');
+  }
+  const path = document.createElementNS(NS, 'path');
+  path.setAttribute('class', 'trail-seg'); path.setAttribute('d', d);
+  const segs = $$('.trail-seg', trailLayer);
+  segs.forEach((p) => p.classList.add('old'));
+  if (segs.length > 4) segs[0].remove();
+  trailLayer.insertBefore(path, hand);
+  trailLast = a;
+  const run = ++trailRun;
+  if (REDUCE) return;
+  const L = path.getTotalLength(), t0 = performance.now(), D = Math.min(2300, 700 + L * 0.4);
+  path.style.strokeDasharray = L; path.style.strokeDashoffset = L;
+  hand.style.opacity = 1;
+  const step = (now) => {
+    if (run !== trailRun) { path.style.strokeDasharray = 'none'; return; }
+    const k = Math.min(1, (now - t0) / D), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    path.style.strokeDashoffset = L * (1 - e);
+    const p = path.getPointAtLength(L * e);
+    hand.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) scale(${(0.72 / cam.z).toFixed(3)})`);
+    if (k < 1) requestAnimationFrame(step);
+    else { path.style.strokeDasharray = 'none'; setTimeout(() => { if (run === trailRun) hand.style.opacity = 0; }, 500); }
+  };
+  requestAnimationFrame(step);
+}
+
+// ------------------------------------------------------------ shared doodles (author mode)
+// assets/doodles.json holds doodles Daga drew herself; every visitor sees
+// them. Open the site with ?author to edit them (?author=off to leave).
+// Points are stored relative to a page so they stay put when layout moves.
+const qs = new URLSearchParams(location.search);
+if (qs.has('author')) store.set('daga-author', qs.get('author') !== 'off');
+const AUTHOR = store.get('daga-author', false);
+let shared = [];
+async function loadShared() {
+  try { const r = await fetch('assets/doodles.json', { cache: 'no-cache' }); if (r.ok) shared = (await r.json()).strokes || []; } catch {}
+}
+function toWorld(s) { const el = document.getElementById(s.p), q = el && el._rect; return q ? { c: s.c, pts: s.pts.map(([x, y]) => [x + q.x, y + q.y]) } : null; }
+function toRel(s) {
+  const [px, py] = s.pts[0];
+  let best = null, bd = Infinity;
+  for (const el of allPages()) {
+    const q = el._rect, d = Math.hypot(Math.max(q.x - px, 0, px - q.x - q.w), Math.max(q.y - py, 0, py - q.y - q.h));
+    if (d < bd) { bd = d; best = el; }
+  }
+  const q = best._rect;
+  return { c: s.c, p: best.id, pts: s.pts.map(([x, y]) => [Math.round((x - q.x) * 10) / 10, Math.round((y - q.y) * 10) / 10]) };
+}
+function sharedRender() { sharedInk.innerHTML = AUTHOR ? '' : shared.map(toWorld).filter(Boolean).map(strokeSvg).join(''); }
+async function saveForEveryone() {
+  const data = JSON.stringify({ v: 1, note: 'Doodles Daga drew in author mode (open the site with ?author). Points are relative to page "p".', strokes: strokes.filter((s) => s.pts.length).map(toRel) }) + '\n';
+  const hint = $('#palette .palette-hint');
+  try {
+    if (window.showSaveFilePicker) {
+      const h = await showSaveFilePicker({ suggestedName: 'doodles.json', types: [{ description: 'Doodles', accept: { 'application/json': ['.json'] } }] });
+      const w = await h.createWritable(); await w.write(data); await w.close();
+      hint.textContent = 'saved ✓ put it in assets/ and push (or ask Claude)';
+      return;
+    }
+  } catch (e) { if (e.name === 'AbortError') return; }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' })); a.download = 'doodles.json'; a.click();
+  hint.textContent = 'downloaded ✓ put doodles.json in assets/ and push';
+}
+
 // ------------------------------------------------------------ boot
 async function boot() {
   try {
@@ -892,7 +1082,14 @@ async function boot() {
   for (const p of C.pages) { const el = buildPage(p); pageEls.push(el); world.appendChild(el); }
   [$('#cover'), ...pageEls].forEach((el) => flowObserver.observe(el));
   buildCV();
+  await loadShared();
   refreshAll();
+  if (AUTHOR) {
+    document.body.classList.add('author');
+    $('#palette [data-act="save"]').hidden = false;
+    $('#palette .palette-hint').textContent = 'author mode · save + push = live for everyone';
+    if (!strokes.length && shared.length) { strokes = shared.map(toWorld).filter(Boolean); inkRender(); }
+  }
   setTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
   animators.add(heroAscii);
   const h = location.hash.slice(1);
@@ -906,6 +1103,7 @@ async function boot() {
     cam.z = z0; cam.x = innerWidth / 2 - ((innerWidth / 2 - t.x) / t.z) * z0; cam.y = innerHeight / 2 - ((innerHeight / 2 - t.y) / t.z) * z0; applyCam();
     setTimeout(() => flyTo(t, 1200), 150);
   }
+  if (!FLOW) setTimeout(() => drawTrail(proj ? proj.page : (h && document.getElementById(h) ? h : 'cover')), h ? 300 : 1300);
   if (FLOW) hideHint();
   addEventListener('hashchange', () => {
     const k = location.hash.slice(1), pr = C.projects.find((p) => p.id === k);
@@ -914,7 +1112,7 @@ async function boot() {
     else if (k && document.getElementById(k)) goTo(k);
   });
   let rt = 0;
-  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(refreshAll, 160); });
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { refreshAll(); drawTrail(activeId); }, 160); });
   mqFlow.addEventListener('change', () => {
     FLOW = mqFlow.matches; document.body.classList.toggle('flow', FLOW);
     if (FLOW) setDoodle(false);
