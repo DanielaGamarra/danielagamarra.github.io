@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DAGA's digibook · Daniela Gamarra · AI Filmmaker, Director & Visual Developer</title>
 <meta name="description" content="Daga (Daniela Gamarra): AI filmmaker, director and visual developer in Toronto. Queer animated stories, games, comics, illustration and creative tools. Digital sketchbook portfolio and CV.">
-<meta name="theme-color" content="#0c0e1a">
+<meta name="theme-color" content="#06070d">
 <meta property="og:type" content="website">
 <meta property="og:title" content="DAGA's digibook · portfolio + CV">
 <meta property="og:description" content="Queer animated stories, made with a human-first AI pipeline: the artist leads, the tools follow.">
@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script>try{var t=JSON.parse(localStorage.getItem('daga-theme'))}catch(e){}document.documentElement.dataset.theme=t==='light'?'light':'dark';</script>
 <link rel="stylesheet" href="assets/style.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Daniela Gamarra","alternateName":"Daga","jobTitle":"AI Filmmaker, Director & Visual Developer","address":{"@type":"PostalAddress","addressLocality":"Toronto","addressCountry":"CA"},"url":"https://danielagamarra.github.io/","sameAs":["https://www.instagram.com/in.daga","https://www.tiktok.com/@in.daga","https://www.linkedin.com/in/daniela-gamarra-saenz"],"alumniOf":["University of British Columbia","Pontifical Catholic University of Peru"]}
@@ -26,6 +27,7 @@
 <header class="bar">
   <a class="brand" href="#cover" data-go="cover"><span class="brand-d">DAGA</span><span class="brand-s">'s digibook</span></a>
   <div class="bar-tools">
+    <button class="tool" id="btn-theme" title="Paper (light) version" aria-label="Switch light or dark">☀</button>
     <button class="tool" id="btn-doodle" aria-pressed="false" title="Doodle on the digibook">✎ <span>doodle</span></button>
     <button class="tool" id="btn-fit" title="See every page">⌖ <span>all pages</span></button>
     <button class="tool tool-cv" id="btn-cv" title="Read it as a CV">≡ <span>CV mode</span></button>

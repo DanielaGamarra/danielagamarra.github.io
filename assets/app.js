@@ -88,6 +88,9 @@ const drawObserver = new IntersectionObserver((ents) => {
 
 // ------------------------------------------------------------ ASCII engine
 const RAMP = ' .,:;-~=+*xo%#@';
+const THEME = { ink: '#161410', hot: '#2a3cff' };
+function readTheme() { const cs = getComputedStyle(document.documentElement); THEME.ink = cs.getPropertyValue('--ink').trim() || THEME.ink; THEME.hot = cs.getPropertyValue('--blue').trim() || THEME.hot; }
+readTheme();
 const SCATTER = '@#%&*+=/\\<>{}[]~';
 const animators = new Set();
 let frameT = 0;
@@ -97,7 +100,7 @@ requestAnimationFrame(loop);
 class Ascii {
   constructor(canvas, opts) {
     this.c = canvas;
-    this.o = Object.assign({ font: 7, color: '#161410', hot: '#2a3cff', noise: 0.05, radius: 46, push: 14, mode: 'emoji', wave: true }, opts);
+    this.o = Object.assign({ font: 7, color: null, hot: null, noise: 0.05, radius: 46, push: 14, mode: 'emoji', wave: true }, opts);
     this.ctx = canvas.getContext('2d');
     this.mouse = null;
     canvas.addEventListener('pointermove', (e) => { this.mouse = this.local(e); if (REDUCE) this.draw(frameT); });
@@ -162,12 +165,12 @@ class Ascii {
       if (v < 0.04 && !(hot > 0.25 && rnd[k] < hot * 0.7)) continue;
       if (anim && o.wave) v *= 0.82 + 0.18 * Math.sin(t * 0.0022 + i * 0.16 + j * 0.34);
       if (hot > 0.3) {
-        ctx.fillStyle = o.hot; ctx.globalAlpha = 0.5 + hot * 0.5;
+        ctx.fillStyle = o.hot || THEME.hot; ctx.globalAlpha = 0.5 + hot * 0.5;
         ctx.fillText(SCATTER[(k * 7 + tick) % SCATTER.length], x, y);
       } else {
         let chr = RAMP[Math.min(RAMP.length - 1, Math.max(1, Math.floor(v * RAMP.length)))];
         if (anim && rnd[k] > 0.985) chr = SCATTER[(k + tick) % SCATTER.length];
-        ctx.fillStyle = o.color; ctx.globalAlpha = 0.28 + 0.72 * Math.min(1, v);
+        ctx.fillStyle = o.color || THEME.ink; ctx.globalAlpha = 0.28 + 0.72 * Math.min(1, v);
         ctx.fillText(chr, x, y);
       }
     }
@@ -761,7 +764,7 @@ function smoothPath(pts) {
 function inkRender(onlyLast) {
   inkLayer.setAttribute('viewBox', '-20000 -20000 40000 40000');
   if (onlyLast && inkLayer.lastElementChild && stroke) { inkLayer.lastElementChild.setAttribute('d', smoothPath(stroke.pts)); return; }
-  inkLayer.innerHTML = strokes.map((s) => { const [c, w, o] = INK[s.c] || INK.ink; return `<path d="${smoothPath(s.pts)}" stroke="${c}" stroke-width="${w}" opacity="${o}"${s.c === 'lime' ? ' style="mix-blend-mode:multiply"' : ''}/>`; }).join('');
+  inkLayer.innerHTML = strokes.map((s) => { const [c, w, o] = INK[s.c] || INK.ink; return `<path d="${smoothPath(s.pts)}" stroke="${c}" stroke-width="${w}" opacity="${o}"${s.c === 'lime' ? ' style="mix-blend-mode:var(--tape-blend)"' : ''}/>`; }).join('');
 }
 function setDoodle(on) {
   doodling = on && !FLOW;
@@ -777,6 +780,15 @@ $('#palette').addEventListener('click', (e) => {
   if (b.dataset.act === 'clear') { strokes = []; store.set('daga-doodles', strokes); inkRender(); }
 });
 $('#btn-fit').addEventListener('click', fitAll);
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  store.set('daga-theme', t);
+  readTheme();
+  const b = $('#btn-theme'); b.textContent = t === 'dark' ? '☀' : '☾'; b.title = t === 'dark' ? 'Paper (light) version' : 'Dark version';
+  const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = t === 'dark' ? '#06070d' : '#0c0e1a';
+  [heroAscii, sheetAscii, ...thumbs].forEach((a) => a && a.draw(frameT));
+}
+$('#btn-theme').addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 
 const hint = $('#hint');
 function hideHint() { hint.classList.add('gone'); }
@@ -874,12 +886,14 @@ async function boot() {
     ]);
   } catch {}
   document.body.classList.toggle('flow', FLOW);
+  readTheme();
   buildTabs();
   world.appendChild(buildCover());
   for (const p of C.pages) { const el = buildPage(p); pageEls.push(el); world.appendChild(el); }
   [$('#cover'), ...pageEls].forEach((el) => flowObserver.observe(el));
   buildCV();
   refreshAll();
+  setTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
   animators.add(heroAscii);
   const h = location.hash.slice(1);
   const proj = C.projects.find((p) => p.id === h);
