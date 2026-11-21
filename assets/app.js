@@ -458,7 +458,7 @@ function buildCover() {
     doodle('star', { x: 40, y: 300, w: 34, rot: -12, cls: 'blue' }),
     doodle('rocket', { x: 1000, y: 610, w: 90, rot: 28, cls: 'blue' }),
     doodle('planet', { x: 980, y: 140, w: 90, rot: -12 }),
-    scribble('← flip the pages', { x: 1012, y: 330, rot: 5, color: 'var(--red)' }),
+    scribble('← flip the pages', { x: 1012, y: 250, rot: 5, color: 'var(--red)' }),
   );
   heroAscii = new Ascii($('.ascii-name', body), {
     font: 11, mode: 'alpha', noise: 0.035, radius: 90, push: 26, seed: 'daga', always: true, glitch: true,
@@ -804,7 +804,7 @@ function setTheme(t) {
   store.set('daga-theme', t);
   readTheme();
   const b = $('#btn-theme'); b.textContent = t === 'dark' ? '☀' : '☾'; b.title = t === 'dark' ? 'Paper (light) version' : 'Dark version';
-  const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = t === 'dark' ? '#06070d' : '#0c0e1a';
+  const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = t === 'dark' ? '#12110f' : '#14120f';
   [heroAscii, sheetAscii, ...thumbs].forEach((a) => a && a.draw(frameT));
 }
 $('#btn-theme').addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));

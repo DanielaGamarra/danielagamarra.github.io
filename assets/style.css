@@ -1,8 +1,8 @@
 /* ============ DAGA's digibook ============ */
 :root {
-  --desk: #0c0e1a;
-  --desk-dot: #262b46;
-  --star: #e8ecff;
+  --desk: #14120f;
+  --desk-dot: #2c2925;
+  --star: #f3ece0;
   --paper: #fbf8f1;
   --paper-2: #f4efe3;
   --rule: #dfe6ef;
@@ -19,7 +19,7 @@
   --serif: 'Instrument Serif', Georgia, serif;
   --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
   --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 30px -12px rgba(40,30,10,.25);
-  --on-lime: #0c0e1a;
+  --on-lime: #14120f;
   --edge: rgba(22,20,16,.06);
   --hint-bg: rgba(251,248,241,.85);
   --tape-blend: multiply;
@@ -27,22 +27,22 @@
 }
 /* ---------- dark version (default) ---------- */
 :root[data-theme="dark"] {
-  --desk: #06070d;
-  --desk-dot: #1c2036;
-  --paper: #13162a;
-  --paper-2: #0d1020;
-  --rule: #1f2440;
-  --ink: #e8ebf7;
-  --ink-2: #b4bad6;
-  --pencil: #7b83aa;
-  --blue: #8796ff;
+  --desk: #12110f;
+  --desk-dot: #2a2723;
+  --paper: #1e1c19;
+  --paper-2: #171512;
+  --rule: #2c2925;
+  --ink: #ece6dc;
+  --ink-2: #c4bbad;
+  --pencil: #8f877a;
+  --blue: #e8b27d;
   --red: #ff6e52;
-  --sky: #3a4a99;
+  --sky: #6b5a45;
   --peach: #a8603a;
   --pink: #9c3f6c;
-  --shadow: 0 0 0 1px rgba(255,255,255,.04), 0 20px 50px -18px rgba(0,0,0,.8), 0 0 60px -30px rgba(135,150,255,.35);
+  --shadow: 0 0 0 1px rgba(255,255,255,.04), 0 20px 50px -18px rgba(0,0,0,.8), 0 0 60px -30px rgba(232,178,125,.18);
   --edge: rgba(255,255,255,.07);
-  --hint-bg: rgba(19,22,42,.85);
+  --hint-bg: rgba(30,28,25,.85);
   --tape-blend: normal;
   --tape-op: .55;
 }
@@ -103,10 +103,10 @@ mark { background: linear-gradient(transparent 12%, var(--lime) 12%, var(--lime)
   background-color: var(--desk);
   background-image:
     radial-gradient(var(--desk-dot) 1.1px, transparent 1.3px),
-    radial-gradient(circle at 30% 40%, rgba(232,236,255,.55) 0.8px, transparent 1.4px),
+    radial-gradient(circle at 30% 40%, rgba(243,236,224,.55) 0.8px, transparent 1.4px),
     radial-gradient(circle at 70% 20%, rgba(200,245,58,.6) 0.9px, transparent 1.6px),
     radial-gradient(circle at 20% 80%, var(--star) 1.2px, transparent 2px),
-    radial-gradient(ellipse at 50% 120%, rgba(42,60,255,.22), transparent 60%);
+    radial-gradient(ellipse at 50% 120%, rgba(200,150,90,.10), transparent 60%);
   background-size: 26px 26px, 173px 173px, 241px 241px, 389px 389px, 100% 100%;
 }
 .desk.grabbing { cursor: grabbing; }
@@ -143,7 +143,7 @@ body.flow .wlayer, body.flow .sketch-over { display: none; }
 body.doodling .desk { cursor: crosshair; }
 body.doodling .page, body.doodling .card { pointer-events: none; }
 
-.hud { position: fixed; z-index: 30; left: 18px; top: 64px; font: 700 11px/1.5 var(--mono); color: #9aa3d6; letter-spacing: .06em; white-space: pre; pointer-events: none; }
+.hud { position: fixed; z-index: 30; left: 18px; top: 64px; font: 700 11px/1.5 var(--mono); color: #a39a8c; letter-spacing: .06em; white-space: pre; pointer-events: none; }
 .hud b { color: var(--lime); font-weight: 800; }
 body.flow .hud, body.cv-on .hud { display: none; }
 .hint { position: fixed; z-index: 30; left: 50%; bottom: 14px; transform: translateX(-50%); font: 700 20px var(--hand); color: var(--ink-2); background: var(--hint-bg); padding: 2px 14px; border-radius: 999px; transition: opacity .6s; pointer-events: none; }
@@ -199,7 +199,7 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .thumb { position: relative; height: 170px; margin-bottom: 12px; overflow: hidden; border-radius: 2px; background: var(--paper-2); }
 .card.featured .thumb { height: 300px; }
 .thumb canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.card:hover .thumb::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(42,60,255,.08) 3px 4px); animation: scan 3s linear infinite; }
+.card:hover .thumb::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(232,178,125,.08) 3px 4px); animation: scan 3s linear infinite; }
 @keyframes scan { to { background-position: 0 40px; } }
 .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s; }
 @keyframes scan { to { background-position: 0 40px; } }
@@ -239,7 +239,7 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .cat svg { width: 100%; height: 100%; overflow: visible; }
 .cat svg path { fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .cat svg .fill { fill: var(--paper); }
-.cat svg .helmet { stroke: var(--blue); stroke-width: 2.2; fill: rgba(188,210,255,.12); }
+.cat svg .helmet { stroke: var(--blue); stroke-width: 2.2; fill: rgba(243,236,224,.08); }
 .cat svg .glint { fill: none; stroke-width: 3.5; opacity: .6; }
 .cat .tag { position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%) rotate(-4deg); font: 700 21px var(--hand); color: var(--red); white-space: nowrap; }
 .cover-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; position: relative; }
@@ -290,7 +290,7 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .sheet .spiral { top: 14px; }
 .sheet .close { position: absolute; right: 14px; top: 12px; border: 1.5px solid var(--ink); background: var(--paper); border-radius: 50%; width: 38px; height: 38px; font: 700 18px var(--mono); }
 .sheet .thumb { height: 340px; }
-.sheet .card:hover .thumb::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(42,60,255,.08) 3px 4px); animation: scan 3s linear infinite; }
+.sheet .card:hover .thumb::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(232,178,125,.08) 3px 4px); animation: scan 3s linear infinite; }
 @keyframes scan { to { background-position: 0 40px; } }
 .thumb img { opacity: 1; }
 .sheet h2 { font: 400 60px/0.95 var(--serif); margin: 6px 0 10px; letter-spacing: -.02em; }
