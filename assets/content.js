@@ -299,6 +299,10 @@ export const projects = [
     role: 'UX/UI designer, visual developer',
     year: '2024–now',
     motif: '🌱',
+    img: 'assets/img/thrivepal/cover.jpg',
+    tagline: 'Habits that work: science-backed programs and daily guidance for personal growth.',
+    gallery: ['assets/img/thrivepal/screen-1.jpg', 'assets/img/thrivepal/screen-2.jpg', 'assets/img/thrivepal/screen-3.jpg', 'assets/img/thrivepal/screen-4.jpg'],
+    links: [{ label: 'App Store', url: 'https://apps.apple.com/us/app/thrivepal-habits-that-work/id6474622417' }, { label: 'thrivepal.com', url: 'https://www.thrivepal.com/' }],
     blurb: 'Mobile-first UX/UI flows and visuals built from user research and behavioral insight. I set the art direction and brand guidelines, and designed generative AI production pipelines with Stable Diffusion, ComfyUI and Google AI Studio.',
   },
 
