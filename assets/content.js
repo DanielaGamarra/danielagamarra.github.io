@@ -132,7 +132,7 @@ export const projects = [
     title: 'Hybrid Dreams',
     kind: 'Writing + worldbuilding studio · web',
     role: 'Founder · product design + build',
-    year: '2026',
+    year: '2025',
     motif: '🌙',
     img: 'assets/img/hybrid-dreams.jpg',
     tagline: 'A collection of creative tools by DAGA.',
