@@ -833,6 +833,7 @@ function openSheet(p) {
     <span class="role">${esc(p.role)}</span>
     <p>${esc(p.blurb)}</p>
     ${p.facts ? `<ul>${p.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
+    ${p.gallery ? `<div class="gallery">${p.gallery.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="${esc(p.title)} screen" loading="lazy"></a>`).join('')}</div>` : ''}
     ${p.links ? `<div class="links">${p.links.map((l) => `<a class="cta dark" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>` : ''}
     ${p.todo ? `<div class="todo">${esc(p.todo)}</div>` : ''}`;
   sheetWrap.hidden = false;

@@ -9,6 +9,7 @@
 //  - line: true shows the project as a text line (title · role) with no
 //          picture. Use it for client work until images are approved.
 //  - pos:  where to crop the picture in its frame, e.g. '50% 20%'.
+//  - gallery: more pictures, shown in the project page.
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
 // =====================================================================
@@ -223,12 +224,14 @@ export const projects = [
     blurb: 'A learning game for kids in rural Latin America. I built and ran the full art pipeline, from vision to delivery, and mentored the junior designers.',
   },
   {
-    id: 'azoove', page: 'games', line: true,
+    id: 'azoove', page: 'games',
     title: 'Azoove',
     kind: 'Game · Timeless Toucan Studios',
     role: 'UI Artist',
     year: '2023–2024',
     motif: '🎮',
+    img: 'assets/img/azoove/key-art.jpg',
+    gallery: ['assets/img/azoove/ui-1.jpg', 'assets/img/azoove/ui-2.jpg', 'assets/img/azoove/ui-3.jpg', 'assets/img/azoove/ui-4.jpg', 'assets/img/azoove/ui-5.jpg', 'assets/img/azoove/ui-6.jpg', 'assets/img/azoove/ui-7.jpg'],
     blurb: 'Defined the UI art direction that became the game\'s visual identity, and iterated the player experience from user research.',
   },
 

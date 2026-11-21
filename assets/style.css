@@ -387,3 +387,11 @@ body.flow .cv .row { grid-template-columns: 1fr; gap: 2px; }
 }
 
 body.cv-on .bar { background: linear-gradient(var(--paper) 70%, transparent); }
+
+/* DAGA logo mark (white SVG used as a mask so it follows the theme) */
+.brand-logo { display: inline-block; width: 22px; height: 26px; vertical-align: -6px; margin-right: 3px; background: currentColor; -webkit-mask: url(img/daga-logo.svg) center / contain no-repeat; mask: url(img/daga-logo.svg) center / contain no-repeat; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sheet .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 18px 0 6px; }
+.sheet .gallery a { display: block; border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; background: var(--paper-2); }
+.sheet .gallery img { display: block; width: 100%; height: auto; transition: transform .3s; }
+.sheet .gallery a:hover img { transform: scale(1.03); }
