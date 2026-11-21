@@ -7,106 +7,147 @@
 <meta name="description" content="Case study: Behind the Seat, an interactive ASCII visual poem by Daga (Daniela Gamarra). A 3D city redrawn as letters, a story engine, authoring tools and a Story Bot that turns viewers' comments into weekly episodes.">
 <meta property="og:title" content="Behind the Seat · case study">
 <meta property="og:image" content="https://danielagamarra.github.io/assets/img/behind-the-seat.jpg">
-<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-<style>.back{display:inline-block;margin:20px 0 0;font:600 12px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8592ab;text-decoration:none}.back:hover{color:#2ff3d2}</style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<meta name="theme-color" content="#12110f">
+<link rel="icon" href="../../favicon.svg?v=2" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script>try{var t=JSON.parse(localStorage.getItem('daga-theme'))}catch(e){}document.documentElement.dataset.theme=t==='light'?'light':'dark';</script>
 <style>
-  /* Layout: one dark reading column like a taxi windshield, diagrams break out wider; the game's own palette (warm cab amber, neon cyan and pink on night blue). */
-  :root {
-    --night: #07090f;      /* page */
-    --panel: #0e121b;      /* diagram ground */
-    --line: #232c3e;       /* rules, node borders */
-    --text: #d9e2f2;
-    --dim: #8592ab;
-    --amber: #ffc27a;      /* the cab, the passenger's words */
-    --cyan: #2ff3d2;       /* neon, the wisp */
-    --pink: #ff4f87;       /* neon, the word pictures */
-    --display: "VT323", "IBM Plex Mono", ui-monospace, monospace;
-    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-    color-scheme: dark;
-  }
-  * { box-sizing: border-box; }
-  body { background: var(--night); color: var(--text); font: 16px/1.65 var(--body); margin: 0; }
-  .wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
-  .col { max-width: 680px; }
-  a { color: var(--cyan); text-underline-offset: 3px; }
-  a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
-  h1, h2, h3 { text-wrap: balance; font-weight: 400; }
-  h2 { font: 400 clamp(34px, 5vw, 46px)/1 var(--display); color: var(--amber); margin: 0 0 14px; letter-spacing: .02em; }
-  h3 { font: 600 13px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--dim); margin: 28px 0 8px; }
-  p { margin: 0 0 14px; }
-  section { padding-top: 72px; }
-  .eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; display: block; }
+:root {
+  --desk: #14120f; --desk-dot: #2c2925; --paper: #f3efe3; --paper-2: #eae5d7; --rule: #ddd6c7;
+  --ink: #161410; --ink-2: #3b372f; --pencil: #8b857a; --lime: #c8f53a; --red: #ff4b2b; --blue: #2a3cff;
+  --on-lime: #14120f; --pink: #ffc2dc; --tape-blend: multiply; --tape-op: .8;
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 30px -12px rgba(40,30,10,.25);
+  --hand: 'Caveat', 'Comic Sans MS', cursive; --serif: 'Instrument Serif', Georgia, serif; --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+:root[data-theme="dark"] {
+  --desk: #12110f; --desk-dot: #2a2723; --paper: #1e1c19; --paper-2: #171512; --rule: #2c2925;
+  --ink: #ece6dc; --ink-2: #c4bbad; --pencil: #8f877a; --red: #ff6e52; --blue: #bdb3a4; --pink: #9c3f6c;
+  --tape-blend: normal; --tape-op: .55;
+  --shadow: 0 0 0 1px rgba(255,255,255,.04), 0 20px 50px -18px rgba(0,0,0,.8);
+}
+* { box-sizing: border-box; }
+html { background: var(--desk); }
+body { margin: 0; color: var(--ink); font: 15px/1.65 var(--mono); -webkit-font-smoothing: antialiased;
+  background: var(--desk); background-image: radial-gradient(var(--desk-dot) 1.1px, transparent 1.3px); background-size: 26px 26px;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 25 L5 18 L19 4 L24 9 L10 23 Z' fill='%23ece6dc' stroke='%23161410' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M3 25 L5 18 L10 23 Z' fill='%23ffffff' stroke='%23161410' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M17 6 L22 11' stroke='%23161410' stroke-width='1.6'/%3E%3C/svg%3E") 3 25, auto; }
+a { color: inherit; text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+a:hover { background: var(--lime); color: var(--on-lime); }
+a:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
 
-  /* Hero: the title as the game draws it, big block letters out of glyphs */
-  .hero { padding-top: 56px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
-  .hero h1 { font: 400 clamp(56px, 10vw, 104px)/.86 var(--display); color: var(--amber); margin: 0 0 20px; text-shadow: 0 0 18px rgba(255, 194, 122, .35); letter-spacing: .02em; }
-  .hero .lede { font-size: 19px; line-height: 1.55; max-width: 34ch; }
-  .hero .meta { font: 13px/1.6 var(--mono); color: var(--dim); margin-top: 18px; }
-  .hero .meta b { color: var(--text); font-weight: 600; }
-  .ascii { font: 11px/1.08 var(--mono); color: var(--amber); white-space: pre; margin: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
-  .ascii .c { color: var(--cyan); } .ascii .p { color: var(--pink); } .ascii .d { color: #4a5670; }
-  @media (max-width: 780px) { .hero { grid-template-columns: 1fr; } .ascii { font-size: 9px; } }
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; pointer-events: none; }
+.bar > * { pointer-events: auto; }
+.brand { text-decoration: none; display: inline-flex; align-items: baseline; gap: 2px; background: var(--paper); color: var(--ink); padding: 4px 14px 6px; border: 1.5px solid var(--ink); border-radius: 999px; box-shadow: 2px 3px 0 var(--ink); font: 800 16px var(--mono); }
+.brand:hover { background: var(--paper); color: var(--ink); }
+.brand i { font: 700 20px var(--hand); font-style: normal; }
+.tool { font: 700 13px var(--mono); background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 12px; box-shadow: 2px 3px 0 var(--ink); cursor: pointer; }
 
-  /* Facts row */
-  .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-top: 44px; }
-  .facts div { background: var(--night); padding: 16px 18px; }
-  .facts b { display: block; font: 400 34px/1 var(--display); color: var(--text); font-variant-numeric: tabular-nums; }
-  .facts span { font: 12px/1.4 var(--mono); color: var(--dim); }
-  @media (max-width: 640px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* the paper sheet */
+.sheet { position: relative; max-width: 1040px; margin: 10px auto 80px; background: var(--paper);
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px); background-size: 100% 32px; background-position: 0 86px;
+  border-radius: 6px 6px 10px 10px; box-shadow: var(--shadow); padding: 74px clamp(18px, 5vw, 64px) 60px; }
+.spiral { position: absolute; left: 40px; right: 40px; top: 14px; font: 700 15px/1 var(--mono); color: var(--ink-2); white-space: nowrap; overflow: hidden; letter-spacing: .05em; user-select: none; }
+.tape { position: absolute; width: 120px; height: 30px; top: -12px; right: 70px; transform: rotate(4deg); background: var(--lime); opacity: var(--tape-op); mix-blend-mode: var(--tape-blend); }
+.col { max-width: 700px; }
+h1, h2, h3 { text-wrap: balance; font-weight: 400; }
+h2 { font: 400 clamp(36px, 5vw, 54px)/1 var(--serif); letter-spacing: -.01em; margin: 0 0 16px; }
+h3 { font: 800 12px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--pencil); margin: 30px 0 10px; }
+p { margin: 0 0 14px; }
+em { font-family: var(--serif); font-size: 1.12em; }
+section { padding-top: 64px; position: relative; }
+.eyebrow { font: 700 26px/1 var(--hand); color: var(--red); display: inline-block; transform: rotate(-2deg); margin-bottom: 10px; }
 
-  /* Diagrams */
-  figure { margin: 28px 0 8px; }
-  .diagram { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
-  .diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
-  figcaption { font: 12.5px/1.5 var(--mono); color: var(--dim); margin-top: 10px; max-width: 680px; }
-  svg text { font-family: var(--mono); }
-  .n rect { fill: var(--night); stroke: var(--line); stroke-width: 1.2; }
-  .n.a rect { stroke: var(--amber); } .n.c rect { stroke: var(--cyan); } .n.p rect { stroke: var(--pink); }
-  .n .t { fill: var(--text); font-size: 13px; font-weight: 600; }
-  .n .s { fill: var(--dim); font-size: 11px; }
-  .arrow { stroke: var(--dim); stroke-width: 1.4; fill: none; }
-  .tag { fill: var(--dim); font-size: 10.5px; letter-spacing: .12em; }
-  .amberT { fill: var(--amber); } .cyanT { fill: var(--cyan); } .pinkT { fill: var(--pink); }
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+.hero .eyebrow { color: var(--pencil); font: 800 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transform: none; }
+.hero h1 { font: 400 clamp(64px, 10vw, 120px)/.9 var(--serif); letter-spacing: -.02em; margin: 6px 0 18px; }
+.hero h1 em { font-size: 1em; }
+.hero .lede { font: 400 24px/1.3 var(--serif); max-width: 30ch; }
+.hero .lede em { font-size: 1em; }
+.hero .meta { font: 13px/1.7 var(--mono); color: var(--ink-2); margin-top: 18px; }
+.hero .meta b { font-weight: 800; color: var(--ink); }
+.ascii { font: 11px/1.1 var(--mono); color: var(--ink); white-space: pre; margin: 0; overflow: hidden; background: var(--paper-2); border: 1.5px solid var(--ink); border-radius: 3px 8px 4px 9px; padding: 18px; transform: rotate(1.2deg); box-shadow: 3px 4px 0 var(--ink); }
+.ascii .c { color: var(--ink); background: var(--lime); color: var(--on-lime); } .ascii .p { color: var(--red); font-weight: 700; } .ascii .d { color: var(--pencil); }
+@media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .ascii { font-size: 9px; } }
 
-  /* Beat strip (the ride as a script) */
-  .beats { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-top: 18px; }
-  .beat { flex: 0 0 auto; border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; min-width: 132px; background: var(--panel); }
-  .beat i { display: block; font: 600 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; font-style: normal; margin-bottom: 8px; }
-  .beat q { font: 13px/1.4 var(--mono); color: var(--text); quotes: none; display: block; }
-  .beat.k-line i { color: #cfe0ff; } .beat.k-scene i { color: #8fd3c7; } .beat.k-poem i { color: var(--pink); } .beat.k-memory i { color: var(--amber); }
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+.facts div { border: 1.5px solid var(--ink); border-radius: 4px 9px 5px 10px; padding: 14px 16px; background: var(--paper); }
+.facts div:nth-child(odd) { transform: rotate(-.8deg); } .facts div:nth-child(even) { transform: rotate(.7deg); }
+.facts b { display: block; font: 400 44px/1 var(--serif); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.facts span { font: 12px/1.45 var(--mono); color: var(--ink-2); }
+@media (max-width: 680px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-  /* Problem / fix list */
-  .fixes { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-top: 20px; }
-  .fix { background: var(--night); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px; padding: 16px 18px; }
-  .fix .q { font-weight: 600; }
-  .fix .q span { display: block; font: 12px/1.4 var(--mono); color: var(--dim); font-weight: 400; margin-top: 4px; }
-  .fix p { margin: 0; color: var(--text); }
-  @media (max-width: 640px) { .fix { grid-template-columns: 1fr; gap: 6px; } }
+/* diagrams on the paper */
+figure { margin: 28px 0 8px; }
+.diagram { overflow-x: auto; background: var(--paper-2); border: 1.5px solid var(--ink); border-radius: 4px 10px 5px 11px; padding: 18px; }
+.diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
+figcaption { font: 700 20px/1.25 var(--hand); color: var(--ink-2); margin-top: 12px; max-width: 700px; }
+figcaption code { font-family: var(--mono); font-size: 13px; }
+svg text { font-family: var(--mono); }
+.n rect { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
+.n.a rect { fill: var(--lime); } .n.a .t, .n.a .s { fill: var(--on-lime); }
+.n.c rect { stroke-dasharray: 5 3; }
+.n.p rect { stroke: var(--red); stroke-width: 2; }
+.n .t { fill: var(--ink); font-size: 13px; font-weight: 700; }
+.n .s { fill: var(--ink-2); font-size: 11px; }
+.arrow { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+marker path { fill: var(--ink) !important; }
+.tag { fill: var(--red); font-size: 11px; letter-spacing: .12em; font-weight: 700; }
+.amberT { fill: var(--red) !important; font-weight: 700; } .cyanT, .pinkT { fill: var(--ink); }
 
-  .week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin-top: 18px; }
-  .day { border: 1px solid var(--line); border-radius: 4px; padding: 10px; min-height: 96px; font: 12px/1.4 var(--mono); color: var(--dim); }
-  .day b { display: block; font: 400 22px/1 var(--display); color: var(--text); margin-bottom: 8px; }
-  .day.on { border-color: var(--amber); color: var(--text); }
-  .day.on.cy { border-color: var(--cyan); }
-  @media (max-width: 640px) { .week { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* the ride as a script: sticky notes */
+.beats { display: flex; gap: 10px; overflow-x: auto; padding: 8px 4px 12px; margin-top: 18px; }
+.beat { flex: 0 0 auto; border: 1.5px solid var(--ink); border-radius: 3px; padding: 10px 12px; min-width: 140px; max-width: 170px; background: var(--paper); box-shadow: 2px 3px 0 var(--ink); }
+.beat:nth-child(odd) { transform: rotate(-1.4deg); } .beat:nth-child(even) { transform: rotate(1.2deg); }
+.beat i { display: block; font: 800 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; font-style: normal; margin-bottom: 8px; color: var(--pencil); }
+.beat q { font: 700 19px/1.15 var(--hand); color: var(--ink); quotes: none; display: block; }
+.beat.k-poem { background: var(--lime); } .beat.k-poem i, .beat.k-poem q { color: var(--on-lime); }
+.beat.k-memory i { color: var(--red); }
 
-  .list { padding-left: 18px; margin: 0 0 14px; } .list li { margin-bottom: 6px; }
-  code { font: 13.5px var(--mono); color: var(--amber); }
-  .credits { border-top: 1px solid var(--line); margin-top: 72px; padding-top: 24px; font: 13px/1.7 var(--mono); color: var(--dim); display: flex; flex-wrap: wrap; gap: 8px 40px; }
-  .credits b { color: var(--text); font-weight: 600; }
-  @media (prefers-reduced-motion: no-preference) { .hero h1 { animation: flick 2.4s steps(1) 1; } @keyframes flick { 0%, 6%, 14% { opacity: 1 } 3%, 10% { opacity: .25 } 100% { opacity: 1 } } }
+/* problems + fixes */
+.fixes { display: grid; gap: 0; margin-top: 20px; border-top: 1.5px dashed var(--pencil); }
+.fix { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 22px; padding: 18px 0; border-bottom: 1.5px dashed var(--pencil); }
+.fix .q { font: 400 24px/1.15 var(--serif); }
+.fix .q span { display: block; font: 700 19px/1.2 var(--hand); color: var(--red); margin-top: 6px; }
+.fix p { margin: 0; color: var(--ink-2); font-size: 14px; }
+@media (max-width: 680px) { .fix { grid-template-columns: 1fr; gap: 6px; } }
+
+/* one week */
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
+.day { border: 1.5px solid var(--rule); border-radius: 4px; padding: 10px; min-height: 100px; font: 12px/1.4 var(--mono); color: var(--pencil); background: var(--paper); }
+.day b { display: block; font: 400 26px/1 var(--serif); color: var(--ink); margin-bottom: 8px; }
+.day.on { border-color: var(--ink); color: var(--ink); box-shadow: 2px 3px 0 var(--ink); }
+.day.on.cy { background: var(--lime); color: var(--on-lime); } .day.on.cy b { color: var(--on-lime); }
+@media (max-width: 680px) { .week { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.list { padding-left: 18px; margin: 0 0 14px; } .list li { margin-bottom: 8px; }
+code { font: 13.5px var(--mono); background: var(--paper-2); padding: 0 4px; border-radius: 3px; }
+.credits { border-top: 1.5px solid var(--ink); margin-top: 72px; padding-top: 24px; font: 13px/1.7 var(--mono); color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 8px 40px; }
+.credits b { color: var(--ink); font-weight: 800; }
+.doodle { position: absolute; pointer-events: none; overflow: visible; }
+.doodle path { fill: none; stroke: var(--pencil); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+@media (max-width: 800px) { .doodle { display: none; } .sheet { transform: none; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="../../#behind">← DAGA's digibook</a>
+<header class="bar">
+  <a class="brand" href="../../#behind">DAGA<i>'s digibook</i></a>
+  <button class="tool" id="theme" type="button" aria-label="Switch light or dark">☀</button>
+</header>
+<main class="sheet">
+  <div class="spiral" aria-hidden="true">(@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    </div>
+  <div class="tape" aria-hidden="true"></div>
+  <svg class="doodle" viewBox="0 0 100 100" style="width:40px;height:40px;right:30px;top:60px;transform:rotate(10deg)" aria-hidden="true"><path d="M50 6 C52 36 64 48 94 50 C64 52 52 64 50 94 C48 64 36 52 6 50 C36 48 48 36 50 6 Z"/></svg>
+  <svg class="doodle" viewBox="0 0 100 100" style="width:70px;height:70px;right:-34px;top:620px;transform:rotate(28deg)" aria-hidden="true"><path d="M50 6 C 64 20, 67 44, 61 66 L39 66 C 33 44, 36 20, 50 6 Z M39 54 L26 74 L40 70 M61 54 L74 74 L60 70 M44 76 L50 94 L56 76"/></svg>
+  <svg class="doodle" viewBox="0 0 100 100" style="width:80px;height:80px;left:-40px;top:1500px;transform:rotate(-12deg)" aria-hidden="true"><path d="M50 30 C 62 30, 70 40, 70 50 C 70 62, 62 70, 50 70 C 38 70, 30 62, 30 50 C 30 40, 38 30, 50 30 Z M30 56 C 6 66, 10 74, 40 66 C 62 60, 92 44, 90 36 C 89 32, 80 33, 70 38"/></svg>
+
 
   <header class="hero">
     <div>
       <span class="eyebrow">Interactive visual poem · 2026</span>
-      <h1>BEHIND<br>THE SEAT</h1>
+      <h1>Behind the <em>Seat</em></h1>
       <p class="lede">A taxi drives through purgatory at night. Every passenger is a soul who has forgotten who they were. The driver only asks one question: <em>When?</em></p>
       <p class="meta"><b>Play it:</b> <a href="https://behindtheseat.vercel.app" target="_blank" rel="noopener">behindtheseat.vercel.app</a> (desktop)<br><b>Made with:</b> Three.js, custom shaders, Node.js, the YouTube API and the Claude API</p>
     </div>
@@ -296,6 +337,15 @@
     <div><b>Game</b><br>Three.js, Vite, WebGL shaders, Web Audio</div>
     <div><b>Story Bot</b><br>Node.js, YouTube Data API, Claude API, Playwright, ffmpeg</div>
   </footer>
-</div>
+
+</main>
+<script>
+(function(){
+  var b=document.getElementById('theme');
+  function set(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('daga-theme',JSON.stringify(t))}catch(e){}b.textContent=t==='dark'?'☀':'☾';}
+  set(document.documentElement.dataset.theme);
+  b.addEventListener('click',function(){set(document.documentElement.dataset.theme==='dark'?'light':'dark')});
+})();
+</script>
 </body>
 </html>
