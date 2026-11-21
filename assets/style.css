@@ -395,3 +395,12 @@ body.cv-on .bar { background: linear-gradient(var(--paper) 70%, transparent); }
 .sheet .gallery a { display: block; border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; background: var(--paper-2); }
 .sheet .gallery img { display: block; width: 100%; height: auto; transition: transform .3s; }
 .sheet .gallery a:hover img { transform: scale(1.03); }
+
+/* cover: logo in ASCII + hola line beside it */
+.cover-head { position: relative; }
+.cover-hola { position: absolute; left: calc(340px * 0.86 + 48px); top: 50%; transform: translateY(-50%); margin: 0; display: grid; gap: 6px; pointer-events: none; }
+.cover-hola .h { font: 400 96px/0.95 var(--serif); letter-spacing: -.02em; }
+.cover-hola .n { font: italic 400 40px/1 var(--serif); color: var(--ink-2); }
+body.flow .cover-hola { left: calc(180px * 0.86 + 18px); }
+body.flow .cover-hola .h { font-size: clamp(28px, 8vw, 44px); }
+body.flow .cover-hola .n { font-size: clamp(16px, 4.4vw, 22px); }

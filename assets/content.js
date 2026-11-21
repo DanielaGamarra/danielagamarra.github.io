@@ -54,7 +54,7 @@ export const pages = [
   { id: 'studio',  no: '06', title: 'studio & ventures', note: 'building my own things', at: [-1, -1], cols: 2, tint: 'peach' },
   { id: 'awards',  no: '07', title: 'awards & talks',   note: 'nice moments', at: [0, -1], cols: 2, tint: 'lime' },
   { id: 'writing', no: '08', title: 'writing', note: 'notes from my Substack', at: [2, 0], cols: 2, tint: 'blue' },
-  { id: 'about',   no: '09', title: 'hola, I\'m Daga',  note: 'about + contact', at: [1, -1], cols: 3, tint: 'pink' },
+  { id: 'about',   no: '09', title: 'Let\'s work together', note: 'about + contact', at: [1, -1], cols: 3, tint: 'pink' },
 ];
 
 export const projects = [

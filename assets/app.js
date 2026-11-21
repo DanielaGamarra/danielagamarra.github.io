@@ -433,8 +433,11 @@ function buildCover() {
   const [first, ...rest] = C.site.role.split(', ');
   body.innerHTML = `
     <h1 class="sr-only" style="position:absolute;left:-9999px">${esc(C.site.fullName)} (${esc(C.site.name)}) · ${esc(C.site.role)}</h1>
-    <canvas class="ascii-name" aria-hidden="true"></canvas>
-    <div class="cover-role"><span class="r">${esc(C.site.fullName)} · <em>${esc(C.site.role)}</em></span><span class="loc">📍 ${esc(C.site.location)}</span></div>
+    <div class="cover-head">
+      <canvas class="ascii-name" aria-hidden="true"></canvas>
+      <p class="cover-hola"><span class="h">Hola, I'm ${esc(C.site.name)}</span><span class="n">(${esc(C.site.fullName)})</span></p>
+    </div>
+    <div class="cover-role"><span class="r"><em>${esc(C.site.role)}</em></span><span class="loc">📍 ${esc(C.site.location)}</span></div>
     <div class="flow" aria-label="${esc(C.site.hero)}">
       <div class="cat" role="img" aria-label="Berlin the cat, draggable">
         <svg viewBox="0 0 200 180" aria-hidden="true">
