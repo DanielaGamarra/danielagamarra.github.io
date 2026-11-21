@@ -141,8 +141,8 @@ export const projects = [
   },
   {
     id: 'hd-draw', page: 'tools',
-    title: 'Hybrid Dreams for iPad',
-    kind: 'Drawing app · iPad',
+    title: 'Inkest',
+    kind: 'Drawing app · iPad · Hybrid Dreams',
     role: 'Product design + build',
     year: '2026',
     motif: '✏️',
