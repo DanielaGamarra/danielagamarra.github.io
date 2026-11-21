@@ -257,11 +257,11 @@ export const projects = [
   {
     id: 'rosa-cuchillo', page: 'comics',
     title: 'Rosa Cuchillo',
-    kind: 'Book illustration · Penguin Random House',
+    kind: 'Graphic novel · Random Cómics, Penguin Random House',
     role: 'Illustrator, Penguin Random House',
-    year: '',
+    year: '2021',
     motif: '🌹',
-    blurb: 'Illustration for Rosa Cuchillo, published by Penguin Random House.',
+    blurb: 'Rosa Cuchillo. La novela gráfica: the comic adaptation of Óscar Colchado\'s novel Rosa Cuchillo (1997), published by Random Cómics, Penguin Random House.',
     todo: 'check the contract before adding covers',
   },
   {
@@ -355,6 +355,7 @@ export const awards = [
 // Press: articles that featured your work. `project` links it to a project
 // id so it also shows on that project's page.
 export const press = [
+  { year: '2021', outlet: 'El lector de historietas', title: '“Rosa Cuchillo. La novela gráfica”, de Óscar Colchado y Daniela Gamarra', url: 'https://ellectordehistorietas.blogspot.com/2021/03/rosa-cuchillo-la-novela-grafica-de.html', project: 'rosa-cuchillo' },
   { year: '2023', outlet: 'El Comercio', title: 'Empathy Hearts, el videojuego creado por escolares peruanas que busca erradicar la estigmatización de personas con TOC', url: 'https://elcomercio.pe/tecnologia/videojuegos/empathy-hearts-el-videojuego-creado-por-escolares-peruanas-que-busca-erradicar-la-estigmatizacion-de-personas-con-toc-videojuegos-e-sports-espana-mexico-usa-noticia/', project: 'empathy' },
   { year: '2023', outlet: 'La Nación', title: 'Empathy Hearts, el videojuego creado por colegialas de Perú para apoyar a personas con TOC', url: 'https://www.nacion.com/tecnologia/videojuegos/empathy-hearts-el-videojuego-creado-por-colegialas/FAINQF4WWNEQ5GEGFBTMGADAWI/story/', project: 'empathy' },
   { year: '2023', outlet: 'La República', title: 'Chorrillos: 4 escolares crean videojuego y este toca temas sobre la salud mental', url: 'https://larepublica.pe/videojuegos/Actualidad/2023/02/13/chorrillos-cuatro-escolares-crean-videojuego-toca-temas-salud-mental-toc-empathy-hearts-trastorno-obsesivocompulsivo-953953', project: 'empathy' },
