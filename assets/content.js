@@ -281,8 +281,9 @@ export const projects = [
     role: 'Writer & artist',
     year: '',
     motif: '🌀',
+    img: 'assets/img/distortion.jpg', pos: '50% 38%',
     blurb: 'A comic series, shared in pieces on Instagram.',
-    todo: 'add a page + link',
+    todo: 'add a link',
   },
   {
     id: 'illus', page: 'comics',
