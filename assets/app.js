@@ -516,7 +516,9 @@ function buildPage(p) {
       <div class="sub">talks I gave 🎤</div>
       <ul class="list">${C.talks.map((t) => t.title
         ? `<li><span class="y">${esc(t.year)}</span><span><span class="t">${t.url ? `<a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.title)}</a>` : esc(t.title)}</span><span class="b">${esc(t.where)}</span></span></li>`
-        : `<li><span class="y">····</span><span class="todo">${esc(t.todo)}</span></li>`).join('')}</ul>`;
+        : `<li><span class="y">····</span><span class="todo">${esc(t.todo)}</span></li>`).join('')}</ul>
+      ${C.press && C.press.length ? `<div class="sub">featured in 📰</div>
+      <ul class="list">${C.press.map((x) => `<li><span class="y">${esc(x.year)}</span><span><span class="t"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></span><span class="b">${esc(x.outlet)}${x.project && C.projects.find((q) => q.id === x.project) ? ` · ${esc(C.projects.find((q) => q.id === x.project).title)}` : ''}</span></span></li>`).join('')}</ul>` : ''}`;
     el.append(doodle('hands', { x: W - 150, y: 40, w: 90, rot: 8 }), doodle('star', { x: 40, y: 34, w: 30, rot: 12, cls: 'red' }));
   } else if (p.id === 'about') {
     body.innerHTML = `
@@ -851,6 +853,7 @@ function openSheet(p) {
     <p>${esc(p.blurb)}</p>
     ${p.facts ? `<ul>${p.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
     ${p.gallery ? `<div class="gallery">${p.gallery.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="${esc(p.title)} screen" loading="lazy"></a>`).join('')}</div>` : ''}
+    ${(C.press || []).some((x) => x.project === p.id) ? `<div class="press"><b>featured in</b>${C.press.filter((x) => x.project === p.id).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.outlet)} ↗</a>`).join('')}</div>` : ''}
     ${p.links ? `<div class="links">${p.links.map((l) => `<a class="cta dark" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>` : ''}
     ${p.todo ? `<div class="todo">${esc(p.todo)}</div>` : ''}`;
   sheetWrap.hidden = false;
@@ -896,6 +899,7 @@ function buildCV() {
     ${C.experience.map((x) => `<div class="row"><div class="when">${esc(x.when)}</div><div class="what"><b>${esc(x.role)}</b><i>${esc(x.org)}${x.where ? ` · ${esc(x.where)}` : ''}</i><ul>${x.points.map((pt) => `<li>${esc(pt)}</li>`).join('')}</ul></div></div>`).join('')}
     <h2>Awards</h2>
     ${C.awards.map((a) => `<div class="row"><div class="when">${esc(a.year)}</div><div class="what"><b>${esc(a.title)}</b><i>${esc(a.by)}</i></div></div>`).join('')}
+    ${C.press && C.press.length ? `<h2>Press</h2>${C.press.map((x) => `<div class="row"><div class="when">${esc(x.year)}</div><div class="what"><b>${esc(x.title)}</b><i>${esc(x.outlet)}</i></div></div>`).join('')}` : ''}
     ${C.talks.some((t) => t.title) ? `<h2>Talks</h2>${C.talks.filter((t) => t.title).map((t) => `<div class="row"><div class="when">${esc(t.year)}</div><div class="what"><b>${esc(t.title)}</b><i>${esc(t.where)}</i></div></div>`).join('')}` : ''}
     <h2>Education</h2>
     ${C.education.map((x) => `<div class="row"><div class="when"></div><div class="what"><b>${esc(x.title)}</b><i>${esc(x.where)}</i></div></div>`).join('')}

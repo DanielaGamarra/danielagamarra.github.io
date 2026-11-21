@@ -352,6 +352,14 @@ export const awards = [
   { year: '', title: 'First of the class · Winternitz award', by: 'Pontifical Catholic University of Peru' },
 ];
 
+// Press: articles that featured your work. `project` links it to a project
+// id so it also shows on that project's page.
+export const press = [
+  { year: '2023', outlet: 'El Comercio', title: 'Empathy Hearts, el videojuego creado por escolares peruanas que busca erradicar la estigmatización de personas con TOC', url: 'https://elcomercio.pe/tecnologia/videojuegos/empathy-hearts-el-videojuego-creado-por-escolares-peruanas-que-busca-erradicar-la-estigmatizacion-de-personas-con-toc-videojuegos-e-sports-espana-mexico-usa-noticia/', project: 'empathy' },
+  { year: '2023', outlet: 'La Nación', title: 'Empathy Hearts, el videojuego creado por colegialas de Perú para apoyar a personas con TOC', url: 'https://www.nacion.com/tecnologia/videojuegos/empathy-hearts-el-videojuego-creado-por-colegialas/FAINQF4WWNEQ5GEGFBTMGADAWI/story/', project: 'empathy' },
+  { year: '2023', outlet: 'La República', title: 'Chorrillos: 4 escolares crean videojuego y este toca temas sobre la salud mental', url: 'https://larepublica.pe/videojuegos/Actualidad/2023/02/13/chorrillos-cuatro-escolares-crean-videojuego-toca-temas-salud-mental-toc-empathy-hearts-trastorno-obsesivocompulsivo-953953', project: 'empathy' },
+];
+
 // Talks you gave. Fill these in; empty ones show as a pencil note.
 export const talks = [
   { year: '2026', title: 'Hand-drawn AI animation: turning 3D AI animation into 2D hand-drawn frames with my own tools', where: 'BC + AI Film Club · Vancouver AI', url: 'https://www.youtube.com/watch?v=TUXn235_Btw&t=19s' },
