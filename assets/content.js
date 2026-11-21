@@ -85,16 +85,6 @@ export const projects = [
     todo: 'add year',
   },
   {
-    id: 'aota-tests', page: 'films',
-    title: 'All of the Above · animation tests',
-    kind: 'AI animation tests',
-    role: 'Creator, director, AI pipeline',
-    year: '2026',
-    motif: '🌲',
-    blurb: 'Animation tests for All of the Above: Hira, April, Gust and the forest spirits at Golden Crow Camp.',
-    todo: 'add test videos (YouTube/Vimeo links)',
-  },
-  {
     id: 'behind', page: 'films',
     title: 'Behind the Seat',
     kind: 'Code animation · interactive experience (demo) · Indaga Studios',
