@@ -182,7 +182,7 @@ export const projects = [
     title: 'Cusco Paradox',
     kind: 'Game (demo) · Indaga Studios',
     role: 'Creative Director',
-    year: '2021–2025',
+    year: '2021',
     motif: '🦙',
     img: 'assets/img/cusco-paradox.jpg',
     tagline: 'An LGBTQ+ narrative puzzle game about a fox being trapped in the Incan netherworld.',
