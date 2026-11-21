@@ -267,13 +267,13 @@ export const projects = [
   },
   {
     id: 'mario-vargas-llosa', page: 'comics',
-    title: 'Mario, el universo de Vargas Llosa',
-    kind: 'Book illustration · Penguin Random House',
+    title: 'Mario. El universo Vargas Llosa',
+    kind: 'Comic · Reservoir Books, Penguin Random House',
     role: 'Illustrator, Penguin Random House',
-    year: '',
+    year: '2019',
     motif: '📚',
-    blurb: 'Illustration for Mario, el universo de Vargas Llosa, published by Penguin Random House.',
-    todo: 'check the contract before adding covers',
+    blurb: 'A comic about the life and novels of Mario Vargas Llosa, written by Carlos Enrique Freyre. The illustrations are shared among four artists: Jesús Castro, Domenica Pagano, Omar Carrillo and me.',
+    todo: 'add the cover or a page',
   },
   {
     id: 'distortion', page: 'comics',
@@ -356,6 +356,7 @@ export const awards = [
 // Press: articles that featured your work. `project` links it to a project
 // id so it also shows on that project's page.
 export const press = [
+  { year: '2019', outlet: 'Libros a mí', title: '«Mario. El universo Vargas Llosa»: nuestro comentario sobre el cómic de Carlos Enrique Freyre', url: 'https://librosami.pe/2019/07/mario-el-universo-vargas-llosa-nuestro-comentario-sobre-el-comic-de-carlos-enrique-freyre/', project: 'mario-vargas-llosa' },
   { year: '2022', outlet: 'Wayka', title: '«Rosa Cuchillo»: la novela de Óscar Colchado adaptada al manga', url: 'https://wayka.pe/rosa-cuchillo-la-novela-de-oscar-colchado-adaptada-al-manga/', project: 'rosa-cuchillo' },
   { year: '2021', outlet: 'El lector de historietas', title: '“Rosa Cuchillo. La novela gráfica”, de Óscar Colchado y Daniela Gamarra', url: 'https://ellectordehistorietas.blogspot.com/2021/03/rosa-cuchillo-la-novela-grafica-de.html', project: 'rosa-cuchillo' },
   { year: '2023', outlet: 'El Comercio', title: 'Empathy Hearts, el videojuego creado por escolares peruanas que busca erradicar la estigmatización de personas con TOC', url: 'https://elcomercio.pe/tecnologia/videojuegos/empathy-hearts-el-videojuego-creado-por-escolares-peruanas-que-busca-erradicar-la-estigmatizacion-de-personas-con-toc-videojuegos-e-sports-espana-mexico-usa-noticia/', project: 'empathy' },
