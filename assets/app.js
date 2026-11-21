@@ -828,8 +828,8 @@ function openSheet(p) {
   sheet.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
-    ${p.video && embedUrl(p.video) ? '' : `<div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}</div>`}
-    ${p.video && embedUrl(p.video) && isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
+    ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}"></div>` : `<div class="thumb"><canvas aria-hidden="true"></canvas></div>`}
+    ${isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
     <h2 id="sheet-title">${esc(p.title)}</h2>
     ${p.video && embedUrl(p.video) ? `<div class="video${p.vertical ? ' vertical' : ''}"><iframe src="${esc(embedUrl(p.video))}" title="${esc(p.title)} video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : ''}

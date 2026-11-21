@@ -407,3 +407,7 @@ body.flow .cover-hola .n { font-size: clamp(16px, 4.4vw, 22px); }
 
 /* CV mode: no doodling */
 body.cv-on #btn-doodle, body.cv-on .palette { display: none !important; }
+
+/* project page: show the whole picture at its own shape */
+.sheet .sheet-img { margin: 0 0 14px; border-radius: 3px; overflow: hidden; background: var(--paper-2); display: grid; place-items: center; }
+.sheet .sheet-img img { display: block; max-width: 100%; max-height: 72vh; width: auto; height: auto; }
