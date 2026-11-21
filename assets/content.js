@@ -10,6 +10,7 @@
 //          picture. Use it for client work until images are approved.
 //  - pos:  where to crop the picture in its frame, e.g. '50% 20%'.
 //  - gallery: more pictures, shown in the project page.
+//  - also: other pages the project shows on too, e.g. ['studio'].
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
 // =====================================================================
@@ -140,7 +141,7 @@ export const projects = [
     links: [{ label: 'hybrid-dreams.com', url: 'https://www.hybrid-dreams.com/' }],
   },
   {
-    id: 'hd-draw', page: 'tools',
+    id: 'hd-draw', page: 'tools', also: ['studio'],
     title: 'Brushest',
     kind: 'iPad drawing + animation app · Apple Pencil',
     role: 'Product design + build',
@@ -193,7 +194,7 @@ export const projects = [
     links: [{ label: 'play the demo on itch.io', url: 'https://indagastudios.itch.io/cuscoparadox' }],
   },
   {
-    id: 'giftagame', page: 'games',
+    id: 'giftagame', page: 'games', also: ['studio'],
     title: 'Gift a Game',
     kind: 'Personalised gift game · web · Indaga Studios',
     role: 'Founder & Creative Director',

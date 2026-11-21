@@ -539,7 +539,7 @@ function buildPage(p) {
     el.append(doodle('satellite', { x: W - 120, y: 30, w: 60, rot: -10, cls: 'blue' }));
     loadWriting($('.posts', body));
   } else {
-    const list = C.projects.filter((x) => x.page === p.id);
+    const list = [...C.projects.filter((x) => x.page === p.id), ...C.projects.filter((x) => (x.also || []).includes(p.id))];
     for (const pr of list.filter((x) => !x.line)) body.appendChild(cardEl(pr));
     const lines = list.filter((x) => x.line);
     if (lines.length) body.appendChild(linesCard(lines));
