@@ -103,7 +103,7 @@ export const projects = [
     motif: '🚕',
     img: 'assets/img/behind-the-seat.jpg', pos: '50% 50%',
     blurb: 'A rainy night, a taxi, and a driver who asks one question: "When?" The passenger answers in one line and the ride becomes a memory, drawn entirely in ASCII characters that flow around you.',
-    links: [{ label: 'take the ride', url: 'https://behindtheseat.vercel.app' }],
+    links: [{ label: 'take the ride', url: 'https://behindtheseat.vercel.app' }, { label: 'read the case study', url: 'case-studies/behind-the-seat/' }],
   },
   {
     id: 'strands', page: 'films',

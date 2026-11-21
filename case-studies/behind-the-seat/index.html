@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Behind the Seat · case study · DAGA's digibook</title>
+<meta name="description" content="Case study: Behind the Seat, an interactive ASCII visual poem by Daga (Daniela Gamarra). A 3D city redrawn as letters, a story engine, authoring tools and a Story Bot that turns viewers' comments into weekly episodes.">
+<meta property="og:title" content="Behind the Seat · case study">
+<meta property="og:image" content="https://danielagamarra.github.io/assets/img/behind-the-seat.jpg">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<style>.back{display:inline-block;margin:20px 0 0;font:600 12px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8592ab;text-decoration:none}.back:hover{color:#2ff3d2}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout: one dark reading column like a taxi windshield, diagrams break out wider; the game's own palette (warm cab amber, neon cyan and pink on night blue). */
+  :root {
+    --night: #07090f;      /* page */
+    --panel: #0e121b;      /* diagram ground */
+    --line: #232c3e;       /* rules, node borders */
+    --text: #d9e2f2;
+    --dim: #8592ab;
+    --amber: #ffc27a;      /* the cab, the passenger's words */
+    --cyan: #2ff3d2;       /* neon, the wisp */
+    --pink: #ff4f87;       /* neon, the word pictures */
+    --display: "VT323", "IBM Plex Mono", ui-monospace, monospace;
+    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--night); color: var(--text); font: 16px/1.65 var(--body); margin: 0; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
+  .col { max-width: 680px; }
+  a { color: var(--cyan); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+  h1, h2, h3 { text-wrap: balance; font-weight: 400; }
+  h2 { font: 400 clamp(34px, 5vw, 46px)/1 var(--display); color: var(--amber); margin: 0 0 14px; letter-spacing: .02em; }
+  h3 { font: 600 13px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--dim); margin: 28px 0 8px; }
+  p { margin: 0 0 14px; }
+  section { padding-top: 72px; }
+  .eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; display: block; }
+
+  /* Hero: the title as the game draws it, big block letters out of glyphs */
+  .hero { padding-top: 56px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+  .hero h1 { font: 400 clamp(56px, 10vw, 104px)/.86 var(--display); color: var(--amber); margin: 0 0 20px; text-shadow: 0 0 18px rgba(255, 194, 122, .35); letter-spacing: .02em; }
+  .hero .lede { font-size: 19px; line-height: 1.55; max-width: 34ch; }
+  .hero .meta { font: 13px/1.6 var(--mono); color: var(--dim); margin-top: 18px; }
+  .hero .meta b { color: var(--text); font-weight: 600; }
+  .ascii { font: 11px/1.08 var(--mono); color: var(--amber); white-space: pre; margin: 0; overflow: hidden; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
+  .ascii .c { color: var(--cyan); } .ascii .p { color: var(--pink); } .ascii .d { color: #4a5670; }
+  @media (max-width: 780px) { .hero { grid-template-columns: 1fr; } .ascii { font-size: 9px; } }
+
+  /* Facts row */
+  .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-top: 44px; }
+  .facts div { background: var(--night); padding: 16px 18px; }
+  .facts b { display: block; font: 400 34px/1 var(--display); color: var(--text); font-variant-numeric: tabular-nums; }
+  .facts span { font: 12px/1.4 var(--mono); color: var(--dim); }
+  @media (max-width: 640px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  /* Diagrams */
+  figure { margin: 28px 0 8px; }
+  .diagram { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
+  .diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
+  figcaption { font: 12.5px/1.5 var(--mono); color: var(--dim); margin-top: 10px; max-width: 680px; }
+  svg text { font-family: var(--mono); }
+  .n rect { fill: var(--night); stroke: var(--line); stroke-width: 1.2; }
+  .n.a rect { stroke: var(--amber); } .n.c rect { stroke: var(--cyan); } .n.p rect { stroke: var(--pink); }
+  .n .t { fill: var(--text); font-size: 13px; font-weight: 600; }
+  .n .s { fill: var(--dim); font-size: 11px; }
+  .arrow { stroke: var(--dim); stroke-width: 1.4; fill: none; }
+  .tag { fill: var(--dim); font-size: 10.5px; letter-spacing: .12em; }
+  .amberT { fill: var(--amber); } .cyanT { fill: var(--cyan); } .pinkT { fill: var(--pink); }
+
+  /* Beat strip (the ride as a script) */
+  .beats { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-top: 18px; }
+  .beat { flex: 0 0 auto; border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; min-width: 132px; background: var(--panel); }
+  .beat i { display: block; font: 600 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; font-style: normal; margin-bottom: 8px; }
+  .beat q { font: 13px/1.4 var(--mono); color: var(--text); quotes: none; display: block; }
+  .beat.k-line i { color: #cfe0ff; } .beat.k-scene i { color: #8fd3c7; } .beat.k-poem i { color: var(--pink); } .beat.k-memory i { color: var(--amber); }
+
+  /* Problem / fix list */
+  .fixes { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-top: 20px; }
+  .fix { background: var(--night); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px; padding: 16px 18px; }
+  .fix .q { font-weight: 600; }
+  .fix .q span { display: block; font: 12px/1.4 var(--mono); color: var(--dim); font-weight: 400; margin-top: 4px; }
+  .fix p { margin: 0; color: var(--text); }
+  @media (max-width: 640px) { .fix { grid-template-columns: 1fr; gap: 6px; } }
+
+  .week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin-top: 18px; }
+  .day { border: 1px solid var(--line); border-radius: 4px; padding: 10px; min-height: 96px; font: 12px/1.4 var(--mono); color: var(--dim); }
+  .day b { display: block; font: 400 22px/1 var(--display); color: var(--text); margin-bottom: 8px; }
+  .day.on { border-color: var(--amber); color: var(--text); }
+  .day.on.cy { border-color: var(--cyan); }
+  @media (max-width: 640px) { .week { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  .list { padding-left: 18px; margin: 0 0 14px; } .list li { margin-bottom: 6px; }
+  code { font: 13.5px var(--mono); color: var(--amber); }
+  .credits { border-top: 1px solid var(--line); margin-top: 72px; padding-top: 24px; font: 13px/1.7 var(--mono); color: var(--dim); display: flex; flex-wrap: wrap; gap: 8px 40px; }
+  .credits b { color: var(--text); font-weight: 600; }
+  @media (prefers-reduced-motion: no-preference) { .hero h1 { animation: flick 2.4s steps(1) 1; } @keyframes flick { 0%, 6%, 14% { opacity: 1 } 3%, 10% { opacity: .25 } 100% { opacity: 1 } } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../../#behind">← DAGA's digibook</a>
+
+  <header class="hero">
+    <div>
+      <span class="eyebrow">Interactive visual poem · 2026</span>
+      <h1>BEHIND<br>THE SEAT</h1>
+      <p class="lede">A taxi drives through purgatory at night. Every passenger is a soul who has forgotten who they were. The driver only asks one question: <em>When?</em></p>
+      <p class="meta"><b>Play it:</b> <a href="https://behindtheseat.vercel.app" target="_blank" rel="noopener">behindtheseat.vercel.app</a> (desktop)<br><b>Made with:</b> Three.js, custom shaders, Node.js, the YouTube API and the Claude API</p>
+    </div>
+<pre class="ascii" aria-label="The city drawn in letters"><span class="d">  :  .  :    .    :  .   :   .  :   .  :</span>
+<span class="d"> .|:::|.  .|::|  ..|:::|.  .|:::|.  .|:|</span>
+<span class="d"> ||=+=||  ||==|  ||=+*=||  || <span class="p">REMEMBER</span> ||</span>
+<span class="d"> ||+=+||  ||=+|  ||*+=+||  ||=+=+=||  ||</span>   <span class="c">.:*%@%*:.</span>
+<span class="d"> ||=+=||  ||+=|  ||=+*=||  ||+=+=+||  ||</span>    <span class="c">'*%%*'</span>
+<span class="d"> ||+=+||__||=+|__||*+=+||__||=+=+=||__||</span>
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        __________________
+     __/  ||    ||    ||  \___
+    |  ___||____||____||___   |=====
+    |=(@@)=================(@@)=|
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       <span class="d">.   '   .   '    .   '   .</span>
+           BEHIND THE SEAT</pre>
+  </header>
+
+  <div class="facts" role="list">
+    <div role="listitem"><b>2 weeks</b><span>from first commit to weekly episodes (Nov 8 to 21, 2026)</span></div>
+    <div role="listitem"><b>~15,800</b><span>lines of code across the game and the bot</span></div>
+    <div role="listitem"><b>216</b><span>commits across the two projects</span></div>
+    <div role="listitem"><b>5</b><span>episodes drafted automatically from comments</span></div>
+  </div>
+
+  <section id="idea">
+    <div class="col">
+      <span class="eyebrow">The idea</span>
+      <h2>A ride through someone's memories</h2>
+      <p>You sit in the driver's seat. A passenger gets in, and instead of <em>where to?</em> the driver asks <em>when?</em> As they talk, the city comes apart and their memories appear: words pour into shapes, and small 3D scenes form out of the rain. When they find the one thing that mattered, they're ready. The taxi stops, the back seat is empty, and a coin is left where they sat: the old fare for the ferryman of souls.</p>
+      <p>Everything on screen is drawn with letters. The city, the cab, the rain and the neon signs (Purgatory, Barzakh, Naraka, Rebirth, Remember) are a real 3D world turned into ASCII characters, 60 times a second.</p>
+    </div>
+    <h3>The ride, as a script</h3>
+    <div class="beats" aria-label="The beats of one ride, in order">
+      <div class="beat k-scene"><i>pickup</i><q>Taxi pulls up. Neon title sputters on.</q></div>
+      <div class="beat k-line"><i>driver</i><q>'Night, lady...</q></div>
+      <div class="beat k-line"><i>passenger</i><q>So that's it?... Was there a reason?</q></div>
+      <div class="beat k-line"><i>driver</i><q>That's up to you... When?</q></div>
+      <div class="beat k-scene"><i>drive</i><q>The city slides by.</q></div>
+      <div class="beat k-poem"><i>poem</i><q>Words fill a shape, dodge the mouse.</q></div>
+      <div class="beat k-memory"><i>memory</i><q>A 3D scene forms from the rain.</q></div>
+      <div class="beat k-line"><i>passenger</i><q>Ah, I see... it was <em>her</em> smile.</q></div>
+      <div class="beat k-line"><i>passenger</i><q>I guess it's time. Stop there.</q></div>
+      <div class="beat k-scene"><i>arrive</i><q>Empty seat. A coin. A wisp fades.</q></div>
+      <div class="beat k-scene"><i>end</i><q>What memories will you keep?</q></div>
+    </div>
+    <figcaption>Each story is a list of beats in one JSON file. The engine plays them top to bottom, so a new story needs no code.</figcaption>
+  </section>
+
+  <section id="engine">
+    <div class="col">
+      <span class="eyebrow">The creation engine</span>
+      <h2>A 3D city, redrawn as letters</h2>
+      <p>The game renders a normal 3D scene, then a chain of image passes turns it into type. Each character cell reads the brightness and the distance of the pixels under it: flat areas become density glyphs (<code>. : - = + * # % @</code>), and edges become line glyphs (<code>| _ / \</code>), so buildings keep their outlines. Glow, film grain, a slight fisheye and drifting fog sit on top, and the spoken lines are typed over it all.</p>
+    </div>
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 980 300" role="img" aria-label="Rendering pipeline: 3D scene, ASCII pass, glow, lens pass, text layer, screen or vertical video">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8592ab"/></marker></defs>
+          <text class="tag" x="10" y="22">EVERY FRAME, ON THE GPU</text>
+          <g class="n a"><rect x="10" y="40" width="150" height="96" rx="5"/><text class="t" x="24" y="66">3D scene</text><text class="s" x="24" y="88">city loop, cab, rain,</text><text class="s" x="24" y="104">neon signs, lamps,</text><text class="s" x="24" y="120">a black cat (Berlin)</text></g>
+          <g class="n"><rect x="200" y="40" width="150" height="96" rx="5"/><text class="t" x="214" y="66">Colour + depth</text><text class="s" x="214" y="88">rendered to textures,</text><text class="s" x="214" y="104">shrunk to one pixel</text><text class="s" x="214" y="120">per letter cell</text></g>
+          <g class="n c"><rect x="390" y="40" width="160" height="96" rx="5"/><text class="t" x="404" y="66">ASCII pass</text><text class="s" x="404" y="88">brightness picks a glyph,</text><text class="s" x="404" y="104">depth jumps draw lines,</text><text class="s" x="404" y="120">memories show through holes</text></g>
+          <g class="n"><rect x="590" y="40" width="150" height="96" rx="5"/><text class="t" x="604" y="66">Glow</text><text class="s" x="604" y="88">bloom on lamps and</text><text class="s" x="604" y="104">neon only (rain stays</text><text class="s" x="604" y="120">below the threshold)</text></g>
+          <g class="n p"><rect x="780" y="40" width="190" height="96" rx="5"/><text class="t" x="794" y="66">Lens pass</text><text class="s" x="794" y="88">tone mapping, fisheye,</text><text class="s" x="794" y="104">colour fringe, grain,</text><text class="s" x="794" y="120">fog (half size), vignette</text></g>
+          <path class="arrow" d="M160 88H196" marker-end="url(#ah)"/><path class="arrow" d="M350 88H386" marker-end="url(#ah)"/><path class="arrow" d="M550 88H586" marker-end="url(#ah)"/><path class="arrow" d="M740 88H776" marker-end="url(#ah)"/>
+          <path class="arrow" d="M875 136V176H560" marker-end="url(#ah)"/>
+          <g class="n a"><rect x="390" y="160" width="170" height="96" rx="5"/><text class="t" x="404" y="186">Text layer</text><text class="s" x="404" y="208">typewriter lines,</text><text class="s" x="404" y="224">word pictures, end card</text><text class="s" x="404" y="240">(neon DAGA in tiny ASCII)</text></g>
+          <path class="arrow" d="M390 208H340" marker-end="url(#ah)"/>
+          <g class="n"><rect x="140" y="160" width="196" height="96" rx="5"/><text class="t" x="154" y="186">Out</text><text class="s" x="154" y="208">browser window, or</text><text class="s" x="154" y="224">1080 × 1920 recording</text><text class="s" x="154" y="240">with sound, for Shorts</text></g>
+          <text class="tag" x="600" y="232">GPU COST PER FRAME</text>
+          <text class="s amberT" x="600" y="252" style="font-size:12px">45 ms → 17 ms after folding passes</text>
+          <text class="s" x="600" y="270" style="font-size:11px">same picture, quiet laptop fans</text>
+        </svg>
+      </div>
+      <figcaption>The look is tuned live with in-game panels (lens, colours, sound mix) and saved to JSON. Performance work folded three passes into one and moved the slow fog noise to half resolution, with the picture unchanged.</figcaption>
+    </figure>
+
+    <div class="col">
+      <h3>Memories: two kinds</h3>
+      <ul class="list">
+        <li><b>Word pictures.</b> A shape (umbrella, ring, hands, heart) is drawn on a tiny canvas with one pixel per letter, then the passenger's own words stream into every cell inside it. The letters move out of the mouse's way, and the story waits until the shape is whole.</li>
+        <li><b>3D memories.</b> The street fragments, a hole opens, and a small scene (a bench by the water, two people under one umbrella) approaches from down the road, assembled from falling letters. On the way out the camera drives straight through it while it comes apart.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="col">
+      <span class="eyebrow">Tools for writing it</span>
+      <h2>Write, watch, mark, fix</h2>
+      <p>To write stories without touching code, the project has its own small studio. A story editor plays any beat instantly and previews line breaks for the phone frame. A frame review tool records the whole ride as stills, four per second, so a change can be pinned to the exact moment: click a frame, shift-click a range, write a note. Notes save as a file the next fix starts from.</p>
+    </div>
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 980 170" role="img" aria-label="Authoring loop: story editor, play, frame capture, notes, fix, back to the editor">
+          <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8592ab"/></marker></defs>
+          <g class="n a"><rect x="10" y="40" width="168" height="80" rx="5"/><text class="t" x="24" y="66">Story editor</text><text class="s" x="24" y="88">beats, lines, poems,</text><text class="s" x="24" y="104">memories; save JSON</text></g>
+          <g class="n"><rect x="210" y="40" width="160" height="80" rx="5"/><text class="t" x="224" y="66">Play</text><text class="s" x="224" y="88">from any beat, 1x to</text><text class="s" x="224" y="104">5x, web or 9:16</text></g>
+          <g class="n c"><rect x="402" y="40" width="170" height="80" rx="5"/><text class="t" x="416" y="66">Frame capture</text><text class="s" x="416" y="88">the ride plays itself,</text><text class="s" x="416" y="104">silent: 580 frames</text></g>
+          <g class="n p"><rect x="604" y="40" width="170" height="80" rx="5"/><text class="t" x="618" y="66">Notes on frames</text><text class="s" x="618" y="88">pick a frame or range,</text><text class="s" x="618" y="104">say what to change</text></g>
+          <g class="n"><rect x="806" y="40" width="164" height="80" rx="5"/><text class="t" x="820" y="66">Fix + push</text><text class="s" x="820" y="88">live on the web, and in</text><text class="s" x="820" y="104">Sunday's episode</text></g>
+          <path class="arrow" d="M178 80H206" marker-end="url(#ah2)"/><path class="arrow" d="M370 80H398" marker-end="url(#ah2)"/><path class="arrow" d="M572 80H600" marker-end="url(#ah2)"/><path class="arrow" d="M774 80H802" marker-end="url(#ah2)"/>
+          <path class="arrow" d="M888 120V150H94V124" marker-end="url(#ah2)"/>
+          <text class="tag" x="400" y="146">NEXT ROUND</text>
+        </svg>
+      </div>
+      <figcaption>A talk mode (<code>/ppt</code>) also plays a slide deck with click, space or the arrows, and the next press after the last slide drops the audience straight into the game.</figcaption>
+    </figure>
+  </section>
+
+  <section id="social">
+    <div class="col">
+      <span class="eyebrow">Social media</span>
+      <h2>Viewers' stories become episodes</h2>
+      <p>Each vertical episode ends by asking viewers which memories they would keep. Their replies are the raw material for the next episodes. A second program, Story Bot, reads the comments under the channel's Shorts, finds the real stories, asks the writer for permission, drafts an episode in the series' voice, records it from the game and uploads it. Every week, on its own.</p>
+    </div>
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 980 420" role="img" aria-label="Content loop: comments are collected, scored, consent asked, chosen, drafted, judged, rendered and uploaded; viewers watch and comment again">
+          <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8592ab"/></marker></defs>
+          <text class="tag" x="10" y="22">FRIDAY</text>
+          <g class="n"><rect x="10" y="36" width="170" height="92" rx="5"/><text class="t" x="24" y="62">Collect</text><text class="s" x="24" y="84">every comment and reply</text><text class="s" x="24" y="100">under the Shorts, new</text><text class="s" x="24" y="116">ones only</text></g>
+          <g class="n c"><rect x="212" y="36" width="180" height="92" rx="5"/><text class="t" x="226" y="62">Score</text><text class="s" x="226" y="84">Claude: is it a story?</text><text class="s" x="226" y="100">theme, 3 scores, safety</text><text class="s" x="226" y="116">flags, one-line summary</text></g>
+          <g class="n p"><rect x="424" y="36" width="180" height="92" rx="5"/><text class="t" x="438" y="62">Ask consent</text><text class="s" x="438" y="84">reply under the comment;</text><text class="s" x="438" y="100">only a clear yes counts</text><text class="s" x="438" y="116">("yesssss!! pls" works)</text></g>
+          <path class="arrow" d="M180 82H208" marker-end="url(#ah3)"/><path class="arrow" d="M392 82H420" marker-end="url(#ah3)"/>
+          <text class="tag" x="10" y="166">SUNDAY</text>
+          <g class="n"><rect x="10" y="180" width="170" height="92" rx="5"/><text class="t" x="24" y="206">Choose</text><text class="s" x="24" y="228">rules, not clicks: scores,</text><text class="s" x="24" y="244">theme rotation, no copies;</text><text class="s" x="24" y="260">nothing good? skip</text></g>
+          <g class="n a"><rect x="212" y="180" width="180" height="92" rx="5"/><text class="t" x="226" y="206">Draft</text><text class="s" x="226" y="228">the fixed lines come from</text><text class="s" x="226" y="244">"When?"; Claude writes</text><text class="s" x="226" y="260">the memory, fits 2:00</text></g>
+          <g class="n c"><rect x="424" y="180" width="180" height="92" rx="5"/><text class="t" x="438" y="206">Judge</text><text class="s" x="438" y="228">a second Claude call grades</text><text class="s" x="438" y="244">the draft; vision checks</text><text class="s" x="438" y="260">frames of the video</text></g>
+          <g class="n"><rect x="636" y="180" width="160" height="92" rx="5"/><text class="t" x="650" y="206">Freeze</text><text class="s" x="650" y="228">the game exactly as</text><text class="s" x="650" y="244">last pushed to GitHub</text><text class="s" x="650" y="260">(no half-done work)</text></g>
+          <g class="n a"><rect x="808" y="180" width="162" height="92" rx="5"/><text class="t" x="822" y="206">Render</text><text class="s" x="822" y="228">Chrome plays it on</text><text class="s" x="822" y="244">autopilot, recorded</text><text class="s" x="822" y="260">1080 × 1920 with sound</text></g>
+          <path class="arrow" d="M514 128V150H95V176" marker-end="url(#ah3)"/>
+          <path class="arrow" d="M180 226H208" marker-end="url(#ah3)"/><path class="arrow" d="M392 226H420" marker-end="url(#ah3)"/><path class="arrow" d="M604 226H632" marker-end="url(#ah3)"/><path class="arrow" d="M796 226H804" marker-end="url(#ah3)"/>
+          <g class="n"><rect x="808" y="312" width="162" height="92" rx="5"/><text class="t" x="822" y="338">Finish</text><text class="s" x="822" y="360">ffmpeg, 4K upscale,</text><text class="s" x="822" y="376">thumbnail on the</text><text class="s" x="822" y="392">brightest neon frame</text></g>
+          <g class="n p"><rect x="590" y="312" width="186" height="92" rx="5"/><text class="t" x="604" y="338">Upload, private</text><text class="s" x="604" y="360">YouTube API, resumable;</text><text class="s" x="604" y="376">Daga checks it and</text><text class="s" x="604" y="392">makes it public</text></g>
+          <g class="n a"><rect x="212" y="312" width="300" height="92" rx="5"/><text class="t" x="226" y="338">Viewers watch, and comment their own</text><text class="s" x="226" y="360">the episode ends on "Once it's all over,</text><text class="s" x="226" y="376">what memories will you keep?"</text><text class="s amberT" x="226" y="394">→ next week's stories</text></g>
+          <path class="arrow" d="M889 272V308" marker-end="url(#ah3)"/><path class="arrow" d="M808 358H780" marker-end="url(#ah3)"/><path class="arrow" d="M590 358H516" marker-end="url(#ah3)"/>
+          <path class="arrow" d="M212 358H200Q186 358 186 344V136Q186 82 182 82" marker-end="url(#ah3)" stroke-dasharray="4 4"/>
+        </svg>
+      </div>
+      <figcaption>Two scheduled jobs on a Mac (launchd): asking happens on Friday because people take time to answer; choosing and making happen on Sunday. Uploads stay private until the run has earned trust (shadow mode).</figcaption>
+    </figure>
+
+    <h3>One week of the loop</h3>
+    <div class="week" aria-label="Weekly schedule">
+      <div class="day"><b>Mon</b>new comments arrive</div>
+      <div class="day"><b>Tue</b></div>
+      <div class="day"><b>Wed</b></div>
+      <div class="day"><b>Thu</b></div>
+      <div class="day on cy"><b>Fri</b>12:00 collect, score, ask up to 5 writers</div>
+      <div class="day"><b>Sat</b>answers come in</div>
+      <div class="day on"><b>Sun</b>10:00 choose, draft, judge, render, upload</div>
+    </div>
+
+    <div class="col">
+      <h3>One template, many stories</h3>
+      <p>The first story, <em>When?</em>, is the template for every episode. Its fixed lines (the pickup, <em>"Was there a reason?"</em>, <em>"That's up to you... When?"</em>, <em>"I guess it's time."</em>) are copied word for word. One line is a pattern, <em>"Ah, I see... it was ___. I didn't need anything else."</em>, and Claude fills the blank with the thing that mattered in each viewer's story, with one word in italics. Editing the template changes every future episode, with no code.</p>
+      <h3>Safety rails</h3>
+      <ul class="list">
+        <li><b>Consent first:</b> a stranger's story is never used without a clear yes in the replies.</li>
+        <li><b>Fail safe:</b> if nothing scores high enough, the week is skipped rather than posting something weak.</li>
+        <li><b>Private by default:</b> every upload waits for a human check. An off switch and a lock file stop runs from overlapping.</li>
+        <li><b>Frozen game:</b> videos record from a snapshot of the last pushed version, so experiments in progress never leak into a public video.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="craft">
+    <div class="col">
+      <span class="eyebrow">Problems worth solving</span>
+      <h2>The details that took the longest</h2>
+    </div>
+    <div class="fixes">
+      <div class="fix"><div class="q">The videos looked much darker on YouTube<span>half the city turned pure black</span></div><p>Chrome records video in full range (0 to 255); YouTube reads limited range (16 to 235), so everything darker than 16 was crushed. The render now converts the range for real and labels the file BT.709.</p></div>
+      <div class="fix"><div class="q">Letters blurred after upload<span>ASCII is the hardest picture to compress</span></div><p>Thousands of tiny high-contrast letters plus film grain eat bitrate. Recordings get half the grain, and the video is upscaled to 4K with nearest-neighbour pixels, which earns a better codec from YouTube even for 1080p viewers.</p></div>
+      <div class="fix"><div class="q">Line breaks in the phone frame<span>a lone "funeral," on its own row</span></div><p>Every row is fitted before the game sees it, using dynamic programming: try every way to cut, keep the cheapest. Costs punish uneven rows, a row ending on "the", and lone last words. The width comes from the Shorts safe zone: 25 letters.</p></div>
+      <div class="fix"><div class="q">A thumbnail with the title fully lit<span>the neon letters flicker on one by one</span></div><p>ffmpeg scans the first four seconds and measures brightness in the title area; the brightest frame is the one where every tube is on.</p></div>
+      <div class="fix"><div class="q">Laptop fans during play<span>measured, not guessed</span></div><p>GPU timer queries showed the image passes were the cost. Folding three passes into one and computing fog at half size cut each frame from about 45 ms to 17 ms, with the same picture.</p></div>
+      <div class="fix"><div class="q">People thought it was a taxi simulator<span>feedback from the first playtests</span></div><p>The meaning arrived too late. The script now plants it in the first lines (<em>"So that's it?... Was there a reason?"</em>), the passenger realises what mattered before the stop, and a coin on the empty seat says they crossed over.</p></div>
+    </div>
+  </section>
+
+  <footer class="credits">
+    <div><b>Concept, story, art direction</b><br>Daga · <a href="https://instagram.com/in.daga" target="_blank" rel="noopener">@in.daga</a></div>
+    <div><b>Game</b><br>Three.js, Vite, WebGL shaders, Web Audio</div>
+    <div><b>Story Bot</b><br>Node.js, YouTube Data API, Claude API, Playwright, ffmpeg</div>
+  </footer>
+</div>
+</body>
+</html>
