@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gift a Game · case study · DAGA's digibook</title>
+<meta name="description" content="Case study: Gift a Game by Daga (Daniela Gamarra). A personalised mini-city video game sent as a gift: objective, value proposition, how it was made in a week, player feedback and go to market.">
+<meta property="og:title" content="Gift a Game · case study">
+<meta property="og:image" content="https://danielagamarra.github.io/assets/img/gift-a-game-card.jpg">
+<meta name="theme-color" content="#12110f">
+<link rel="icon" href="../../favicon.svg?v=2" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<script>try{var t=JSON.parse(localStorage.getItem('daga-theme'))}catch(e){}document.documentElement.dataset.theme=t==='light'?'light':'dark';</script>
+<style>
+:root {
+  --desk: #14120f; --desk-dot: #2c2925; --paper: #f3efe3; --paper-2: #eae5d7; --rule: #ddd6c7;
+  --ink: #161410; --ink-2: #3b372f; --pencil: #8b857a; --lime: #c8f53a; --red: #ff4b2b; --blue: #2a3cff;
+  --on-lime: #14120f; --pink: #ffc2dc; --tape-blend: multiply; --tape-op: .8;
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 30px -12px rgba(40,30,10,.25);
+  --hand: 'Caveat', 'Comic Sans MS', cursive; --serif: 'Instrument Serif', Georgia, serif; --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+:root[data-theme="dark"] {
+  --desk: #12110f; --desk-dot: #2a2723; --paper: #1e1c19; --paper-2: #171512; --rule: #2c2925;
+  --ink: #ece6dc; --ink-2: #c4bbad; --pencil: #8f877a; --red: #ff6e52; --blue: #bdb3a4; --pink: #9c3f6c;
+  --tape-blend: normal; --tape-op: .55;
+  --shadow: 0 0 0 1px rgba(255,255,255,.04), 0 20px 50px -18px rgba(0,0,0,.8);
+}
+* { box-sizing: border-box; }
+html { background: var(--desk); }
+body { margin: 0; color: var(--ink); font: 15px/1.65 var(--mono); -webkit-font-smoothing: antialiased;
+  background: var(--desk); background-image: radial-gradient(var(--desk-dot) 1.1px, transparent 1.3px); background-size: 26px 26px;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 25 L5 18 L19 4 L24 9 L10 23 Z' fill='%23ece6dc' stroke='%23161410' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M3 25 L5 18 L10 23 Z' fill='%23ffffff' stroke='%23161410' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M17 6 L22 11' stroke='%23161410' stroke-width='1.6'/%3E%3C/svg%3E") 3 25, auto; }
+a { color: inherit; text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+a:hover { background: var(--lime); color: var(--on-lime); }
+a:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; pointer-events: none; }
+.bar > * { pointer-events: auto; }
+.brand { text-decoration: none; display: inline-flex; align-items: baseline; gap: 2px; background: var(--paper); color: var(--ink); padding: 4px 14px 6px; border: 1.5px solid var(--ink); border-radius: 999px; box-shadow: 2px 3px 0 var(--ink); font: 800 16px var(--mono); }
+.brand:hover { background: var(--paper); color: var(--ink); }
+.brand i { font: 700 20px var(--hand); font-style: normal; }
+.tool { font: 700 13px var(--mono); background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 12px; box-shadow: 2px 3px 0 var(--ink); cursor: pointer; }
+
+/* the paper sheet */
+.sheet { position: relative; max-width: 1040px; margin: 10px auto 80px; background: var(--paper);
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px); background-size: 100% 32px; background-position: 0 86px;
+  border-radius: 6px 6px 10px 10px; box-shadow: var(--shadow); padding: 74px clamp(18px, 5vw, 64px) 60px; }
+.spiral { position: absolute; left: 40px; right: 40px; top: 14px; font: 700 15px/1 var(--mono); color: var(--ink-2); white-space: nowrap; overflow: hidden; letter-spacing: .05em; user-select: none; }
+.tape { position: absolute; width: 120px; height: 30px; top: -12px; right: 70px; transform: rotate(4deg); background: var(--lime); opacity: var(--tape-op); mix-blend-mode: var(--tape-blend); }
+.col { max-width: 700px; }
+h1, h2, h3 { text-wrap: balance; font-weight: 400; }
+h2 { font: 400 clamp(36px, 5vw, 54px)/1 var(--serif); letter-spacing: -.01em; margin: 0 0 16px; }
+h3 { font: 800 12px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--pencil); margin: 30px 0 10px; }
+p { margin: 0 0 14px; }
+em { font-family: var(--serif); font-size: 1.12em; }
+section { padding-top: 64px; position: relative; }
+.eyebrow { font: 700 26px/1 var(--hand); color: var(--red); display: inline-block; transform: rotate(-2deg); margin-bottom: 10px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+.hero .eyebrow { color: var(--pencil); font: 800 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transform: none; }
+.hero h1 { font: 400 clamp(64px, 10vw, 120px)/.9 var(--serif); letter-spacing: -.02em; margin: 6px 0 18px; }
+.hero h1 em { font-size: 1em; }
+.hero .lede { font: 400 24px/1.3 var(--serif); max-width: 30ch; }
+.hero .lede em { font-size: 1em; }
+.hero .meta { font: 13px/1.7 var(--mono); color: var(--ink-2); margin-top: 18px; }
+.hero .meta b { font-weight: 800; color: var(--ink); }
+.ascii { font: 11px/1.1 var(--mono); color: var(--ink); white-space: pre; margin: 0; overflow: hidden; background: var(--paper-2); border: 1.5px solid var(--ink); border-radius: 3px 8px 4px 9px; padding: 18px; transform: rotate(1.2deg); box-shadow: 3px 4px 0 var(--ink); }
+.ascii .c { color: var(--ink); background: var(--lime); color: var(--on-lime); } .ascii .p { color: var(--red); font-weight: 700; } .ascii .d { color: var(--pencil); }
+@media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .ascii { font-size: 9px; } }
+
+/* facts */
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+.facts div { border: 1.5px solid var(--ink); border-radius: 4px 9px 5px 10px; padding: 14px 16px; background: var(--paper); }
+.facts div:nth-child(odd) { transform: rotate(-.8deg); } .facts div:nth-child(even) { transform: rotate(.7deg); }
+.facts b { display: block; font: 400 44px/1 var(--serif); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
+.facts span { font: 12px/1.45 var(--mono); color: var(--ink-2); }
+@media (max-width: 680px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* diagrams on the paper */
+figure { margin: 28px 0 8px; }
+.diagram { overflow-x: auto; background: var(--paper-2); border: 1.5px solid var(--ink); border-radius: 4px 10px 5px 11px; padding: 18px; }
+.diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
+figcaption { font: 700 20px/1.25 var(--hand); color: var(--ink-2); margin-top: 12px; max-width: 700px; }
+figcaption code { font-family: var(--mono); font-size: 13px; }
+svg text { font-family: var(--mono); }
+.n rect { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
+.n.a rect { fill: var(--lime); } .n.a .t, .n.a .s { fill: var(--on-lime); }
+.n.c rect { stroke-dasharray: 5 3; }
+.n.p rect { stroke: var(--red); stroke-width: 2; }
+.n .t { fill: var(--ink); font-size: 13px; font-weight: 700; }
+.n .s { fill: var(--ink-2); font-size: 11px; }
+.arrow { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+marker path { fill: var(--ink) !important; }
+.tag { fill: var(--red); font-size: 11px; letter-spacing: .12em; font-weight: 700; }
+.amberT { fill: var(--red) !important; font-weight: 700; } .cyanT, .pinkT { fill: var(--ink); }
+
+/* the ride as a script: sticky notes */
+.beats { display: flex; gap: 10px; overflow-x: auto; padding: 8px 4px 12px; margin-top: 18px; }
+.beat { flex: 0 0 auto; border: 1.5px solid var(--ink); border-radius: 3px; padding: 10px 12px; min-width: 140px; max-width: 170px; background: var(--paper); box-shadow: 2px 3px 0 var(--ink); }
+.beat:nth-child(odd) { transform: rotate(-1.4deg); } .beat:nth-child(even) { transform: rotate(1.2deg); }
+.beat i { display: block; font: 800 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; font-style: normal; margin-bottom: 8px; color: var(--pencil); }
+.beat q { font: 700 19px/1.15 var(--hand); color: var(--ink); quotes: none; display: block; }
+.beat.k-poem { background: var(--lime); } .beat.k-poem i, .beat.k-poem q { color: var(--on-lime); }
+.beat.k-memory i { color: var(--red); }
+
+/* problems + fixes */
+.fixes { display: grid; gap: 0; margin-top: 20px; border-top: 1.5px dashed var(--pencil); }
+.fix { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 22px; padding: 18px 0; border-bottom: 1.5px dashed var(--pencil); }
+.fix .q { font: 400 24px/1.15 var(--serif); }
+.fix .q span { display: block; font: 700 19px/1.2 var(--hand); color: var(--red); margin-top: 6px; }
+.fix p { margin: 0; color: var(--ink-2); font-size: 14px; }
+@media (max-width: 680px) { .fix { grid-template-columns: 1fr; gap: 6px; } }
+
+/* one week */
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
+.day { border: 1.5px solid var(--rule); border-radius: 4px; padding: 10px; min-height: 100px; font: 12px/1.4 var(--mono); color: var(--pencil); background: var(--paper); }
+.day b { display: block; font: 400 26px/1 var(--serif); color: var(--ink); margin-bottom: 8px; }
+.day.on { border-color: var(--ink); color: var(--ink); box-shadow: 2px 3px 0 var(--ink); }
+.day.on.cy { background: var(--lime); color: var(--on-lime); } .day.on.cy b { color: var(--on-lime); }
+@media (max-width: 680px) { .week { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.list { padding-left: 18px; margin: 0 0 14px; } .list li { margin-bottom: 8px; }
+code { font: 13.5px var(--mono); background: var(--paper-2); padding: 0 4px; border-radius: 3px; }
+.credits { border-top: 1.5px solid var(--ink); margin-top: 72px; padding-top: 24px; font: 13px/1.7 var(--mono); color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 8px 40px; }
+.credits b { color: var(--ink); font-weight: 800; }
+.doodle { position: absolute; pointer-events: none; overflow: visible; }
+.doodle path { fill: none; stroke: var(--pencil); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+@media (max-width: 800px) { .doodle { display: none; } .sheet { transform: none; } }
+
+/* gift a game */
+.cover { margin: 0; transform: rotate(1.4deg); background: var(--paper-2); border: 1.5px solid var(--ink); border-radius: 3px 8px 4px 9px; box-shadow: 3px 4px 0 var(--ink); padding: 10px; position: relative; }
+.cover img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.cover::before { content: ''; position: absolute; width: 90px; height: 26px; top: -12px; left: 40%; transform: rotate(-5deg); background: var(--lime); opacity: var(--tape-op); mix-blend-mode: var(--tape-blend); }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+.steps figure { margin: 0; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 4px 9px 5px 10px; padding: 8px 8px 12px; box-shadow: 2px 3px 0 var(--ink); }
+.steps figure:nth-child(odd) { transform: rotate(-1deg); } .steps figure:nth-child(even) { transform: rotate(1deg); }
+.steps img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.steps figcaption { font-size: 19px; margin-top: 8px; }
+.steps figcaption b { font: 800 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 4px; }
+@media (max-width: 680px) { .steps { display: flex; overflow-x: auto; gap: 14px; padding: 6px 4px 14px; scroll-snap-type: x mandatory; } .steps figure { flex: 0 0 64%; scroll-snap-align: center; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="../../#giftagame">DAGA<i>'s digibook</i></a>
+  <button class="tool" id="theme" type="button" aria-label="Switch light or dark">☀</button>
+</header>
+<main class="sheet">
+  <div class="spiral" aria-hidden="true">(@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    (@)    </div>
+  <div class="tape" aria-hidden="true"></div>
+  <svg class="doodle" viewBox="0 0 100 100" style="width:40px;height:40px;right:30px;top:60px;transform:rotate(10deg)" aria-hidden="true"><path d="M50 6 C52 36 64 48 94 50 C64 52 52 64 50 94 C48 64 36 52 6 50 C36 48 48 36 50 6 Z"/></svg>
+  <svg class="doodle" viewBox="0 0 100 100" style="width:70px;height:70px;right:-34px;top:640px;transform:rotate(28deg)" aria-hidden="true"><path d="M50 6 C 64 20, 67 44, 61 66 L39 66 C 33 44, 36 20, 50 6 Z M39 54 L26 74 L40 70 M61 54 L74 74 L60 70 M44 76 L50 94 L56 76"/></svg>
+  <svg class="doodle" viewBox="0 0 100 100" style="width:80px;height:80px;left:-40px;top:1600px;transform:rotate(-12deg)" aria-hidden="true"><path d="M50 30 C 62 30, 70 40, 70 50 C 70 62, 62 70, 50 70 C 38 70, 30 62, 30 50 C 30 40, 38 30, 50 30 Z M30 56 C 6 66, 10 74, 40 66 C 62 60, 92 44, 90 36 C 89 32, 80 33, 70 38"/></svg>
+
+  <header class="hero">
+    <div>
+      <span class="eyebrow">Personalised gift game · 2026</span>
+      <h1>Gift a <em>Game</em></h1>
+      <p class="lede">Their city as a tiny video game: their name on the sign, their family in the streets, and <em>your</em> message waiting at the end.</p>
+      <p class="meta"><b>Play it:</b> <a href="https://giftagame.app" target="_blank" rel="noopener">giftagame.app</a> (any phone)<br><b>My role:</b> founder: concept, game and world design, art direction, product, brand and go-to-market<br><b>Made with:</b> Three.js, WebGL, Stripe Checkout, Cloudflare Workers</p>
+    </div>
+    <figure class="cover"><img src="cover.jpg" alt="Gift a Game: the logo, the slogan 'A special gift, made just for your loved ones' and a wooden Little Toronto"></figure>
+  </header>
+
+  <div class="facts" role="list">
+    <div role="listitem"><b>1 week</b><span>from first line of code to live payments (Nov 17 to 24, 2026)</span></div>
+    <div role="listitem"><b>6</b><span>cities ready to gift, 5 more on the way</span></div>
+    <div role="listitem"><b>~60</b><span>wooden pieces per city, about 10 minutes to build</span></div>
+    <div role="listitem"><b>CA$12</b><span>one price, no app, no account</span></div>
+  </div>
+
+  <section id="objective">
+    <div class="col">
+      <span class="eyebrow">The objective</span>
+      <h2>CA$500 profit by New Year's Eve</h2>
+      <p>A real business test with a clear finish line: CA$500 profit by Dec 31, 2026, which is about 55 sales, with a first checkpoint of 5 sales by Dec 1. One rule kept the numbers honest: <em>friends get gifts, never a sales pitch</em>. Every sale has to come from a stranger.</p>
+      <p>The buyer is mostly a woman aged 18 to 34 in the US or Canada, on her phone. She finds gifts on TikTok, Instagram and Pinterest, decides in under a minute, and is often buying at the last minute for a partner, a best friend or a parent far away.</p>
+    </div>
+  </section>
+
+  <section id="value">
+    <div class="col">
+      <span class="eyebrow">The value proposition</span>
+      <h2>A special gift, made just for your loved ones</h2>
+      <p>People want a gift that says <em>I made this for you</em> more than one that costs a lot. Digital gifts usually feel like "just a link". Gift a Game answers that by making the receiver build something: the gift takes time to open, it is clearly about them, and it ends with a moment worth sharing.</p>
+      <p>For the giver it is a personalised gift in about 10 minutes, ready to send tonight. For the receiver it is a small game made only for them.</p>
+    </div>
+    <div class="steps">
+      <figure><img src="1-make.jpg" alt="The gift maker on a phone" loading="lazy"><figcaption><b>1 · make</b>Pick a city, their name, the people and pets in their life, a flag and a message.</figcaption></figure>
+      <figure><img src="2-build.jpg" alt="Building the city piece by piece" loading="lazy"><figcaption><b>2 · build</b>They unwrap the box and place about 60 wooden pieces, chapter by chapter.</figcaption></figure>
+      <figure><img src="3-finale.jpg" alt="The finished city at night with the message" loading="lazy"><figcaption><b>3 · the moment</b>The lights come on, their name glows, and your message appears.</figcaption></figure>
+    </div>
+    <h3>Their side of the gift, beat by beat</h3>
+    <div class="beats" aria-label="What the receiver experiences, in order">
+      <div class="beat k-scene"><i>unwrap</i><q>A gift box opens with two taps.</q></div>
+      <div class="beat k-line"><i>build</i><q>The first piece snaps onto the board.</q></div>
+      <div class="beat k-memory"><i>discover</i><q>Their name on the theatre sign.</q></div>
+      <div class="beat k-line"><i>chapter</i><q>A local story at every chapter.</q></div>
+      <div class="beat k-memory"><i>discover</i><q>Their family and pets out for a walk.</q></div>
+      <div class="beat k-scene"><i>finale</i><q>Lights on, confetti, the name glows.</q></div>
+      <div class="beat k-poem"><i>message</i><q>Your words, signed by you.</q></div>
+      <div class="beat k-line"><i>pass it on</i><q>Send a thank-you, or make one.</q></div>
+    </div>
+  </section>
+
+  <section id="made">
+    <div class="col">
+      <span class="eyebrow">How it was made</span>
+      <h2>From one city to a live shop in a week</h2>
+      <p>I ran the studio like a small company on a daily cycle: research, build, test, review. I approved every city, every post and every spend. Little Toronto came first, then the gift maker, checkout, five more cities, the shop and a content system.</p>
+    </div>
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 980 300" role="img" aria-label="The gift loop: the giver makes and pays, the receiver opens the link, builds the city, sees the finale, then sends a thank-you or makes a gift of their own">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8592ab"/></marker></defs>
+          <text class="tag" x="10" y="22">THE GIVER</text>
+          <g class="n a"><rect x="10" y="40" width="170" height="96" rx="5"/><text class="t" x="24" y="66">Gift maker</text><text class="s" x="24" y="88">city, names, family,</text><text class="s" x="24" y="104">pets, flag, message;</text><text class="s" x="24" y="120">about 10 minutes</text></g>
+          <g class="n"><rect x="212" y="40" width="170" height="96" rx="5"/><text class="t" x="226" y="66">Checkout</text><text class="s" x="226" y="88">Stripe, no account,</text><text class="s" x="226" y="104">Apple Pay or card,</text><text class="s" x="226" y="120">CA$12 / US$9.99</text></g>
+          <g class="n p"><rect x="414" y="40" width="186" height="96" rx="5"/><text class="t" x="428" y="66">The gift link</text><text class="s" x="428" y="88">signed after payment;</text><text class="s" x="428" y="104">short link + QR, words</text><text class="s" x="428" y="120">encrypted in the browser</text></g>
+          <path class="arrow" d="M180 88H208" marker-end="url(#ah)"/><path class="arrow" d="M382 88H410" marker-end="url(#ah)"/>
+          <text class="tag" x="640" y="22">THE RECEIVER</text>
+          <g class="n"><rect x="640" y="40" width="160" height="96" rx="5"/><text class="t" x="654" y="66">Unwrap + build</text><text class="s" x="654" y="88">~60 pieces, eight</text><text class="s" x="654" y="104">chapters, Easter eggs,</text><text class="s" x="654" y="120">any phone, no app</text></g>
+          <g class="n a"><rect x="820" y="40" width="150" height="96" rx="5"/><text class="t" x="834" y="66">Finale</text><text class="s" x="834" y="88">lights, their name,</text><text class="s" x="834" y="104">the giver's message</text></g>
+          <path class="arrow" d="M600 88H636" marker-end="url(#ah)"/><path class="arrow" d="M800 88H816" marker-end="url(#ah)"/>
+          <path class="arrow" d="M895 136V180H700" marker-end="url(#ah)"/>
+          <g class="n c"><rect x="440" y="160" width="256" height="96" rx="5"/><text class="t" x="454" y="186">Pass it on</text><text class="s" x="454" y="208">a thank-you picture with the</text><text class="s" x="454" y="224">website on it, or "make one for</text><text class="s" x="454" y="240">someone you love"</text></g>
+          <path class="arrow" d="M440 208H95V140" marker-end="url(#ah)" stroke-dasharray="4 4"/>
+          <text class="s amberT" x="130" y="232" style="font-size:12px">every finished gift can start a new one</text>
+        </svg>
+      </div>
+      <figcaption>The privacy promise shaped the build: the server signs a fingerprint of the gift after payment and stores only an encrypted copy, so it never reads the names or the message.</figcaption>
+    </figure>
+    <div class="col">
+      <h3>What made it work on a phone</h3>
+      <ul class="list">
+        <li><b>A wooden-puzzle feel.</b> Every piece lands with a little bounce, a click and a puff of sawdust, so ten minutes of building feels like play, not a loading screen.</li>
+        <li><b>A strict budget.</b> Each city is tested for graphics and memory on older phones, plus automated checks for flicker, cameras and the full gift flow in every city.</li>
+        <li><b>Local, not generic.</b> Each city has its own landmarks and short stories: the 506 streetcar in Toronto, the Hollywood sign in LA, the Statue of Liberty in a working harbour in New York.</li>
+        <li><b>Built to be found.</b> Gift guide pages (for mom, for a boyfriend, last minute), an FAQ and structured data, so the shop appears when someone asks a search engine or an assistant for a personalised gift.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="feedback">
+    <div class="col">
+      <span class="eyebrow">Player feedback</span>
+      <h2>What we heard, and what changed the same day</h2>
+      <p>The first real players called it <em>"epic"</em> and built it together as a couple. Then the receiver went and made her own gift for someone else.</p>
+    </div>
+    <div class="fixes">
+      <div class="fix"><div class="q">"It goes by very fast"<span>the story at the end of each chapter</span></div><p>The card closed after a fixed 3.2 seconds. It now stays 7 to 13 seconds depending on how long the story is, and a tap still closes it sooner.</p></div>
+      <div class="fix"><div class="q">The receiver became a maker<span>she made her own gift right after playing</span></div><p>The end of the game now leads with a thank-you picture to send back to the giver, with the website on it, then "Make one for someone you love". Sales that start from a finished gift are tagged, so the loop can be measured.</p></div>
+      <div class="fix"><div class="q">"There is no Indonesian flag"<span>a player from Indonesia</span></div><p>Every country's flag is now in (203, Taiwan and Palestine included), picked with a search box instead of a long list.</p></div>
+      <div class="fix"><div class="q">Two Canada flags in Toronto<span>home flag and city flag were the same</span></div><p>When the home country matches the city's, the game flies the city's own flag instead: Toronto, New York, LA (zigzags included) and the rest.</p></div>
+      <div class="fix"><div class="q">"Little LA is lame"<span>it looked like any city</span></div><p>Rebuilt with the Hollywood sign on golden hills, the downtown skyline, Walk of Fame stars and a beach with a pier.</p></div>
+      <div class="fix"><div class="q">"The beach should be in the front"<span>it sat behind the city</span></div><p>Beaches moved to the front in LA, Miami and Vancouver. New York, a port and not a beach, got a harbour promenade, a ferry and the Statue of Liberty.</p></div>
+    </div>
+  </section>
+
+  <section id="market">
+    <div class="col">
+      <span class="eyebrow">Go to market</span>
+      <h2>Organic first, ads only when strangers buy</h2>
+      <ul class="list">
+        <li><b>Pinterest first.</b> Gift ideas are searched there weeks ahead and pins keep working for months. Every video also becomes a pin, plus its own stills and GIFs, all linking to the shop.</li>
+        <li><b>Instagram and TikTok.</b> Three short videos a day. Hooks come from research on what is trending and speak to the person directly: <em>"Would your mom play a video game?"</em></li>
+        <li><b>One clear offer.</b> 25% off for Black Friday (Nov 27 to 30), then a last-minute Christmas window.</li>
+        <li><b>A rule for ads.</b> No paid ads until the funnel is measurable, strangers buy on their own, one post clearly wins, and the cost per sale fits a CA$10 profit per gift.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="col">
+      <span class="eyebrow">Where it stands</span>
+      <h2>Results so far, and lessons</h2>
+      <p>The shop opens on Nov 24, 2026, so there are no sales numbers yet: a live site, live payments, six playable cities and the first real players. The next checkpoint is 5 sales from strangers by Dec 1.</p>
+      <h3>Lessons</h3>
+      <ul class="list">
+        <li><b>Real players beat opinions.</b> One couple found what a week of internal testing missed.</li>
+        <li><b>The gift is the moment, not the file.</b> The value is the receiver building it and finding your words, so the building had to feel good.</li>
+        <li><b>Every finish is a new start.</b> The end of the game is the best ad there is, so it asks the receiver to share and to make one.</li>
+        <li><b>Say it directly.</b> "A video game just for your mom" beats clever wording.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="credits">
+    <div><b>Concept, game design, art direction</b><br>Daga · <a href="https://instagram.com/in.daga" target="_blank" rel="noopener">@in.daga</a></div>
+    <div><b>Studio</b><br>Indaga Studios</div>
+    <div><b>Built with</b><br>Three.js, WebGL, Stripe Checkout, Cloudflare Workers + KV</div>
+  </footer>
+
+</main>
+<script>
+(function(){
+  var b=document.getElementById('theme');
+  function set(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('daga-theme',JSON.stringify(t))}catch(e){}b.textContent=t==='dark'?'☀':'☾';}
+  set(document.documentElement.dataset.theme);
+  b.addEventListener('click',function(){set(document.documentElement.dataset.theme==='dark'?'light':'dark')});
+})();
+</script>
+</body>
+</html>

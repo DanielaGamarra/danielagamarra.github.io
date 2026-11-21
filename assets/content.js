@@ -200,9 +200,9 @@ export const projects = [
     role: 'Founder & Creative Director',
     year: '2026',
     motif: '🎁',
-    img: 'assets/img/gift-a-game.jpg',
+    img: 'assets/img/gift-a-game-card.jpg',
     blurb: 'A special gift made just for your loved ones: their city as a tiny game, personalised by you, with your words hidden on the signs and your message at the end. Any phone. No app.',
-    links: [{ label: 'giftagame.app', url: 'https://www.giftagame.app/' }],
+    links: [{ label: 'giftagame.app', url: 'https://www.giftagame.app/' }, { label: 'read the case study', url: 'case-studies/gift-a-game/' }],
   },
   {
     id: 'kadabra', page: 'games',
