@@ -821,7 +821,7 @@ function openSheet(p) {
   sheet.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
-    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}">` : ''}</div>
+    ${p.video && embedUrl(p.video) ? '' : `<div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}">` : ''}</div>`}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
     <h2 id="sheet-title">${esc(p.title)}</h2>
     ${p.video && embedUrl(p.video) ? `<div class="video${p.vertical ? ' vertical' : ''}"><iframe src="${esc(embedUrl(p.video))}" title="${esc(p.title)} video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : ''}
@@ -832,7 +832,7 @@ function openSheet(p) {
     ${p.links ? `<div class="links">${p.links.map((l) => `<a class="cta dark" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>` : ''}
     ${p.todo ? `<div class="todo">${esc(p.todo)}</div>` : ''}`;
   sheetWrap.hidden = false;
-  if (!p.img) {
+  if (!p.img && $('canvas', sheet)) {
     sheetAscii = makeThumb($('canvas', sheet), p, { font: 9, radius: 70, push: 20 });
     sheetAscii.always = true; requestAnimationFrame(() => { sheetAscii.resize(); animators.add(sheetAscii); });
   }
