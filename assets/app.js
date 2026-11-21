@@ -395,6 +395,17 @@ function cardEl(p) {
   return el;
 }
 
+// Client work without approved images: a plain list, title · role.
+function linesCard(list) {
+  const el = document.createElement('article');
+  el.className = 'card lines-card'; el.dataset.id = 'lines-' + list[0].page;
+  el.style.setProperty('--r', '0.6deg'); el.style.transform = 'rotate(var(--r))';
+  el.innerHTML = `<div class="kind">also worked on</div><ul class="plist">${list.map((p) => `
+    <li><button type="button" data-pid="${esc(p.id)}"><b>${esc(p.title)}</b><span class="role">${esc(p.role)}</span><small>${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</small></button>${p.todo ? `<div class="todo">${esc(p.todo)}</div>` : ''}</li>`).join('')}</ul>`;
+  el.addEventListener('click', (e) => { const b = e.target.closest('[data-pid]'); if (b && !dragMoved) openSheet(C.projects.find((p) => p.id === b.dataset.pid)); });
+  return el;
+}
+
 function pageShell(id, { no, title, note, tint, cols }) {
   const el = document.createElement('section');
   el.className = 'page'; el.id = id;
@@ -510,7 +521,9 @@ function buildPage(p) {
     loadWriting($('.posts', body));
   } else {
     const list = C.projects.filter((x) => x.page === p.id);
-    for (const pr of list) body.appendChild(cardEl(pr));
+    for (const pr of list.filter((x) => !x.line)) body.appendChild(cardEl(pr));
+    const lines = list.filter((x) => x.line);
+    if (lines.length) body.appendChild(linesCard(lines));
     const picks = ['planet', 'rocket', 'ufo', 'orbit', 'constellation', 'satellite', 'sparkle', 'eye'];
     const a = picks[Math.floor(r() * picks.length)], b = picks[Math.floor(r() * picks.length)];
     el.append(

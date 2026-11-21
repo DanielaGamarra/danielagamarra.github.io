@@ -183,6 +183,17 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .card:hover { transform: rotate(var(--r, 0deg)) translateY(-4px) scale(1.015) !important; z-index: 5; }
 .card:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 .card.featured { width: 680px; }
+.lines-card { cursor: default; }
+.lines-card:hover { transform: rotate(var(--r, 0deg)) !important; }
+.plist { list-style: none; margin: 8px 0 0; padding: 0; }
+.plist li { border-top: 1px dashed var(--rule); padding: 10px 0; }
+.plist li:first-child { border-top: 0; padding-top: 4px; }
+.plist button { all: unset; cursor: pointer; display: grid; gap: 4px; width: 100%; }
+.plist button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.plist b { font: 400 26px/1.05 var(--serif); }
+.plist button:hover b { text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 3px; }
+.plist .role { justify-self: start; }
+.plist small { font: 400 11px var(--mono); color: var(--pencil); }
 .rough { position: absolute; inset: -3px; width: calc(100% + 6px); height: calc(100% + 6px); pointer-events: none; overflow: visible; }
 .rough path { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
 .thumb { position: relative; height: 170px; margin-bottom: 12px; overflow: hidden; border-radius: 2px; background: var(--paper-2); }
