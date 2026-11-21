@@ -301,15 +301,6 @@ export const projects = [
     motif: '🌱',
     blurb: 'Mobile-first UX/UI flows and visuals built from user research and behavioral insight. I set the art direction and brand guidelines, and designed generative AI production pipelines with Stable Diffusion, ComfyUI and Google AI Studio.',
   },
-  {
-    id: 'colloquium', page: 'product',
-    title: 'Graphic Design Colloquium',
-    kind: 'Visual identity · PUCP, Lima',
-    role: 'Activities + brand coordinator',
-    year: '2017',
-    motif: '🎟️',
-    blurb: 'The full identity system for the university\'s largest design event, across print, signage, merch and digital. I led a team of 30 designers.',
-  },
 
   // ---------------------------------------------------------------- studio
   {
