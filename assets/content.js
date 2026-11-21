@@ -351,7 +351,7 @@ export const awards = [
 
 // Talks you gave. Fill these in; empty ones show as a pencil note.
 export const talks = [
-  { year: '', title: '', where: '', url: '', todo: 'add a talk: title, event, year' },
+  { year: '2026', title: 'Hand-drawn AI animation: turning 3D AI animation into 2D hand-drawn frames with my own tools', where: 'BC + AI Film Club · Vancouver AI', url: 'https://www.youtube.com/watch?v=TUXn235_Btw&t=19s' },
   { year: '', title: '', where: '', url: '', todo: 'add another talk' },
 ];
 
