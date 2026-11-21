@@ -369,6 +369,9 @@ const pageEls = [];
 let heroAscii, flow, bubble;
 const thumbs = [];
 
+// Projects made at Indaga Studios carry the studio logo.
+const isIndaga = (p) => p.indaga || /Indaga Studios/.test(p.kind || '');
+const studioBadge = (p) => isIndaga(p) ? '<span class="studio-badge" title="Made at Indaga Studios" role="img" aria-label="Made at Indaga Studios"><i></i></span>' : '';
 function cardEl(p) {
   const el = document.createElement('article');
   el.className = 'card' + (p.featured ? ' featured' : '');
@@ -378,7 +381,7 @@ function cardEl(p) {
   el.style.setProperty('--r', ((r() - 0.5) * 2.4).toFixed(2) + 'deg');
   el.style.transform = 'rotate(var(--r))';
   el.innerHTML = `
-    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ''}</div>
+    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}</div>
     <div class="kind">${esc(p.kind)}${p.video ? ' · <b class="play">▶ watch</b>' : ''}</div>
     <h3>${esc(p.title)}</h3>
     ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ''}
@@ -821,7 +824,8 @@ function openSheet(p) {
   sheet.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
-    ${p.video && embedUrl(p.video) ? '' : `<div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}">` : ''}</div>`}
+    ${p.video && embedUrl(p.video) ? '' : `<div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}</div>`}
+    ${p.video && embedUrl(p.video) && isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
     <h2 id="sheet-title">${esc(p.title)}</h2>
     ${p.video && embedUrl(p.video) ? `<div class="video${p.vertical ? ' vertical' : ''}"><iframe src="${esc(embedUrl(p.video))}" title="${esc(p.title)} video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : ''}
@@ -936,7 +940,7 @@ function looseOval(cx, cy, rx, ry, seed) {
 }
 const BG_PICKS = ['planet', 'rocket', 'ufo', 'orbit', 'constellation', 'satellite', 'sparkle', 'star', 'comet', 'crosshair', 'asteroid', 'spiral', 'squiggle', 'eye'];
 const BG_NOTES = ['unexplored ✦', 'here be dragons', 'note to self: sleep', 'more pages soon', 'berlin was here', 'sector unmapped', 'x marks nothing', 'ideas go here'];
-const FEATURE_NOTES = { aota: 'start here!', 'hd-web': 'I built this', cusco: 'my own game!', mod: '100% by hand', indaga: 'my studio' };
+const FEATURE_NOTES = { aota: 'start here!', 'hd-web': 'I built this', calling: 'watch the trailer!', mod: '100% by hand', indaga: 'my studio' };
 function seedSketch() {
   if (FLOW) { sketchBg.innerHTML = ''; $$('.sketch-over').forEach((s) => s.remove()); return; }
   const rects = allPages().map((el) => el._rect);

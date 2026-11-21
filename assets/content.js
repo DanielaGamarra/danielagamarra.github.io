@@ -8,6 +8,7 @@
 //          the project page. Add vertical: true for 9:16 episodes.
 //  - line: true shows the project as a text line (title · role) with no
 //          picture. Use it for client work until images are approved.
+//  - pos:  where to crop the picture in its frame, e.g. '50% 20%'.
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
 // =====================================================================
@@ -148,19 +149,7 @@ export const projects = [
 
   // ---------------------------------------------------------------- games
   {
-    id: 'cusco', page: 'games', featured: true,
-    title: 'Cusco Paradox',
-    kind: 'Game (demo) · Indaga Studios',
-    role: 'Creative Director',
-    year: '2021–2025',
-    motif: '🦙',
-    img: 'assets/img/cusco-paradox.jpg',
-    tagline: 'An LGBTQ+ narrative puzzle game about a fox being trapped in the Incan netherworld.',
-    blurb: 'My own queer Inca game. An educational interactive experience made at Indaga Studios, where I led creative direction, art direction and production.',
-    links: [{ label: 'play the demo on itch.io', url: 'https://indagastudios.itch.io/cuscoparadox' }],
-  },
-  {
-    id: 'calling', page: 'games',
+    id: 'calling', page: 'games', featured: true,
     title: 'The Calling',
     kind: 'Interactive experience · career guidance · Indaga Studios',
     role: 'Creative Director',
@@ -174,6 +163,30 @@ export const projects = [
     links: [{ label: 'movetuvocacion.com', url: 'https://www.movetuvocacion.com/' }],
   },
   {
+    id: 'thrive-table', page: 'games',
+    title: 'Thrive to Table',
+    kind: 'Cozy cafe adventure game',
+    role: 'Main Artist, AI-assisted workflows',
+    year: '',
+    motif: '🥕',
+    img: 'assets/img/thrive-to-table.jpg', pos: '50% 22%',
+    tagline: 'Tiny mysterious friends escaped from the real world help you craft and thrive in a cozy cafe adventure.',
+    blurb: 'Main artist, leading AI-assisted art workflows.',
+    links: [{ label: 'thrivetotable.com', url: 'https://thrivetotable.com/' }],
+  },
+  {
+    id: 'cusco', page: 'games',
+    title: 'Cusco Paradox',
+    kind: 'Game (demo) · Indaga Studios',
+    role: 'Creative Director',
+    year: '2021–2025',
+    motif: '🦙',
+    img: 'assets/img/cusco-paradox.jpg',
+    tagline: 'An LGBTQ+ narrative puzzle game about a fox being trapped in the Incan netherworld.',
+    blurb: 'My own queer Inca game. An educational interactive experience made at Indaga Studios, where I led creative direction, art direction and production.',
+    links: [{ label: 'play the demo on itch.io', url: 'https://indagastudios.itch.io/cuscoparadox' }],
+  },
+  {
     id: 'empathy', page: 'games',
     title: 'Empathy Hearts',
     kind: 'Interactive experience · 2SLGBTQ+ inclusion · Indaga Studios',
@@ -185,12 +198,28 @@ export const projects = [
     blurb: 'An educational interactive experience about 2SLGBTQ+ inclusion, made at Indaga Studios.',
   },
   {
-    id: 'kadabra', page: 'games', line: true,
+    id: 'giftagame', page: 'games',
+    title: 'Gift a Game',
+    kind: 'Personalised gift game · web · Indaga Studios',
+    role: 'Founder & Creative Director',
+    year: '2026',
+    motif: '🎁',
+    img: 'assets/img/gift-a-game.jpg',
+    blurb: 'A special gift made just for your loved ones: their city as a tiny game, personalised by you, with your words hidden on the signs and your message at the end. Any phone. No app.',
+    links: [{ label: 'giftagame.app', url: 'https://www.giftagame.app/' }],
+  },
+
+  {
+    id: 'kadabra', page: 'games',
     title: 'Escuela Kadabra',
     kind: 'Educational game · Innova Schools',
     role: 'Lead Artist',
     year: '2019–2021',
     motif: '🎩',
+    img: 'assets/img/escuela-kadabra.jpg',
+    video: 'https://www.youtube.com/watch?v=9lFaFwQrFaA',
+    tagline: 'An educational side-scroller narrative game for kids.',
+    facts: ['Reading comprehension minigames: vocabulary, decoding and inferential meaning', 'Explore the world of Eureka and the Ekai, mythical creatures who guide the learning'],
     blurb: 'A learning game for kids in rural Latin America. I built and ran the full art pipeline, from vision to delivery, and mentored the junior designers.',
   },
   {
@@ -201,27 +230,6 @@ export const projects = [
     year: '2023–2024',
     motif: '🎮',
     blurb: 'Defined the UI art direction that became the game\'s visual identity, and iterated the player experience from user research.',
-  },
-  {
-    id: 'thrive-table', page: 'games', line: true,
-    title: 'Thrive to Table',
-    kind: 'Game',
-    role: 'Main Artist, AI-assisted workflows',
-    year: '',
-    motif: '🥕',
-    blurb: 'Main artist, leading AI-assisted art workflows.',
-    todo: 'confirm it is OK to show publicly (current job)',
-  },
-  {
-    id: 'giftagame', page: 'games',
-    title: 'Gift a Game',
-    kind: 'Personalised gift game · web · Indaga Studios',
-    role: 'Founder & Creative Director',
-    year: '2026',
-    motif: '🎁',
-    img: 'assets/img/gift-a-game.jpg',
-    blurb: 'A special gift made just for your loved ones: their city as a tiny game, personalised by you, with your words hidden on the signs and your message at the end. Any phone. No app.',
-    links: [{ label: 'giftagame.app', url: 'https://www.giftagame.app/' }],
   },
 
   // ---------------------------------------------------------------- comics
@@ -289,7 +297,7 @@ export const projects = [
 
   // ---------------------------------------------------------------- studio
   {
-    id: 'indaga', page: 'studio', featured: true,
+    id: 'indaga', page: 'studio', featured: true, indaga: true,
     title: 'Indaga Studios',
     kind: 'My studio · Lima → Toronto',
     role: 'Founder, lead designer, producer',

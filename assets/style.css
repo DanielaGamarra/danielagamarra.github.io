@@ -183,6 +183,11 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .card:hover { transform: rotate(var(--r, 0deg)) translateY(-4px) scale(1.015) !important; z-index: 5; }
 .card:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 .card.featured { width: 680px; }
+.studio-badge { position: absolute; z-index: 2; right: 8px; bottom: 8px; display: grid; place-items: center; padding: 5px 8px; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 6px; box-shadow: 2px 2px 0 var(--ink); transform: rotate(-3deg); }
+.studio-badge i { display: block; width: 40px; height: 21px; background: var(--ink); -webkit-mask: url(img/indaga-studios-logo.svg) center / contain no-repeat; mask: url(img/indaga-studios-logo.svg) center / contain no-repeat; }
+.card.featured .studio-badge i { width: 54px; height: 28px; }
+.sheet-studio { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 700 18px var(--hand); color: var(--pencil); }
+.sheet-studio .studio-badge { position: static; transform: rotate(-3deg); }
 .lines-card { cursor: default; }
 .lines-card:hover { transform: rotate(var(--r, 0deg)) !important; }
 .plist { list-style: none; margin: 8px 0 0; padding: 0; }
