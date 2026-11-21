@@ -416,3 +416,11 @@ body.cv-on #btn-doodle, body.cv-on .palette { display: none !important; }
 .sheet .sheet-motif.has-media canvas { border-radius: 2px; }
 .sheet .sheet-motif.has-media::before { content: ''; position: absolute; top: -10px; left: 50%; width: 70px; height: 20px; transform: translateX(-50%) rotate(-3deg); background: var(--lime); opacity: .75; mix-blend-mode: var(--tape-blend); }
 body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px; right: 8px; }
+
+/* dark version: pencil cursor with a white point, white crosshair when doodling */
+:root[data-theme="dark"] body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M3 25 L5 18 L19 4 L24 9 L10 23 Z' fill='%23ece6dc' stroke='%23161410' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M3 25 L5 18 L10 23 Z' fill='%23ffffff' stroke='%23161410' stroke-width='1' stroke-linejoin='round'/%3E%3Cpath d='M17 6 L22 11' stroke='%23161410' stroke-width='1.6'/%3E%3C/svg%3E") 3 25, auto;
+}
+:root[data-theme="dark"] body.doodling .desk {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 V22 M2 12 H22' stroke='%23161410' stroke-width='3.5'/%3E%3Cpath d='M12 2 V22 M2 12 H22' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, crosshair;
+}
