@@ -229,7 +229,7 @@ export const projects = [
     title: 'Empathy Hearts',
     kind: 'Interactive experience · 2SLGBTQ+ inclusion · Indaga Studios',
     role: 'Producer',
-    year: '2021–2025',
+    year: '2023',
     motif: '🌈',
     img: 'assets/img/empathy-hearts.jpg',
     links: [{ label: 'play on itch.io', url: 'https://indagastudios.itch.io/empathy-hearts' }],
