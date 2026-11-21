@@ -227,13 +227,13 @@ export const projects = [
   {
     id: 'empathy', page: 'games',
     title: 'Empathy Hearts',
-    kind: 'Interactive experience · 2SLGBTQ+ inclusion · Indaga Studios',
+    kind: 'Visual novel · mental health · Indaga Studios',
     role: 'Producer',
     year: '2023',
     motif: '🌈',
     img: 'assets/img/empathy-hearts.jpg',
     links: [{ label: 'play on itch.io', url: 'https://indagastudios.itch.io/empathy-hearts' }],
-    blurb: 'An educational interactive experience about 2SLGBTQ+ inclusion, made at Indaga Studios.',
+    blurb: 'A visual novel made together with 4th-year secondary students from Innova Schools, to share knowledge and build empathy for people who live with OCD.',
   },
 
   // ---------------------------------------------------------------- comics
