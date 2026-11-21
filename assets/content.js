@@ -272,6 +272,7 @@ export const projects = [
     role: 'Illustrator, Penguin Random House',
     year: '2019',
     motif: '📚',
+    facts: ['Finalist, Best illustrated book or comic, Premios Luces 2019 (El Comercio)'],
     blurb: 'A comic about the life and novels of Mario Vargas Llosa, written by Carlos Enrique Freyre. The illustrations are shared among four artists: Jesús Castro, Domenica Pagano, Omar Carrillo and me.',
     todo: 'add the cover or a page',
   },
@@ -349,6 +350,7 @@ export const awards = [
   { year: '2023', title: 'Female creator of intellectual property', by: 'Peruvian Government Award' },
   { year: '2022', title: 'Young creators who shine', by: 'Peruvian Government Award' },
   { year: '2022', title: 'Scholarship for digital creators building 2SLGBTQ+ awareness projects', by: 'OUTtv, Canada' },
+  { year: '2019', title: 'Finalist, Best illustrated book or comic · Mario. El universo Vargas Llosa', by: 'Premios Luces, El Comercio' },
   { year: '', title: 'Scholarship · Master of Digital Media', by: 'Centre for Digital Media, University of British Columbia' },
   { year: '', title: 'First of the class · Winternitz award', by: 'Pontifical Catholic University of Peru' },
 ];
@@ -356,6 +358,7 @@ export const awards = [
 // Press: articles that featured your work. `project` links it to a project
 // id so it also shows on that project's page.
 export const press = [
+  { year: '2020', outlet: 'El Comercio', title: 'Premios Luces 2019: revisa la lista de nominados y vota aquí por tus favoritos', url: 'https://elcomercio.pe/luces/premios-luces-estos-son-todos-los-nominados-de-este-ano-noticia/', project: 'mario-vargas-llosa' },
   { year: '2019', outlet: 'Libros a mí', title: '«Mario. El universo Vargas Llosa»: nuestro comentario sobre el cómic de Carlos Enrique Freyre', url: 'https://librosami.pe/2019/07/mario-el-universo-vargas-llosa-nuestro-comentario-sobre-el-comic-de-carlos-enrique-freyre/', project: 'mario-vargas-llosa' },
   { year: '2022', outlet: 'Wayka', title: '«Rosa Cuchillo»: la novela de Óscar Colchado adaptada al manga', url: 'https://wayka.pe/rosa-cuchillo-la-novela-de-oscar-colchado-adaptada-al-manga/', project: 'rosa-cuchillo' },
   { year: '2021', outlet: 'El lector de historietas', title: '“Rosa Cuchillo. La novela gráfica”, de Óscar Colchado y Daniela Gamarra', url: 'https://ellectordehistorietas.blogspot.com/2021/03/rosa-cuchillo-la-novela-grafica-de.html', project: 'rosa-cuchillo' },
