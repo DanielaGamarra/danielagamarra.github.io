@@ -1010,6 +1010,7 @@ function drawTrail(id) {
   if (FLOW || document.body.classList.contains('cv-on')) return;
   const a = anchorOf(id);
   if (!a || (trailLast && trailLast.id === id)) return;
+  if (id === 'cover') { trailLast = a; return; } // no line on the cover, the trail just starts there
   if (!hand) { trailLayer.insertAdjacentHTML('beforeend', HAND); hand = $('#hand', trailLayer); }
   const r = rng(id + trailRun), n = Math.max(4, Math.round((a.x1 - a.x0) / 70)), u = [];
   for (let i = 0; i <= n; i++) u.push([a.x0 + ((a.x1 - a.x0) * i) / n, a.y + (r() - 0.5) * 8 - (i === n ? 12 : 0)]);
