@@ -143,7 +143,7 @@ export const projects = [
   {
     id: 'hd-draw', page: 'tools', also: ['studio'],
     title: 'Brushest',
-    kind: 'iPad drawing + animation app · Apple Pencil',
+    kind: 'iPad drawing + animation app · Apple Pencil · Indaga Studios',
     role: 'Product design + build',
     year: '2026',
     motif: '🖌️',
