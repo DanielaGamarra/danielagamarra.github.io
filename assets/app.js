@@ -1031,13 +1031,14 @@ function drawTrail(id) {
   if (!hand) { trailLayer.insertAdjacentHTML('beforeend', HAND); hand = $('#hand', trailLayer); }
   const r = rng(id + trailRun), n = Math.max(4, Math.round((a.x1 - a.x0) / 70)), u = [];
   for (let i = 0; i <= n; i++) u.push([a.x0 + ((a.x1 - a.x0) * i) / n, a.y + (r() - 0.5) * 8 - (i === n ? 12 : 0)]);
-  let d = smoothPath(u);
+  let d = smoothPath(u), conn = '';
   if (trailLast) {
     const s = [trailLast.x1, trailLast.y], e = u[0];
     const dx = e[0] - s[0], dy = e[1] - s[1], L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L;
     const k = Math.min(380, L * 0.28) * (trailRun % 2 ? 1 : -1);
     const m = [s[0] + dx / 2 + nx * k * 0.5, s[1] + dy / 2 + ny * k * 0.5];
-    d = `M${s[0].toFixed(1)} ${s[1].toFixed(1)} C${(s[0] + dx * 0.1 + nx * k).toFixed(1)} ${(s[1] + dy * 0.1 + ny * k).toFixed(1)} ${(m[0] - dx * 0.2).toFixed(1)} ${(m[1] - dy * 0.2).toFixed(1)} ${m[0].toFixed(1)} ${m[1].toFixed(1)} S${(e[0] - dx * 0.12 - nx * k * 0.4).toFixed(1)} ${(e[1] - dy * 0.12 - ny * k * 0.4).toFixed(1)} ${e[0].toFixed(1)} ${e[1].toFixed(1)} ` + d.replace(/^M[^QL]*/, '');
+    conn = `M${s[0].toFixed(1)} ${s[1].toFixed(1)} C${(s[0] + dx * 0.1 + nx * k).toFixed(1)} ${(s[1] + dy * 0.1 + ny * k).toFixed(1)} ${(m[0] - dx * 0.2).toFixed(1)} ${(m[1] - dy * 0.2).toFixed(1)} ${m[0].toFixed(1)} ${m[1].toFixed(1)} S${(e[0] - dx * 0.12 - nx * k * 0.4).toFixed(1)} ${(e[1] - dy * 0.12 - ny * k * 0.4).toFixed(1)} ${e[0].toFixed(1)} ${e[1].toFixed(1)}`;
+    d = conn + ' ' + d.replace(/^M[^QL]*/, '');
   }
   const path = document.createElementNS(NS, 'path');
   path.setAttribute('class', 'trail-seg'); path.setAttribute('d', d);
@@ -1047,20 +1048,38 @@ function drawTrail(id) {
   trailLayer.insertBefore(path, hand);
   trailLast = a;
   const run = ++trailRun;
-  if (REDUCE) return;
-  const L = path.getTotalLength(), t0 = performance.now(), D = Math.min(2300, 700 + L * 0.4);
+  let Lc = 0;
+  if (conn) { const tmp = document.createElementNS(NS, 'path'); tmp.setAttribute('d', conn); trailLayer.appendChild(tmp); Lc = tmp.getTotalLength(); tmp.remove(); }
+  const L = path.getTotalLength();
+  if (REDUCE) { eraseConnector(path, L, Lc, 0); return; }
+  const t0 = performance.now(), D = Math.min(2300, 700 + L * 0.4);
   path.style.strokeDasharray = L; path.style.strokeDashoffset = L;
   hand.style.opacity = 1;
   const step = (now) => {
-    if (run !== trailRun) { path.style.strokeDasharray = 'none'; return; }
+    if (run !== trailRun) { path.style.strokeDasharray = 'none'; eraseConnector(path, L, Lc, 200); return; }
     const k = Math.min(1, (now - t0) / D), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
     path.style.strokeDashoffset = L * (1 - e);
     const p = path.getPointAtLength(L * e);
     hand.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) scale(${(0.72 / cam.z).toFixed(3)})`);
     if (k < 1) requestAnimationFrame(step);
-    else { path.style.strokeDasharray = 'none'; setTimeout(() => { if (run === trailRun) hand.style.opacity = 0; }, 500); }
+    else { path.style.strokeDasharray = 'none'; setTimeout(() => { if (run === trailRun) hand.style.opacity = 0; }, 500); eraseConnector(path, L, Lc, 1100); }
   };
   requestAnimationFrame(step);
+}
+// After the hand arrives, the travel line fades away little by little from
+// its start, so it never sits on top of the text; the underline stays.
+function eraseConnector(path, L, Lc, delay) {
+  if (!Lc) return;
+  if (REDUCE) { path.style.strokeDashoffset = 0; path.style.strokeDasharray = `0 ${Lc.toFixed(1)} ${L.toFixed(1)}`; return; }
+  setTimeout(() => {
+    const t0 = performance.now(), D = Math.min(3200, 1200 + Lc * 0.6);
+    const st = (now) => {
+      const k = Math.min(1, (now - t0) / D), e = k * k * (3 - 2 * k);
+      path.style.strokeDashoffset = 0; path.style.strokeDasharray = `0 ${(Lc * e).toFixed(1)} ${L.toFixed(1)}`;
+      if (k < 1) requestAnimationFrame(st);
+    };
+    requestAnimationFrame(st);
+  }, delay);
 }
 
 // ------------------------------------------------------------ shared doodles (author mode)
