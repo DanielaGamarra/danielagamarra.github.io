@@ -232,7 +232,7 @@ body.flow .hud, body.cv-on .hud { display: none; }
 
 /* ---------- cover (hero) ---------- */
 .cover .page-head { display: none; }
-.ascii-name { display: block; width: 100%; height: 230px; margin: 0 0 6px; }
+.ascii-name { display: block; width: 100%; height: 340px; margin: 0 0 6px; }
 .cover-role { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline; margin-bottom: 18px; }
 .cover-role .r { font: 400 34px/1 var(--serif); }
 .cover-role .r em { font-style: italic; }
@@ -353,7 +353,7 @@ body.flow .page-head { flex-wrap: wrap; gap: 4px 12px; }
 body.flow .page-note { font-size: 22px; }
 body.flow .card.featured h3 { font-size: 36px; }
 body.flow .card.featured .thumb { height: 200px; }
-body.flow .ascii-name { height: 120px; }
+body.flow .ascii-name { height: 180px; }
 body.flow .flow { font-size: 22px; line-height: 30px; }
 body.flow .cover-role .r { font-size: 26px; }
 body.flow .cat { width: 120px; height: 108px; }
@@ -389,7 +389,7 @@ body.flow .cv .row { grid-template-columns: 1fr; gap: 2px; }
 body.cv-on .bar { background: linear-gradient(var(--paper) 70%, transparent); }
 
 /* DAGA logo mark (white SVG used as a mask so it follows the theme) */
-.brand-logo { display: inline-block; width: 22px; height: 26px; vertical-align: -6px; margin-right: 3px; background: currentColor; -webkit-mask: url(img/daga-logo.svg) center / contain no-repeat; mask: url(img/daga-logo.svg) center / contain no-repeat; }
+.brand-logo { display: inline-block; width: 26px; height: 31px; vertical-align: -8px; margin-right: 3px; background: currentColor; -webkit-mask: url(img/daga-logo.svg) center / contain no-repeat; mask: url(img/daga-logo.svg) center / contain no-repeat; }
 .sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .sheet .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 18px 0 6px; }
 .sheet .gallery a { display: block; border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; background: var(--paper-2); }

@@ -423,6 +423,8 @@ function pageShell(id, { no, title, note, tint, cols }) {
   return el;
 }
 
+const LOGO = new Image();
+LOGO.src = 'assets/img/daga-logo.svg';
 function buildCover() {
   const el = pageShell('cover', { no: '00', title: 'cover', note: '', tint: 'lime', cols: 3 });
   el.classList.add('cover');
@@ -464,13 +466,12 @@ function buildCover() {
     scribble('← flip the pages', { x: 1012, y: 250, rot: 5, color: 'var(--red)' }),
   );
   heroAscii = new Ascii($('.ascii-name', body), {
-    font: 11, mode: 'alpha', noise: 0.035, radius: 90, push: 26, seed: 'daga', always: true, glitch: true,
+    font: 8, mode: 'alpha', noise: 0.03, radius: 90, push: 26, seed: 'daga', always: true, glitch: true,
+    // Daga's logo mark in ASCII (drawn a few times, offset, to thicken the strokes)
     src: (g, w, h) => {
-      const t = 'DAGA';
-      let s = h * 1.12;
-      g.font = `800 ${s}px "JetBrains Mono", monospace`;
-      const tw = g.measureText(t).width; if (tw > w * 0.98) { s *= (w * 0.98) / tw; g.font = `800 ${s}px "JetBrains Mono", monospace`; }
-      g.textBaseline = 'middle'; g.fillStyle = '#000'; g.fillText(t, 0, h * 0.52);
+      if (!(LOGO.complete && LOGO.naturalWidth)) return;
+      const lh = h * 0.97, lw = lh * (798 / 944), y = (h - lh) / 2, d = Math.max(1.5, h / 160);
+      for (const [dx, dy] of [[0, 0], [d, 0], [-d, 0], [0, d], [0, -d]]) g.drawImage(LOGO, dx + d, y + dy, lw, lh);
     },
   });
   heroAscii.always = true;
@@ -1001,7 +1002,7 @@ function anchorOf(id) {
   if (!el || !el._rect) return null;
   const t = id === 'cover' ? $('.ascii-name', el) : $('.page-title', el);
   if (!t) return null;
-  const b = relBox(t, el), q = el._rect, w = id === 'cover' ? b.w * 0.78 : b.w;
+  const b = relBox(t, el), q = el._rect, w = id === 'cover' ? b.h * 0.86 : b.w;
   return { id, x0: q.x + b.x - 12, x1: q.x + b.x + w + 18, y: q.y + b.y + b.h + (id === 'cover' ? 2 : 12) };
 }
 function clearTrail() { $$('.trail-seg', trailLayer).forEach((p) => p.remove()); trailLast = null; trailRun++; if (hand) hand.style.opacity = 0; }
@@ -1093,6 +1094,7 @@ async function boot() {
       document.fonts.load('700 20px "Caveat"'),
     ]);
   } catch {}
+  try { await LOGO.decode(); } catch {}
   document.body.classList.toggle('flow', FLOW);
   readTheme();
   buildTabs();
