@@ -188,17 +188,6 @@ export const projects = [
     links: [{ label: 'play the demo on itch.io', url: 'https://indagastudios.itch.io/cuscoparadox' }],
   },
   {
-    id: 'empathy', page: 'games',
-    title: 'Empathy Hearts',
-    kind: 'Interactive experience · 2SLGBTQ+ inclusion · Indaga Studios',
-    role: 'Producer',
-    year: '2021–2025',
-    motif: '🌈',
-    img: 'assets/img/empathy-hearts.jpg',
-    links: [{ label: 'play on itch.io', url: 'https://indagastudios.itch.io/empathy-hearts' }],
-    blurb: 'An educational interactive experience about 2SLGBTQ+ inclusion, made at Indaga Studios.',
-  },
-  {
     id: 'giftagame', page: 'games',
     title: 'Gift a Game',
     kind: 'Personalised gift game · web · Indaga Studios',
@@ -209,7 +198,6 @@ export const projects = [
     blurb: 'A special gift made just for your loved ones: their city as a tiny game, personalised by you, with your words hidden on the signs and your message at the end. Any phone. No app.',
     links: [{ label: 'giftagame.app', url: 'https://www.giftagame.app/' }],
   },
-
   {
     id: 'kadabra', page: 'games',
     title: 'Escuela Kadabra',
@@ -233,6 +221,17 @@ export const projects = [
     img: 'assets/img/azoove/key-art.jpg',
     gallery: ['assets/img/azoove/ui-1.jpg', 'assets/img/azoove/ui-2.jpg', 'assets/img/azoove/ui-3.jpg', 'assets/img/azoove/ui-4.jpg', 'assets/img/azoove/ui-5.jpg', 'assets/img/azoove/ui-6.jpg', 'assets/img/azoove/ui-7.jpg'],
     blurb: 'Defined the UI art direction that became the game\'s visual identity, and iterated the player experience from user research.',
+  },
+  {
+    id: 'empathy', page: 'games',
+    title: 'Empathy Hearts',
+    kind: 'Interactive experience · 2SLGBTQ+ inclusion · Indaga Studios',
+    role: 'Producer',
+    year: '2021–2025',
+    motif: '🌈',
+    img: 'assets/img/empathy-hearts.jpg',
+    links: [{ label: 'play on itch.io', url: 'https://indagastudios.itch.io/empathy-hearts' }],
+    blurb: 'An educational interactive experience about 2SLGBTQ+ inclusion, made at Indaga Studios.',
   },
 
   // ---------------------------------------------------------------- comics
