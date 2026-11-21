@@ -262,6 +262,7 @@ export const projects = [
     year: '2021',
     motif: '🌹',
     img: 'assets/img/rosa-cuchillo.jpg', pos: '50% 30%',
+    links: [{ label: 'watch the book presentation', url: 'https://www.youtube.com/watch?v=_xal_0b7Fyg' }],
     blurb: 'Rosa Cuchillo. La novela gráfica: the comic adaptation of Óscar Colchado\'s novel Rosa Cuchillo (1997), published by Random Cómics, Penguin Random House.',
   },
   {
@@ -365,7 +366,7 @@ export const press = [
 // Talks you gave. Fill these in; empty ones show as a pencil note.
 export const talks = [
   { year: '2026', title: 'Hand-drawn AI animation: turning 3D AI animation into 2D hand-drawn frames with my own tools', where: 'BC + AI Film Club · Vancouver AI', url: 'https://www.youtube.com/watch?v=TUXn235_Btw&t=19s' },
-  { year: '', title: '', where: '', url: '', todo: 'add another talk' },
+  { year: '2021', title: 'Rosa Cuchillo, the graphic novel: online book presentation with Óscar Colchado', where: 'Online presentation · PERÚ - Todas Las Sangres', url: 'https://www.youtube.com/watch?v=_xal_0b7Fyg' },
 ];
 
 // ---------------------------------------------------------------- CV only
