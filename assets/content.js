@@ -141,13 +141,16 @@ export const projects = [
   },
   {
     id: 'hd-draw', page: 'tools',
-    title: 'Inkest',
-    kind: 'Drawing app · iPad · Hybrid Dreams',
+    title: 'Brushest',
+    kind: 'iPad drawing + animation app · Apple Pencil',
     role: 'Product design + build',
     year: '2026',
-    motif: '✏️',
-    blurb: 'A native drawing app for iPad, built in Swift and Metal, so sketches flow straight into the Hybrid Dreams studio.',
-    todo: 'add a screenshot',
+    motif: '🖌️',
+    img: 'assets/img/brushest.jpg', pos: '50% 20%',
+    tagline: "Drawings that won't sit still.",
+    blurb: 'An iPad app for Apple Pencil where every line stays alive. Lines boil, wave, bounce and fly apart, without redrawing a single frame.',
+    facts: ['Living strokes and stackable effects', 'Frame-by-frame animation', '3D planes'],
+    links: [{ label: 'try it on the page', url: 'https://danielagamarra.github.io/brushest/' }],
   },
 
   // ---------------------------------------------------------------- games
