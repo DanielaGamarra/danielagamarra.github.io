@@ -194,6 +194,18 @@ function imageSrc(img) {
 }
 function makeThumb(canvas, p, opts = {}) {
   const a = new Ascii(canvas, { seed: p.id, src: emojiSrc(p.motif || '✦'), ...opts });
+  if (p.ascii) { // a logo drawn as ASCII (alpha mode, like the cover)
+    const im = new Image();
+    im.onload = () => {
+      a.o.src = (g, w, h) => {
+        const r = Math.min((w * 0.78) / im.naturalWidth, (h * 0.74) / im.naturalHeight), iw = im.naturalWidth * r, ih = im.naturalHeight * r;
+        g.drawImage(im, (w - iw) / 2, (h - ih) / 2, iw, ih);
+      };
+      a.o.mode = 'alpha'; a.o.noise = 0.03; a.resize();
+    };
+    im.src = p.ascii;
+    return a;
+  }
   if (p.img) {
     const im = new Image();
     im.onload = () => { a.o.src = imageSrc(im); a.o.mode = 'lum'; a.o.noise = 0; a.resize(); };
@@ -828,7 +840,8 @@ function openSheet(p) {
   sheet.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
-    ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}"></div>` : `<div class="thumb"><canvas aria-hidden="true"></canvas></div>`}
+    <div class="thumb sheet-motif${p.img || p.video ? ' has-media' : ''}"><canvas aria-hidden="true"></canvas></div>
+    ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}"></div>` : ''}
     ${isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
     <h2 id="sheet-title">${esc(p.title)}</h2>
@@ -841,8 +854,8 @@ function openSheet(p) {
     ${p.links ? `<div class="links">${p.links.map((l) => `<a class="cta dark" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>` : ''}
     ${p.todo ? `<div class="todo">${esc(p.todo)}</div>` : ''}`;
   sheetWrap.hidden = false;
-  if (!p.img && $('canvas', sheet)) {
-    sheetAscii = makeThumb($('canvas', sheet), p, { font: 9, radius: 70, push: 20 });
+  if ($('canvas', sheet)) { // the ASCII motif drawing stays on every project page, with its hover
+    sheetAscii = makeThumb($('canvas', sheet), { ...p, img: null }, { font: 9, radius: 70, push: 20 });
     sheetAscii.always = true; requestAnimationFrame(() => { sheetAscii.resize(); animators.add(sheetAscii); });
   }
   $('.close', sheet).addEventListener('click', closeSheet);

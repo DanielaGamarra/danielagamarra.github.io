@@ -175,7 +175,7 @@ export const projects = [
     img: 'assets/img/thrive-to-table.jpg', pos: '50% 22%',
     tagline: 'Tiny mysterious friends escaped from the real world help you craft and thrive in a cozy cafe adventure.',
     blurb: 'Main artist, leading AI-assisted art workflows.',
-    links: [{ label: 'thrivetotable.com', url: 'https://thrivetotable.com/' }],
+    links: [{ label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.thrivepal.thrivetotable&hl=en' }, { label: 'thrivetotable.com', url: 'https://thrivetotable.com/' }],
   },
   {
     id: 'cusco', page: 'games',
@@ -308,7 +308,9 @@ export const projects = [
 
   // ---------------------------------------------------------------- studio
   {
-    id: 'indaga', page: 'studio', featured: true, indaga: true,
+    id: 'indaga', page: 'studio', featured: true,
+    ascii: 'assets/img/indaga-studios-logo.svg',
+    links: [{ label: 'indagastudios.com', url: 'https://www.indagastudios.com/' }],
     title: 'Indaga Studios',
     kind: 'My studio · Lima → Toronto',
     role: 'Founder, lead designer, producer',
@@ -326,14 +328,14 @@ export const projects = [
     blurb: 'Grew a TikTok audience past 50,000 with strong visual hooks and stories people felt.',
   },
   {
-    id: 'clothing', page: 'studio',
-    title: 'My clothing brand',
-    kind: 'E-commerce · Shopify',
-    role: 'Founder',
+    id: 'instagram', page: 'studio',
+    title: '10k on Instagram',
+    kind: 'Content creator · Instagram',
+    role: 'Creator',
     year: '',
-    motif: '👕',
-    blurb: 'Ran my own clothing brand online, end to end: design, store, content.',
-    todo: 'add name + year',
+    motif: '📸',
+    blurb: 'Grew my Instagram, @in.daga, to 10,000 followers.',
+    links: [{ label: '@in.daga', url: 'https://www.instagram.com/in.daga' }],
   },
 ];
 
@@ -341,6 +343,7 @@ export const awards = [
   { year: '2023', title: 'Female creator of intellectual property', by: 'Peruvian Government Award' },
   { year: '2022', title: 'Young creators who shine', by: 'Peruvian Government Award' },
   { year: '2022', title: 'Scholarship for digital creators building 2SLGBTQ+ awareness projects', by: 'OUTtv, Canada' },
+  { year: '', title: 'Scholarship · Master of Digital Media', by: 'Centre for Digital Media, University of British Columbia' },
   { year: '', title: 'First of the class · Winternitz award', by: 'Pontifical Catholic University of Peru' },
 ];
 
@@ -364,8 +367,6 @@ export const experience = [
     points: ['Book illustration.'] },
   { role: 'Content Creator', org: 'Personal brand', where: 'Lima, Peru', when: 'Mar – Nov 2020',
     points: ['Grew a TikTok audience to 50,000+.'] },
-  { role: 'Activities and Brand Coordinator', org: 'Graphic Design Colloquium, PUCP', where: 'Lima, Peru', when: 'Feb – Oct 2017',
-    points: ['Identity for the university\'s largest design event; led 30 designers.'] },
 ];
 
 export const education = [
@@ -374,5 +375,5 @@ export const education = [
 ];
 
 export const skills = ['Creative direction', 'Directing', 'AI visual production', 'Art direction', 'Visual development', 'UX/UI', 'Brand systems', 'Comics + illustration', 'Production management', 'Content strategy'];
-export const tools = ['Figma', 'Adobe Suite', 'ComfyUI', 'Midjourney', 'Google AI Studio', 'Klaviyo', 'Coda', 'ClickUp', 'Jira'];
+export const tools = ['Figma', 'Adobe Suite', 'ComfyUI', 'Midjourney', 'Google AI Studio', 'Coda', 'ClickUp', 'Jira'];
 export const languages = ['Spanish (native)', 'English (fluent)'];

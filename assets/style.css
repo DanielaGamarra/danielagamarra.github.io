@@ -411,3 +411,8 @@ body.cv-on #btn-doodle, body.cv-on .palette { display: none !important; }
 /* project page: show the whole picture at its own shape */
 .sheet .sheet-img { margin: 0 0 14px; border-radius: 3px; overflow: hidden; background: var(--paper-2); display: grid; place-items: center; }
 .sheet .sheet-img img { display: block; max-width: 100%; max-height: 72vh; width: auto; height: auto; }
+/* project page: the ASCII motif as a little paper note pinned in the top-right corner */
+.sheet .sheet-motif.has-media { position: absolute; z-index: 4; top: 84px; right: 22px; width: 190px; height: 150px; margin: 0; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 2px; box-shadow: 3px 4px 0 rgba(0,0,0,.25); transform: rotate(4deg); overflow: visible; }
+.sheet .sheet-motif.has-media canvas { border-radius: 2px; }
+.sheet .sheet-motif.has-media::before { content: ''; position: absolute; top: -10px; left: 50%; width: 70px; height: 20px; transform: translateX(-50%) rotate(-3deg); background: var(--lime); opacity: .75; mix-blend-mode: var(--tape-blend); }
+body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px; right: 8px; }
