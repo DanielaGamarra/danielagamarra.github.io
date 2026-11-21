@@ -100,7 +100,7 @@ export const projects = [
     role: 'Creator · story, design, code',
     year: '2026',
     motif: '🚕',
-    img: 'assets/img/behind-the-seat.jpg',
+    img: 'assets/img/behind-the-seat.jpg', pos: '50% 62%',
     blurb: 'A rainy night, a taxi, and a driver who asks one question: "When?" The passenger answers in one line and the ride becomes a memory, drawn entirely in ASCII characters that flow around you.',
     links: [{ label: 'take the ride', url: 'https://behindtheseat.vercel.app' }],
   },
