@@ -153,6 +153,19 @@ export const projects = [
     facts: ['Living strokes and stackable effects', 'Frame-by-frame animation', '3D planes'],
     links: [{ label: 'try it on the page', url: 'https://danielagamarra.github.io/brushest/' }],
   },
+  {
+    id: 'ganttier', page: 'tools',
+    title: 'Ganttier',
+    kind: 'Planner app · web · Indaga Studios',
+    role: 'Product design + build',
+    year: '2026',
+    motif: '📅',
+    img: 'assets/img/ganttier.jpg',
+    tagline: 'Your plan, alive. Claude is the brain.',
+    blurb: 'A personal planner that lives in a folder of Markdown files. It turns goals into a scheduled week, and any AI, starting with Claude, can read and run it with you.',
+    facts: ['Free, local-first, AI-ready', 'No sign-up: your files stay on your computer unless you choose a cloud folder like Google Drive'],
+    links: [{ label: 'open Ganttier', url: 'https://ganttier.vercel.app/?welcome' }],
+  },
 
   // ---------------------------------------------------------------- games
   {
