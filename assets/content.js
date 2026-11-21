@@ -133,9 +133,11 @@ export const projects = [
     role: 'Founder · product design + build',
     year: '2026',
     motif: '🌙',
+    img: 'assets/img/hybrid-dreams.jpg',
+    tagline: 'A collection of creative tools by DAGA.',
     blurb: 'A local-first studio in the browser for writers, comic artists and indie filmmakers. Story timelines on an infinite canvas, docs, characters and worlds, storyboards, AI video prompts and an editor to cut the film. Your story lives as plain Markdown in your own folder, never on a server.',
-    facts: ['Storiest: visual story timelines', 'Elements: characters, locations, magic systems', 'Directing + Framest: from shot prompts to the final cut'],
-    links: [{ label: 'hybrid-dreams.com', url: 'https://hybrid-dreams.com' }],
+    facts: ['Storiest: visual story timelines', 'Elements: characters, locations, magic systems', 'Directing + Framest: from shot prompts to the final cut', 'Plain Markdown in a folder on your computer, Obsidian-compatible, no account, free'],
+    links: [{ label: 'hybrid-dreams.com', url: 'https://www.hybrid-dreams.com/' }],
   },
   {
     id: 'hd-draw', page: 'tools',
