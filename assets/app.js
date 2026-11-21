@@ -893,6 +893,7 @@ function buildCV() {
   $('#cv [data-print]').addEventListener('click', () => print());
 }
 function setCV(on) {
+  if (on) setDoodle(false); // no doodling on the CV
   document.body.classList.toggle('cv-on', on);
   $('#cv').hidden = !on;
   $('#btn-cv').setAttribute('aria-pressed', String(on));

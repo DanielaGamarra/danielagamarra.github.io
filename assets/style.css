@@ -3,9 +3,9 @@
   --desk: #14120f;
   --desk-dot: #2c2925;
   --star: #f3ece0;
-  --paper: #fbf8f1;
-  --paper-2: #f4efe3;
-  --rule: #dfe6ef;
+  --paper: #f2f0ec;
+  --paper-2: #e9e6e0;
+  --rule: #dcd8d1;
   --ink: #161410;
   --ink-2: #3b372f;
   --pencil: #8b857a;
@@ -21,7 +21,7 @@
   --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 30px -12px rgba(40,30,10,.25);
   --on-lime: #14120f;
   --edge: rgba(22,20,16,.06);
-  --hint-bg: rgba(251,248,241,.85);
+  --hint-bg: rgba(242,240,236,.88);
   --tape-blend: multiply;
   --tape-op: .8;
 }
@@ -404,3 +404,6 @@ body.cv-on .bar { background: linear-gradient(var(--paper) 70%, transparent); }
 body.flow .cover-hola { left: calc(180px * 0.86 + 18px); }
 body.flow .cover-hola .h { font-size: clamp(28px, 8vw, 44px); }
 body.flow .cover-hola .n { font-size: clamp(16px, 4.4vw, 22px); }
+
+/* CV mode: no doodling */
+body.cv-on #btn-doodle, body.cv-on .palette { display: none !important; }
