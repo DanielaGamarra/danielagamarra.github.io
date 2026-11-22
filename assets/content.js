@@ -20,7 +20,7 @@ export const site = {
   fullName: 'Daniela Gamarra',
   role: 'AI Filmmaker, Director & Visual Developer',
   tagline: 'Queer animated stories, made with a human-first AI pipeline: the artist leads, the tools follow.',
-  location: 'From Peru, based in Toronto, Canada',
+  location: 'Born in Lima, based in Toronto',
   email: 'gamarra.saenz@gmail.com',
   // Your Substack, e.g. 'https://daga.substack.com'. Leave '' until it exists.
   // A GitHub Action reads its RSS feed every hour and the posts show up on
