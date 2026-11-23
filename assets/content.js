@@ -636,3 +636,60 @@ export const education = [
 export const skills = ['Creative direction', 'Directing', 'AI visual production', 'Art direction', 'Visual development', 'UX/UI', 'Brand systems', 'Comics + illustration', 'Production management', 'Content strategy'];
 export const tools = ['Figma', 'Adobe Suite', 'ComfyUI', 'Midjourney', 'Google AI Studio', 'Coda', 'ClickUp', 'Jira'];
 export const languages = ['Spanish (native)', 'English (fluent)'];
+
+// ---------------------------------------------------------------- role links
+// Each lens is its own link (danielagamarra.github.io/<path>/) showing only the
+// work for one kind of job. Nothing is deleted: a lens hides and reorders.
+//  - pages: [pageId, [column, row]] in reading order (cover stays at 0,0)
+//  - projects: ids to show · move: { projectId: pageId } to show a project on
+//    another page in this lens · talks/press/awards: filters · cv: overrides
+// Branch rule: the comics lens is Daga's hand-drawn branch, ZERO AI anywhere.
+const noAI = (x) => !/\bAI\b|generative|midjourney|comfyui|google ai studio/i.test(JSON.stringify(x));
+export const lenses = {
+  comics: {
+    title: 'Comics & manga', role: 'Comic Artist, Mangaka & Illustrator',
+    tagline: 'Comics, webtoons and manga, drawn by hand.',
+    hero: 'I draw comics, webtoons and manga by hand. More than ten years of penciling, inking, coloring and lettering stories, from graphic novels with Penguin Random House to my own webtoon, MOD. This is my digibook, a digital sketchbook. Drag the cat, flip through the pages, doodle in the margins.',
+    heroMarks: ['comics', 'webtoons', 'manga', 'by hand', 'MOD', 'digibook'],
+    about: "Hola! I'm Daga, an award-winning comic and manga artist from Peru, now based in Toronto, and queer too. More than ten years of comics, webtoons and illustration, drawn by hand: graphic novels with Penguin Random House, my own webtoon MOD, and a lot of personal art. I also art-direct comic teams, from style to print.",
+    stats: [
+      { n: '10+', label: 'years drawing for a living' },
+      { n: '2', label: 'graphic novels with Penguin Random House' },
+      { n: '50k', label: 'on TikTok' },
+      { n: '10k', label: 'on Instagram' },
+    ],
+    pages: [['comics', [1, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
+    projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus'],
+    talks: noAI, press: noAI, awards: noAI,
+    cv: { skills: ['Comics + manga', 'Penciling, inking, coloring', 'Lettering + page layout', 'Character + environment design', 'Cover design', 'Art direction', 'Art production management', 'Print preparation'],
+          tools: ['Clip Studio Paint', 'Procreate', 'Adobe Suite', 'Figma'] },
+  },
+  direction: {
+    title: 'Artist & creative director', role: 'Artist, Art & Creative Director',
+    tagline: 'Comics, games and animated stories, from the first sketch to the team that ships it.',
+    pages: [['films', [1, 0]], ['comics', [-1, 0]], ['games', [0, 1]], ['studio', [-1, 1]], ['awards', [0, -1]], ['about', [1, -1]]],
+    projects: ['aota', 'appetite', 'behind', 'trash-squad', 'strands', 'awwm', 'hd-web', 'calling', 'cusco', 'kadabra', 'mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus', 'indaga'],
+    move: { 'hd-web': 'films' },
+  },
+  narrative: {
+    title: 'Narrative & writing', role: 'Writer, Narrative Designer & Storyteller',
+    tagline: 'Stories for comics, games, shows and interactive worlds.',
+    hero: 'I write stories: queer animated shows, webtoons, comics and games. More than ten years of building worlds and characters, from my webtoon MOD to the game writing of Fusewave, Cusco Paradox and Escuela Kadabra. This is my digibook, a digital sketchbook. Drag the cat, flip through the pages, doodle in the margins.',
+    heroMarks: ['write stories', 'MOD', 'game writing', 'digibook'],
+    pages: [['films', [1, 0]], ['comics', [-1, 0]], ['games', [0, 1]], ['about', [0, -1]]],
+    projects: ['aota', 'strands', 'awwm', 'appetite', 'behind', 'mod', 'distortion', 'fusewave', 'cusco', 'kadabra'],
+  },
+  product: {
+    title: 'Product design & production', role: 'Product Designer, Producer & Project Manager',
+    tagline: 'Products and teams, from research to launch.',
+    pages: [['product', [1, 0]], ['tools', [-1, 0]], ['games', [0, 1]], ['studio', [1, 1]], ['about', [0, -1]]],
+    projects: ['thrivepal', 'virtualtutors', 'hd-web', 'hd-draw', 'ganttier', 'giftagame', 'catpid', 'empathy', 'indaga'],
+  },
+  'game-ux': {
+    title: 'Game UX/UI & game design', role: 'Game UX/UI Designer & Game Designer',
+    tagline: 'Game interfaces and experiences players understand in seconds.',
+    pages: [['games', [1, 0]], ['about', [-1, 0]]],
+    projects: ['calling', 'kadabra', 'cusco', 'azoove', 'thrive-table', 'behind'],
+    move: { behind: 'games' },
+  },
+};

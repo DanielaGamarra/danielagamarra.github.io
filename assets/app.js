@@ -3,6 +3,21 @@
 import { prepareWithSegments, layoutNextLine } from '../vendor/pretext/layout.js';
 import * as C from './content.js';
 
+// Role link: a folder page sets window.LENS; the lens hides/reorders content (nothing is deleted).
+const LENS = window.LENS && C.lenses[window.LENS];
+if (LENS) {
+  const keepIn = (arr, fn) => { const k = arr.filter(fn); arr.splice(0, arr.length, ...k); };
+  for (const k of ['role', 'tagline', 'hero', 'heroMarks', 'about', 'stats']) if (LENS[k]) C.site[k] = LENS[k];
+  const pages = LENS.pages.map(([id, at], i) => ({ ...C.pages.find((p) => p.id === id), at, no: String(i + 1).padStart(2, '0') }));
+  C.pages.splice(0, C.pages.length, ...pages);
+  const keep = new Set(LENS.projects);
+  keepIn(C.projects, (p) => keep.has(p.id));
+  for (const p of C.projects) if (LENS.move && LENS.move[p.id]) { p.page = LENS.move[p.id]; p.also = []; }
+  for (const k of ['talks', 'press', 'awards']) if (LENS[k]) keepIn(C[k], LENS[k]);
+  if (LENS.cv) for (const k of ['skills', 'tools']) if (LENS.cv[k]) C[k].splice(0, C[k].length, ...LENS.cv[k]);
+}
+const here = (hash) => location.pathname + location.search + hash;
+
 const NS = 'http://www.w3.org/2000/svg';
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -888,7 +903,7 @@ function openLock(p) {
     e.preventDefault(); err.textContent = 'checking…';
     try { await tryUnlock(input.value); openSheet(p); } catch { err.textContent = 'not quite. ask Daga for the password'; input.select(); }
   });
-  history.replaceState(null, '', '#' + p.id);
+  history.replaceState(null, '', here('#' + p.id));
 }
 
 function openSheet(p) {
@@ -921,7 +936,7 @@ function openSheet(p) {
   }
   $('.close', sheet).addEventListener('click', closeSheet);
   $('.close', sheet).focus();
-  history.replaceState(null, '', '#' + p.id);
+  history.replaceState(null, '', here('#' + p.id));
 }
 // Core loop: nodes on a circle, clockwise from the top, with arrows between.
 function loopSvg(steps) {
@@ -997,7 +1012,7 @@ function setCV(on) {
   document.body.classList.toggle('cv-on', on);
   $('#cv').hidden = !on;
   $('#btn-cv').setAttribute('aria-pressed', String(on));
-  if (on) { scrollTo(0, 0); history.replaceState(null, '', '#cv'); }
+  if (on) { scrollTo(0, 0); history.replaceState(null, '', here('#cv')); }
   else { history.replaceState(null, '', location.pathname); requestAnimationFrame(refreshAll); }
 }
 $('#btn-cv').addEventListener('click', () => setCV(!document.body.classList.contains('cv-on')));
@@ -1007,7 +1022,7 @@ addEventListener('afterprint', () => { if (!document.body.classList.contains('cv
 // ------------------------------------------------------------ links inside the page
 document.addEventListener('click', (e) => {
   const go = e.target.closest('[data-go]');
-  if (go) { e.preventDefault(); if (document.body.classList.contains('cv-on')) setCV(false); goTo(go.dataset.go); history.replaceState(null, '', go.dataset.go === 'cover' ? location.pathname : '#' + go.dataset.go); return; }
+  if (go) { e.preventDefault(); if (document.body.classList.contains('cv-on')) setCV(false); goTo(go.dataset.go); history.replaceState(null, '', go.dataset.go === 'cover' ? location.pathname : here('#' + go.dataset.go)); return; }
   const cv = e.target.closest('[data-cv]');
   if (cv) { e.preventDefault(); setCV(true); }
 });
