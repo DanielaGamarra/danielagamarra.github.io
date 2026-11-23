@@ -414,6 +414,7 @@ export const projects = [
   {
     id: 'catpid', page: 'games',
     tags: ['Production'],
+    team: [{ name: 'Rija Kamran', role: 'Art' }],
     title: 'Catpid',
     kind: 'Matchmaking puzzle game · Opal Studios',
     role: 'Producer, project manager',
