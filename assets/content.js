@@ -289,9 +289,10 @@ export const projects = [
   {
     id: 'cusco', page: 'games',
     tags: ['Game UX/UI', 'Writing'],
+    team: [{ name: 'Alejandro Melian', role: 'Game design' }, { name: 'Yoshi Capurro', role: 'Art support' }],
     title: 'Cusco Paradox',
     kind: 'Game (demo) · Indaga Studios',
-    role: 'Creative Director, Art Lead',
+    role: 'Creative Director, Lead Designer & Producer',
     year: '2021',
     motif: '🦙',
     img: 'assets/img/cusco-paradox.jpg',
@@ -310,6 +311,26 @@ export const projects = [
       {
         h: 'Level concept art',
         text: 'I drew and painted concept art for every level, with precise notes on lighting, landmarks and color palette, and walked the environment pixel artist through them. That kept the final game true to the vision.',
+        gallery: [{ src: 'assets/img/cusco/village.jpg', wide: true }, 'assets/img/cusco/serpent-puzzle.jpg', 'assets/img/cusco/green-cave.jpg', 'assets/img/cusco/temple.jpg'],
+      },
+      {
+        h: 'The challenge',
+        text: 'Design a narrative-driven puzzle game that tells an Incan 2SLGBTQ+ story and raises awareness about homophobia in the Peruvian Andes. The hardest part of the experience design was teaching players how to play with minimal resources, inside the limits of a web game, while keeping the true identity and historical value of the queer elements of pre-colonial Peru.',
+      },
+      {
+        h: 'Game flow',
+        text: 'Players solve puzzles to earn story rewards and move forward. As a cozy game, the stakes stay low when you lose. The main focus was cultural authenticity, which shaped the whole UI design.',
+        loop: ['Solve the puzzle', 'Progress in the story'],
+      },
+      {
+        h: 'UX/UI, wireframes & sketches',
+        text: 'It was a web and mobile browser game that had to support player gestures like any other mobile game, while staying as modular and simple as possible. I prioritized quantity over polish to get results and run tests fast.',
+        gallery: ['assets/img/cusco/sketches.jpg', 'assets/img/cusco/grid-wireframes.jpg', 'assets/img/cusco/tutorial-1.jpg', 'assets/img/cusco/tutorial-2.jpg', 'assets/img/cusco/tutorial-3.jpg'],
+      },
+      {
+        h: 'Testing',
+        text: 'I ran several user tests on the game\'s difficulty. Despite the simple mechanics and cozy world, the difficulty grew exponentially and players struggled to understand what to do. Solving that was the most demanding design problem of the project.',
+        gallery: [{ src: 'assets/img/cusco/testing-grids.jpg', wide: true }],
       },
     ],
   },
