@@ -384,6 +384,7 @@ const thumbs = [];
 // Projects made at Indaga Studios carry the studio logo.
 const isIndaga = (p) => p.indaga || /Indaga Studios/.test(p.kind || '');
 const studioBadge = (p) => isIndaga(p) ? '<span class="studio-badge" title="Made at Indaga Studios" role="img" aria-label="Made at Indaga Studios"><i></i></span>' : '';
+const tagsHtml = (p) => p.tags ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
 function cardEl(p) {
   const el = document.createElement('article');
   el.className = 'card' + (p.featured ? ' featured' : '');
@@ -395,6 +396,7 @@ function cardEl(p) {
   el.innerHTML = `
     <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}</div>
     <div class="kind">${esc(p.kind)}${p.video ? ' · <b class="play">▶ watch</b>' : ''}</div>
+    ${tagsHtml(p)}
     <h3>${esc(p.title)}</h3>
     ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ''}
     <p>${esc(p.blurb)}</p>
@@ -550,7 +552,7 @@ function buildPage(p) {
     el.append(doodle('satellite', { x: W - 120, y: 30, w: 60, rot: -10, cls: 'blue' }));
     loadWriting($('.posts', body));
   } else {
-    const list = [...C.projects.filter((x) => x.page === p.id), ...C.projects.filter((x) => (x.also || []).includes(p.id))];
+    const list = [...C.projects.filter((x) => x.page === p.id), ...C.projects.filter((x) => (x.also || []).includes(p.id))].filter((x) => !x.draft);
     for (const pr of list.filter((x) => !x.line)) body.appendChild(cardEl(pr));
     const lines = list.filter((x) => x.line);
     if (lines.length) body.appendChild(linesCard(lines));
@@ -856,6 +858,7 @@ function openSheet(p) {
     ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}"></div>` : ''}
     ${isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
+    ${tagsHtml(p)}
     <h2 id="sheet-title">${esc(p.title)}</h2>
     ${p.video && embedUrl(p.video) ? `<div class="video${p.vertical ? ' vertical' : ''}"><iframe src="${esc(embedUrl(p.video))}" title="${esc(p.title)} video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : ''}
     ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ''}

@@ -16,6 +16,8 @@
 //          loop: ['A', 'B', ...] draws a core-loop circle; flow: ['A', 'B'] draws
 //          a step-by-step chain.
 //  - team: [{ name, role }] the people on projects Daga led, shown on the page.
+//  - tags: ['UX/UI · Product' | 'Product design · Management' | 'Game UX/UI'] shown as chips.
+//  - draft: true keeps a project hidden until its text and images are in.
 //  - also: other pages the project shows on too, e.g. ['studio'].
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
@@ -161,6 +163,7 @@ export const projects = [
   // ---------------------------------------------------------------- tools
   {
     id: 'hd-web', page: 'tools', featured: true,
+    tags: ['Product design · Management'],
     title: 'Hybrid Dreams',
     kind: 'Writing + worldbuilding studio · web',
     role: 'Founder · product design + build',
@@ -174,6 +177,7 @@ export const projects = [
   },
   {
     id: 'hd-draw', page: 'tools', also: ['studio'],
+    tags: ['Product design · Management'],
     title: 'Brushest',
     kind: 'iPad drawing + animation app · Apple Pencil · Indaga Studios',
     role: 'Product design + build',
@@ -187,6 +191,7 @@ export const projects = [
   },
   {
     id: 'ganttier', page: 'tools',
+    tags: ['Product design · Management'],
     title: 'Ganttier',
     kind: 'Planner app · web · Indaga Studios',
     role: 'Product design + build',
@@ -202,6 +207,7 @@ export const projects = [
   // ---------------------------------------------------------------- games
   {
     id: 'calling', page: 'games', featured: true,
+    tags: ['Game UX/UI'],
     title: 'The Calling',
     kind: 'Interactive experience · career guidance · Indaga Studios',
     role: 'Creative Director, Lead Designer',
@@ -217,8 +223,13 @@ export const projects = [
     sections: [
       {
         h: 'Creative & art direction',
-        text: 'I led the creative and artistic vision of the game, from concept art and briefs to team organization. I set high-quality standards for asset production, kept the team on schedule, and set the direction and artistic mood of the experience. With our artists, designers and tech artists, I chose the visual direction from the first concept, where I drew the characters myself, to the final iteration, where I directed the in-house art team and international contractors.',
+        text: 'I led the project across experience design and art direction, working with cross-functional teams on everything the game needed, from narrative design and technical implementation to stakeholder engagement and strategy. I led the creative and artistic vision of the game, from concept art and briefs to designing and maintaining the art bible and organizing the team. I set high-quality standards for asset production, kept the team on schedule, and set the direction and artistic mood of the experience. With our artists, designers and tech artists, I chose the visual direction from the first concept, where I drew the characters myself, to the final iteration, where I directed the in-house art team and international contractors.',
         note: 'Character concepts by me. Final art by Brenda Barrueta (Lead Artist), Satoshi Waku (UX/UI) and Yoshi Capurro (Technical Artist).',
+      },
+      {
+        h: 'Character style & camera',
+        text: 'I developed and kept the character style consistent with the artists across every in-game character, with close attention to asset sizes, style and color palette. I also worked with the artists to polish the camera angle, giving the game its own immersive look and feel.',
+        note: 'Character sheets, props and scale charts by Brenda Barrueta, under my art direction.',
       },
       {
         h: 'The challenge',
@@ -250,6 +261,7 @@ export const projects = [
   },
   {
     id: 'thrive-table', page: 'games',
+    tags: ['Game UX/UI'],
     title: 'Thrive to Table',
     kind: 'Cozy cafe adventure game',
     role: 'Main Artist, AI-assisted workflows',
@@ -288,6 +300,7 @@ export const projects = [
   },
   {
     id: 'giftagame', page: 'games', also: ['studio'],
+    tags: ['Product design · Management'],
     title: 'Gift a Game',
     kind: 'Personalised gift game · web · Indaga Studios',
     role: 'Founder & Creative Director',
@@ -299,6 +312,7 @@ export const projects = [
   },
   {
     id: 'kadabra', page: 'games',
+    tags: ['Game UX/UI'],
     title: 'Escuela Kadabra',
     kind: 'Educational game · Innova Schools',
     role: 'Art Lead, Lead UX/UI Designer, then Art Direction & Production',
@@ -340,6 +354,7 @@ export const projects = [
   },
   {
     id: 'azoove', page: 'games',
+    tags: ['Game UX/UI'],
     title: 'Azoove',
     kind: 'Social survival card game · Timeless Toucan Studios',
     role: 'UX/UI Designer, Visual Developer',
@@ -433,6 +448,7 @@ export const projects = [
   // ---------------------------------------------------------------- product
   {
     id: 'thrivepal', page: 'product', featured: true,
+    tags: ['UX/UI · Product'],
     title: 'ThrivePal',
     kind: 'Mobile app · AI visual development',
     role: 'AI visual developer, UX/UI designer',
@@ -465,6 +481,41 @@ export const projects = [
         flow: ['Goals', 'Programs', 'Stages', 'Activities'],
       },
     ],
+  },
+
+  {
+    id: 'virtualtutors', page: 'product',
+    tags: ['UX/UI · Product'],
+    title: 'VirtualTutors',
+    kind: 'Tutoring booking web app · Innova Schools',
+    role: 'UX UI Designer',
+    year: '2022',
+    motif: '📅',
+    img: 'assets/img/virtualtutors.jpg',
+    blurb: 'UX/UI design for Tutores Virtuales, a new Innova Schools service: pick a day and a time, then confirm a pack of sessions with your tutor.',
+  },
+  {
+    id: 'cafe-symbiosis', page: 'games', draft: true,
+    tags: ['Game UX/UI'],
+    title: 'Cafe Symbiosis',
+    kind: 'Cozy cafe game',
+    role: 'UX UI Designer',
+    year: '',
+    motif: '☕',
+    img: 'assets/img/cafe-symbiosis.jpg',
+    blurb: 'UX/UI design for Cafe Symbiosis.',
+    todo: 'waiting for the project page (text + images)',
+  },
+  {
+    id: 'copiloto', page: 'product', draft: true,
+    tags: ['UX/UI · Product'],
+    title: 'Copiloto',
+    kind: '',
+    role: 'UX UI Designer',
+    year: '',
+    motif: '🧭',
+    blurb: 'UX/UI design for Copiloto.',
+    todo: 'waiting for the project page (text + images)',
   },
 
   // ---------------------------------------------------------------- studio
