@@ -849,8 +849,51 @@ setTimeout(hideHint, 7000);
 // ------------------------------------------------------------ detail sheet
 const sheetWrap = $('#sheet-wrap'), sheet = $('#sheet');
 let sheetAscii = null, lastFocus = null;
-function openSheet(p) {
+// 🔒 Hiring-only projects: public card is a lock; the page is AES-GCM encrypted in assets/locked.json.
+const unlocked = {};
+const LOCK_ART = `    .--------.
+   / .------. \\
+  / /        \\ \\
+  | |        | |
+.-'-'--------'-'-.
+|   ::::::::::   |
+|   :::(  ):::   |
+|   ::::||::::   |
+|   ::::||::::   |
+'----------------'`;
+async function tryUnlock(pw) {
+  const d = await (await fetch('assets/locked.json')).json();
+  const b = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b(d.salt), iterations: d.iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b(d.iv) }, key, b(d.ct));
+  for (const e of JSON.parse(new TextDecoder().decode(plain))) unlocked[e.id] = e;
+}
+function openLock(p) {
   lastFocus = document.activeElement;
+  sheet.innerHTML = `
+    <div class="spiral" aria-hidden="true">${spiralStr}</div>
+    <button class="close" aria-label="Close">✕</button>
+    <pre class="lock-art" aria-hidden="true">${esc(LOCK_ART)}</pre>
+    <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
+    <h2 id="sheet-title">${esc(p.title)}</h2>
+    <span class="role">${esc(p.role)}</span>
+    <p>${esc(p.blurb)}</p>
+    <form class="lock-form"><label>password <input type="password" autocomplete="off" required></label><button class="cta dark" type="submit">unlock</button><span class="lock-err" role="status"></span></form>`;
+  sheetWrap.hidden = false;
+  $('.close', sheet).addEventListener('click', closeSheet);
+  const form = $('.lock-form', sheet), input = $('input', form), err = $('.lock-err', form);
+  input.focus();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); err.textContent = 'checking…';
+    try { await tryUnlock(input.value); openSheet(p); } catch { err.textContent = 'not quite. ask Daga for the password'; input.select(); }
+  });
+  history.replaceState(null, '', '#' + p.id);
+}
+
+function openSheet(p) {
+  if (p.locked) { if (!unlocked[p.id]) return openLock(p); p = unlocked[p.id]; }
+  lastFocus = lastFocus || document.activeElement;
   sheet.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
@@ -916,6 +959,7 @@ function closeSheet() {
   if (sheetAscii) { animators.delete(sheetAscii); sheetAscii = null; }
   history.replaceState(null, '', location.pathname);
   lastFocus && lastFocus.focus && lastFocus.focus({ preventScroll: true });
+  lastFocus = null;
 }
 sheetWrap.addEventListener('click', (e) => { if (e.target === sheetWrap) closeSheet(); });
 addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!sheetWrap.hidden) closeSheet(); else if (doodling) setDoodle(false); } });

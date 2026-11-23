@@ -18,6 +18,8 @@
 //  - team: [{ name, role }] the people on projects Daga led, shown on the page.
 //  - tags: ['UX/UI · Product' | 'Product design · Management' | 'Game UX/UI'] shown as chips.
 //  - draft: true keeps a project hidden until its text and images are in.
+//  - locked: true shows an ASCII lock card; the real page is encrypted in assets/locked.json
+//          (built from IPs/Portfolio/hiring/ with build-locked.mjs). Unlocks with the hiring password.
 //  - also: other pages the project shows on too, e.g. ['studio'].
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
@@ -285,6 +287,16 @@ export const projects = [
     ],
   },
   {
+    id: 'thrive-table', page: 'games', locked: true,
+    tags: ['Game UX/UI'],
+    title: 'Thrive to Table',
+    kind: 'Cozy cafe game',
+    role: 'Main Artist',
+    year: '2024–now',
+    motif: '🔒',
+    blurb: 'Current work, shown privately to people hiring me. Ask me for the password.',
+  },
+  {
     id: 'cusco', page: 'games',
     tags: ['Game UX/UI', 'Writing'],
     team: [{ name: 'Alejandro Melian', role: 'Game design' }, { name: 'Yoshi Capurro', role: 'Art support' }],
@@ -495,6 +507,16 @@ export const projects = [
 
   // ---------------------------------------------------------------- product
 
+  {
+    id: 'thrivepal', page: 'product', locked: true,
+    tags: ['UX/UI · Product'],
+    title: 'ThrivePal',
+    kind: 'Mobile app',
+    role: 'Product Designer',
+    year: '2024–now',
+    motif: '🔒',
+    blurb: 'Current work, shown privately to people hiring me. Ask me for the password.',
+  },
   {
     id: 'virtualtutors', page: 'product',
     tags: ['UX/UI · Product'],
