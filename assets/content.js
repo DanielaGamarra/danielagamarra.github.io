@@ -284,7 +284,18 @@ export const projects = [
     img: 'assets/img/fusewave/key-art.jpg',
     tagline: 'A narrative-driven sandbox where you compose your own songs.',
     blurb: 'A cozy music adventure game where creativity is key: players explore a narrative-driven sandbox and create their own music. I wrote the game and worked on parts of its game design.',
-    gallery: ['assets/img/fusewave/hero-art.jpg', 'assets/img/fusewave/prototype-1.jpg', 'assets/img/fusewave/prototype-2.jpg'],
+    team: [{ name: 'Rija Kamran', role: 'Art' }, { name: 'Javier Fernandez (Monkey)', role: 'Game design' }, { name: 'Paula Valverde', role: 'Project manager' }],
+    sections: [
+      {
+        h: 'The world',
+        gallery: [{ src: 'assets/img/fusewave/art-headphones.jpg', wide: true }, 'assets/img/fusewave/art-mall.jpg', 'assets/img/fusewave/art-dome.jpg', 'assets/img/fusewave/hero-art.jpg'],
+        note: 'Art by Rija Kamran.',
+      },
+      {
+        h: 'Prototype',
+        gallery: ['assets/img/fusewave/prototype-1.jpg', 'assets/img/fusewave/prototype-2.jpg'],
+      },
+    ],
   },
   {
     id: 'cusco', page: 'games',
