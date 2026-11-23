@@ -43,7 +43,7 @@ export const site = {
   hero: 'I make queer animated stories, games, comics and the tools to build them. More than ten years of drawing by hand, now directing with a human-first AI pipeline: the artist leads, the tools follow. This is my digibook, a digital sketchbook. Drag the cat, flip through the pages, doodle in the margins.',
   heroMarks: ['queer animated stories', 'games', 'comics', 'tools', 'human-first AI pipeline', 'digibook'],
   // About text (from the portfolio brief, kept as written).
-  about: "Hola! I'm Daga, an award-winning visual developer and director from Peru, now based in Toronto, and queer too. More than ten years across comics, webtoons, illustration and games. I ran my own game studio and led a two-year production with an 11-person team. Back home, I was recognized for women's leadership in intellectual property and as a standout young creator. Now I make AI-assisted animation and lead AI-assisted art workflows in games.",
+  about: "Hola! I'm Daga, an award-winning visual developer and director from Peru, now based in Toronto, and queer too. More than ten years across comics, webtoons, illustration and games. I ran my own game studio and led a two-year production with an 11-person team. Back home, I was recognized for women's leadership in intellectual property and as a standout young creator. Now I make AI-assisted animation and lead character and UI art for games.",
   stats: [
     { n: '10+', label: 'years drawing for a living' },
     { n: '50k', label: 'on TikTok' },
@@ -259,19 +259,6 @@ export const projects = [
         text: 'We ran several rounds of testing with internal and external control groups. We built with a "build to think" mindset, polishing every part of the game from day one. After each test we looked at two outcomes, design and technology, and I organized the team around what to keep, fix or completely change.',
       },
     ],
-  },
-  {
-    id: 'thrive-table', page: 'games',
-    tags: ['Game UX/UI'],
-    title: 'Thrive to Table',
-    kind: 'Cozy cafe adventure game',
-    role: 'Main Artist, AI-assisted workflows',
-    year: '',
-    motif: '🥕',
-    img: 'assets/img/thrive-to-table.jpg', pos: '50% 22%',
-    tagline: 'Tiny mysterious friends escaped from the real world help you craft and thrive in a cozy cafe adventure.',
-    blurb: 'Main artist, leading AI-assisted art workflows.',
-    links: [{ label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.thrivepal.thrivetotable&hl=en' }, { label: 'thrivetotable.com', url: 'https://thrivetotable.com/' }],
   },
   {
     id: 'fusewave', page: 'games',
@@ -507,42 +494,6 @@ export const projects = [
   },
 
   // ---------------------------------------------------------------- product
-  {
-    id: 'thrivepal', page: 'product', featured: true,
-    tags: ['UX/UI · Product'],
-    title: 'ThrivePal',
-    kind: 'Mobile app · AI visual development',
-    role: 'AI visual developer, UX/UI designer',
-    year: '2024–now',
-    motif: '🌱',
-    img: 'assets/img/thrivepal/pillars-top.jpg',
-    tagline: 'Habits that work: science-backed programs and daily guidance for personal growth.',
-    gallery: ['assets/img/thrivepal/screen-1.jpg', 'assets/img/thrivepal/screen-2.jpg', 'assets/img/thrivepal/screen-3.jpg', 'assets/img/thrivepal/screen-4.jpg'],
-    links: [{ label: 'App Store', url: 'https://apps.apple.com/us/app/thrivepal-habits-that-work/id6474622417' }, { label: 'thrivepal.com', url: 'https://www.thrivepal.com/' }],
-    blurb: 'I worked alongside field experts and engineers to design a personal development app that helps people reach their goals. I set the art direction and brand guidelines, designed the UX/UI, and built the generative AI production pipelines with Midjourney, Stable Diffusion, ComfyUI and Google AI Studio.',
-    sections: [
-      {
-        h: 'AI visual development',
-        text: 'Since the product is AI-driven, many of its processes are designed to be AI-driven too. I used Midjourney and refined my prompts to find a visual direction for all of the app\'s images. The paper cut style was the perfect fit: minimalist, delicate, easy to blend with vector images, and fast to produce.',
-        gallery: [{ src: 'assets/img/thrivepal/pillars.jpg', wide: true }, 'assets/img/thrivepal/mountain.jpg', 'assets/img/thrivepal/tiles.jpg', 'assets/img/thrivepal/forest.jpg', 'assets/img/thrivepal/shield.jpg', 'assets/img/thrivepal/focus-map.jpg'],
-        note: 'Real text is part of the core product and can\'t be shared yet.',
-      },
-      {
-        h: 'The challenge',
-        text: 'Design a minimalist mobile app that helps people identify, organize and plan their goals with an AI coach. It meant distilling large volumes of information into simple, actionable steps, guided by how the brain makes decisions.',
-      },
-      {
-        h: 'User research',
-        text: 'After aligning the product outcomes with stakeholders, I ran desktop research and user interviews, and reviewed the insights the team already had. The app is for everyone, but our primary users are women, who are often the first to adopt health and personal growth apps. The findings came from conversations with neuroscience experts, users and data-driven health tech specialists.',
-        items: [
-          'Even with strong willpower, the wrong plan leads to failure. Action: AI-trained programs that help each user plan their goals. In the UX/UI this meant narrowing a cascade of information into Goals > Programs > Stages > Activities, while keeping it easy to add, remove and edit.',
-          'Even small actions take cognitive effort, so users need an easy starting point to trigger a motivation cascade. Action: the home page opens with a zero-effort action, checking activities and completing lessons.',
-          'A longer onboarding brings better-matched users and smarter guidance. Action: a dynamic onboarding of about 15 minutes, with questions tailored to each person, so every user gets a flow made for their needs.',
-        ],
-        flow: ['Goals', 'Programs', 'Stages', 'Activities'],
-      },
-    ],
-  },
 
   {
     id: 'virtualtutors', page: 'product',
@@ -643,8 +594,8 @@ export const talks = [
 export const experience = [
   { role: 'Lead Designer, Producer', org: 'Indaga Studios', where: 'Lima, Peru', when: 'Nov 2021 – Mar 2025',
     points: ['Creative direction and brand strategy for interactive experiences: Empathy Hearts, Cusco Paradox, The Calling.', 'Art bible, briefs and pipelines for an 11-person team plus vendors across time zones.', 'Pitch decks, trailers, web and social for each launch.'] },
-  { role: 'UX/UI Designer, Visual Developer', org: 'ThrivePal', where: 'New York (remote)', when: 'Apr 2024 – now',
-    points: ['Mobile-first UX/UI from user research; art direction and brand guidelines.', 'Generative AI production pipelines (Stable Diffusion, ComfyUI, Google AI Studio).'] },
+  { role: 'Product Designer, Main Artist', org: 'ThrivePal', where: 'New York (remote)', when: 'Apr 2024 – now',
+    points: ['Mobile-first UX/UI from user research; art direction and brand guidelines.', 'Main artist on a cozy cafe game: character design, UI art and environment assets.'] },
   { role: 'UX/UI Designer, Visual Developer', org: 'Timeless Toucan Studios · Azoove', where: 'Seattle (remote)', when: 'Nov 2023 – Feb 2024',
     points: ['UI art direction that became the product\'s core identity; UX iterations from research.'] },
   { role: 'Art Lead', org: 'Innova Schools · Escuela Kadabra', where: 'Lima, Peru', when: 'Oct 2019 – Nov 2021',
