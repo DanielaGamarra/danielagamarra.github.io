@@ -15,6 +15,7 @@
 //          { src, wide: true } to fill the whole row.
 //          loop: ['A', 'B', ...] draws a core-loop circle; flow: ['A', 'B'] draws
 //          a step-by-step chain.
+//  - team: [{ name, role }] the people on projects Daga led, shown on the page.
 //  - also: other pages the project shows on too, e.g. ['studio'].
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
@@ -212,7 +213,13 @@ export const projects = [
     blurb: 'Discover your vocational path with a video game where you live a magical adventure and face important questions to understand your vocation and your path in life. A production of Indaga Studios and M.O.V.E.',
     facts: ['A vocational education video game', 'An interactive career finder', 'Part of the M.O.V.E. digital ecosystem, built on Javier Echevarría\'s vocational guidance method', 'Made with Unity and Figma'],
     links: [{ label: 'movetuvocacion.com', url: 'https://www.movetuvocacion.com/' }],
+    team: [{ name: 'Brenda Barrueta', role: 'Lead Artist' }, { name: 'Satoshi Waku', role: 'UX/UI' }, { name: 'Yoshi Capurro', role: 'Technical Artist' }],
     sections: [
+      {
+        h: 'Creative & art direction',
+        text: 'I led the creative and artistic vision of the game, from concept art and briefs to team organization. I set high-quality standards for asset production, kept the team on schedule, and set the direction and artistic mood of the experience. With our artists, designers and tech artists, I chose the visual direction from the first concept, where I drew the characters myself, to the final iteration, where I directed the in-house art team and international contractors.',
+        note: 'Character concepts by me. Final art by Brenda Barrueta (Lead Artist), Satoshi Waku (UX/UI) and Yoshi Capurro (Technical Artist).',
+      },
       {
         h: 'The challenge',
         text: 'Design a career guidance experience that tests behavior and responses, then gives a guidance result. We ran many tests with students aged 15 to 18 who don\'t play video games.',
@@ -320,13 +327,13 @@ export const projects = [
   {
     id: 'azoove', page: 'games',
     title: 'Azoove',
-    kind: 'Game · Timeless Toucan Studios',
-    role: 'UI Artist',
+    kind: 'Social survival card game · Timeless Toucan Studios',
+    role: 'UX/UI Designer, Visual Developer',
     year: '2023–2024',
     motif: '🎮',
     img: 'assets/img/azoove/key-art.jpg',
     gallery: ['assets/img/azoove/ui-1.jpg', 'assets/img/azoove/ui-2.jpg', 'assets/img/azoove/ui-3.jpg', 'assets/img/azoove/ui-4.jpg', 'assets/img/azoove/ui-5.jpg', 'assets/img/azoove/ui-6.jpg', 'assets/img/azoove/ui-7.jpg'],
-    blurb: 'Defined the UI art direction that became the game\'s visual identity, and iterated the player experience from user research.',
+    blurb: 'I worked alongside the creative director to redesign the existing interface and create new features, fixing usability issues and making the visual experience more immersive. I defined the UI art direction that became the game\'s visual identity, and iterated the player experience from user research.',
   },
   {
     id: 'empathy', page: 'games',

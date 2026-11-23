@@ -453,5 +453,7 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 
 /* press mentions on a project page */
 .sheet .press { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 4px 0 14px; font: 700 13px var(--mono); }
+.sheet .team span { font: 700 13px var(--mono); }
+.sheet .team small { font-weight: 400; color: var(--pencil); }
 .sheet .press b { font: 700 20px var(--hand); color: var(--red); }
 .sheet .press a { color: var(--ink); text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 3px; }

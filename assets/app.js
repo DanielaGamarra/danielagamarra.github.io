@@ -862,6 +862,7 @@ function openSheet(p) {
     <span class="role">${esc(p.role)}</span>
     <p>${esc(p.blurb)}</p>
     ${p.facts ? `<ul>${p.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
+    ${p.team ? `<div class="press team"><b>team</b>${p.team.map((t) => `<span>${esc(t.name)} <small>${esc(t.role)}</small></span>`).join('')}</div>` : ''}
     ${(p.sections || []).map((s) => `<section class="sec"><h3>${esc(s.h)}</h3>${s.text ? `<p>${esc(s.text)}</p>` : ''}${s.items ? `<ul class="insights">${s.items.map((t) => { const i = t.indexOf(' Action: '); return i < 0 ? `<li>${esc(t)}</li>` : `<li>${esc(t.slice(0, i))}<span class="act"><b>Action:</b> ${esc(t.slice(i + 9))}</span></li>`; }).join('')}</ul>` : ''}${s.loop ? loopSvg(s.loop) : ''}${s.flow ? flowHtml(s.flow) : ''}${s.gallery ? galleryHtml(s.gallery, p.title) : ''}${s.note ? `<p class="note">${esc(s.note)}</p>` : ''}</section>`).join('')}
     ${p.gallery ? galleryHtml(p.gallery, p.title) : ''}
     ${(C.press || []).some((x) => x.project === p.id) ? `<div class="press"><b>featured in</b>${C.press.filter((x) => x.project === p.id).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.outlet)} ↗</a>`).join('')}</div>` : ''}
