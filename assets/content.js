@@ -128,6 +128,34 @@ export const projects = [
     blurb: 'A fantasy romance in development.',
     todo: 'confirm it is OK to show + 1 image',
   },
+  {
+    id: 'trash-squad', page: 'films',
+    title: 'Trash Squad',
+    kind: 'Animated series concept · pitch',
+    role: 'Art Lead',
+    year: '2018',
+    motif: '🚀',
+    img: 'assets/img/trash-squad/key-art.jpg',
+    blurb: 'I led the visual development of the project: key concept art, character design and storyboards. I also guided the production team to keep the style and quality consistent. The project reached the semifinals of an international contest after being pitched to Cartoon Network executives and artists from the acclaimed show Steven Universe.',
+    facts: ['Semifinalist in an international contest', 'Pitched to Cartoon Network executives and Steven Universe artists'],
+    sections: [
+      {
+        h: 'Key concept art',
+        text: 'Key concept art for the show.',
+        gallery: ['assets/img/trash-squad/battle.jpg', 'assets/img/trash-squad/bin-galaxy.jpg'],
+      },
+      {
+        h: 'Memories',
+        text: 'I painted the background art for the main character\'s memories, with an old, nostalgic look and a style of their own, so the past reads apart from the present.',
+        gallery: ['assets/img/trash-squad/memory-1.jpg', 'assets/img/trash-squad/memory-2.jpg'],
+      },
+      {
+        h: 'Storyboards',
+        text: 'A selection of storyboard shots for the pilot.',
+        gallery: ['assets/img/trash-squad/board-1.jpg', 'assets/img/trash-squad/board-2.jpg', 'assets/img/trash-squad/board-3.jpg'],
+      },
+    ],
+  },
 
   // ---------------------------------------------------------------- tools
   {
