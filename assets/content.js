@@ -264,13 +264,27 @@ export const projects = [
     id: 'cusco', page: 'games',
     title: 'Cusco Paradox',
     kind: 'Game (demo) · Indaga Studios',
-    role: 'Creative Director',
+    role: 'Creative Director, Art Lead',
     year: '2021',
     motif: '🦙',
     img: 'assets/img/cusco-paradox.jpg',
     tagline: 'An LGBTQ+ narrative puzzle game about a fox being trapped in the Incan netherworld.',
     blurb: 'My own queer Inca game. An educational interactive experience made at Indaga Studios, where I led creative direction, art direction and production.',
     links: [{ label: 'play the demo on itch.io', url: 'https://indagastudios.itch.io/cuscoparadox' }],
+    sections: [
+      {
+        h: 'Creative & art direction',
+        text: 'I led the creative and artistic vision of the game, from concept art and briefs to designing and maintaining the art bible. The challenges: very different devices, a team with mixed seniority and art styles, and tight timelines set by stakeholders. The solution: a pixel art game with a unique use of shaders and lights.',
+      },
+      {
+        h: 'Characters',
+        text: 'I worked closely with the artists to craft memorable characters. I sketched the first designs and color palettes by hand, sent them to the pixel artist for production, and ran feedback sessions until the characters had the look and feel we wanted.',
+      },
+      {
+        h: 'Level concept art',
+        text: 'I drew and painted concept art for every level, with precise notes on lighting, landmarks and color palette, and walked the environment pixel artist through them. That kept the final game true to the vision.',
+      },
+    ],
   },
   {
     id: 'giftagame', page: 'games', also: ['studio'],
