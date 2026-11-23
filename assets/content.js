@@ -280,14 +280,14 @@ export const projects = [
     id: 'kadabra', page: 'games',
     title: 'Escuela Kadabra',
     kind: 'Educational game · Innova Schools',
-    role: 'UX/UI Designer, Lead Artist',
+    role: 'Art Lead, Lead UX/UI Designer, then Art Direction & Production',
     year: '2019–2021',
     motif: '🎩',
     img: 'assets/img/escuela-kadabra.jpg',
     video: 'https://www.youtube.com/watch?v=9lFaFwQrFaA',
     tagline: 'An educational side-scroller narrative game for kids.',
     facts: ['Completion rate up from 0.38% to 30%', 'Reading comprehension minigames: vocabulary, decoding and inferential meaning', 'Explore the world of Eureka and the Ekai, mythical creatures who guide the learning', 'Made with Unity and Figma'],
-    blurb: 'I designed an educational experience for a critical issue in Latin America: low reading comprehension among children, which becomes a bigger challenge as they grow and meet more complex information. Escuela Kadabra uses a gamified approach to build essential communication skills, including vocabulary, decoding and inferential thinking. I designed the UX/UI, then took a second role as Lead Artist: I built and ran the full art pipeline, from vision to delivery, and mentored the junior designers.',
+    blurb: 'I designed an educational experience for a critical issue in Latin America: low reading comprehension among children, which becomes a bigger challenge as they grow and meet more complex information. Escuela Kadabra uses a gamified approach to build essential communication skills, including vocabulary, decoding and inferential thinking. I was the Art Lead and Lead Experience Designer (UX/UI). Later I moved into art direction and production, managing pipelines, briefs and quality assurance with in-house artists and contractors from Peru and Spain.',
     sections: [
       {
         h: 'The challenge',
@@ -303,8 +303,8 @@ export const projects = [
         ],
       },
       {
-        h: 'Scalability for low-end phones',
-        text: 'The app had to run on low-end devices, so the challenge was to make the simplest yet most immersive experience for kids and their parents. Our answer was a full pixel art style, and there I took another hat: Art Lead, with 2 in-house designers and artists, plus contractors abroad.',
+        h: 'Pixel art for low-end phones',
+        text: 'The app had to run on low-end devices, so the challenge was to make the simplest yet most immersive experience for kids and their parents. Our answer was a full pixel art style, and there I took another hat: Art Lead, with 2 in-house designers and artists, plus contractors abroad. I led the team producing characters, props, animations and UI, and during production I ran feedback sessions to keep the style consistent and raise the quality of each artist\'s work.',
       },
       {
         h: 'Live game experience',
