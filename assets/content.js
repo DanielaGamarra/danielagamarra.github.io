@@ -102,6 +102,7 @@ export const projects = [
   },
   {
     id: 'behind', page: 'films',
+    tags: ['Writing'],
     title: 'Behind the Seat',
     kind: 'Code animation · interactive experience (demo) · Indaga Studios',
     role: 'Creator · story, design, code',
@@ -273,7 +274,21 @@ export const projects = [
     links: [{ label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.thrivepal.thrivetotable&hl=en' }, { label: 'thrivetotable.com', url: 'https://thrivetotable.com/' }],
   },
   {
+    id: 'fusewave', page: 'games',
+    tags: ['Writing'],
+    title: 'Fusewave',
+    kind: 'Cozy music adventure game',
+    role: 'Writer, game design',
+    year: '2024',
+    motif: '🎧',
+    img: 'assets/img/fusewave/key-art.jpg',
+    tagline: 'A narrative-driven sandbox where you compose your own songs.',
+    blurb: 'A cozy music adventure game where creativity is key: players explore a narrative-driven sandbox and create their own music. I wrote the game and worked on parts of its game design.',
+    gallery: ['assets/img/fusewave/hero-art.jpg', 'assets/img/fusewave/prototype-1.jpg', 'assets/img/fusewave/prototype-2.jpg'],
+  },
+  {
     id: 'cusco', page: 'games',
+    tags: ['Game UX/UI', 'Writing'],
     title: 'Cusco Paradox',
     kind: 'Game (demo) · Indaga Studios',
     role: 'Creative Director, Art Lead',
@@ -312,7 +327,7 @@ export const projects = [
   },
   {
     id: 'kadabra', page: 'games',
-    tags: ['Game UX/UI'],
+    tags: ['Game UX/UI', 'Writing'],
     title: 'Escuela Kadabra',
     kind: 'Educational game · Innova Schools',
     role: 'Art Lead, Lead UX/UI Designer, then Art Direction & Production',
