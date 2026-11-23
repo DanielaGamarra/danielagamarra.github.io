@@ -13,6 +13,8 @@
 //  - sections: [{ h, text, items[], gallery[], note }] process chapters on the
 //          project page (challenge, research, etc). A gallery item can be
 //          { src, wide: true } to fill the whole row.
+//          loop: ['A', 'B', ...] draws a core-loop circle; flow: ['A', 'B'] draws
+//          a step-by-step chain.
 //  - also: other pages the project shows on too, e.g. ['studio'].
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
@@ -53,7 +55,15 @@ export const pages = [
   { id: 'films',   no: '01', title: 'shows & AI films', note: 'what I direct now', at: [1, 0], cols: 3, tint: 'lime' },
   { id: 'tools',   no: '02', title: 'tools I build',    note: 'because the right tool did not exist', at: [1, 1], cols: 2, tint: 'blue' },
   { id: 'games',   no: '03', title: 'games',            note: 'playable stories', at: [0, 1], cols: 3, tint: 'peach' },
-  { id: 'comics',  no: '04', title: 'comics & webtoons', note: 'by hand, always', at: [-1, 1], cols: 2, tint: 'pink' },
+  { id: 'comics',  no: '04', title: 'comics & webtoons', note: 'by hand, always', at: [-1, 1], cols: 2, tint: 'pink',
+    // "What I do" card on this page.
+    intro: "I'm an award-winning comic & manga artist and art director. I have a deep passion for visual narrative and design, and an obsession with pushing each visual medium to make versatile, high-quality, memorable stories.",
+    roles: [
+      { h: 'Comic artist', text: 'Visual development of the style, storyboarding, penciling, inking, coloring, lettering, page layout, cover design.' },
+      { h: 'Art direction', text: 'Stakeholder alignment, art style direction, character and environment design, color script, team communication, art quality assurance, team feedback, and teaching junior artists to grow their skills.' },
+      { h: 'Art production manager', text: 'Setting the production pipeline, finding risks, and improving processes.' },
+      { h: 'Graphic designer', text: 'Cover design, lettering, dialogue, layout and print preparation for comics.' },
+    ] },
   { id: 'product', no: '05', title: 'product design',   note: 'apps people use', at: [-1, 0], cols: 2, tint: 'blue' },
   { id: 'studio',  no: '06', title: 'studio & ventures', note: 'building my own things', at: [-1, -1], cols: 2, tint: 'peach' },
   { id: 'awards',  no: '07', title: 'awards & talks',   note: 'nice moments', at: [0, -1], cols: 2, tint: 'lime' },
@@ -190,7 +200,8 @@ export const projects = [
       },
       {
         h: 'User flow',
-        text: 'As Lead Designer, I worked with a junior designer to keep improving the experience: intuitive, instructional, and still an immersive game world, since most of the game is UI. The core loop: explore, talk to a character, play a vocational minigame, update your career profile.',
+        text: 'As Lead Designer, I worked with a junior designer to keep improving the experience: intuitive, instructional, and still an immersive game world, since most of the game is UI.',
+        loop: ['Explore', 'Talk to a character', 'Vocational minigame', 'Update career profile'],
       },
       {
         h: 'Collaborative iteration',
@@ -269,7 +280,8 @@ export const projects = [
       },
       {
         h: 'Live game experience',
-        text: 'As the Experience Designer (UX/UI), I worked closely with the game designer and the educational designer on the first concept and test plans. One of my main goals was to keep the game fun: without that, retention would drop even if the product taught well. I advocated for the changes and features that kept kids engaged, and the completion rate grew from 0.38% to 30%. The core loop: explore, play a reading game, earn coins and unlock areas, upgrade your Ekai.',
+        text: 'As the Experience Designer (UX/UI), I worked closely with the game designer and the educational designer on the first concept and test plans. One of my main goals was to keep the game fun: without that, retention would drop even if the product taught well. I advocated for the changes and features that kept kids engaged, and the completion rate grew from 0.38% to 30%.',
+        loop: ['Explore', 'Reading game', 'Earn coins, unlock areas', 'Upgrade your Ekai'],
       },
       {
         h: 'Wireframes & sketches',
@@ -318,22 +330,23 @@ export const projects = [
     id: 'rosa-cuchillo', page: 'comics',
     title: 'Rosa Cuchillo',
     kind: 'Graphic novel · Random Cómics, Penguin Random House',
-    role: 'Illustrator, Penguin Random House',
+    role: 'Penciler, main comic artist & art direction',
     year: '2021',
     motif: '🌹',
     img: 'assets/img/rosa-cuchillo.jpg', pos: '50% 30%',
     links: [{ label: 'watch the book presentation', url: 'https://www.youtube.com/watch?v=_xal_0b7Fyg' }],
-    blurb: 'Rosa Cuchillo. La novela gráfica: the comic adaptation of Óscar Colchado\'s novel Rosa Cuchillo (1997), published by Random Cómics, Penguin Random House.',
+    blurb: 'Rosa Cuchillo. La novela gráfica: the comic adaptation of Óscar Colchado\'s novel Rosa Cuchillo (1997), published by Random Cómics, Penguin Random House. I was the penciler and main comic artist, and I developed the art direction of the project: style, character and environment design. I also did the coloring and the cover, in several color palettes for marketing, and worked with the final editing team on lettering, typography, dialogue bubbles and quality control for the printed book.',
+    facts: ['ISBN 9786124827327'],
   },
   {
     id: 'mario-vargas-llosa', page: 'comics',
     title: 'Mario. El universo Vargas Llosa',
     kind: 'Comic · Reservoir Books, Penguin Random House',
-    role: 'Illustrator, Penguin Random House',
+    role: 'Art production lead & comic artist',
     year: '2019',
     motif: '📚',
-    facts: ['Finalist, Best illustrated book or comic, Premios Luces 2019 (El Comercio)'],
-    blurb: 'A comic about the life and novels of Mario Vargas Llosa, written by Carlos Enrique Freyre. The illustrations are shared among four artists: Jesús Castro, Domenica Pagano, Omar Carrillo and me.',
+    facts: ['Finalist, Best illustrated book or comic, Premios Luces 2019 (El Comercio)', 'ISBN 9786124267123'],
+    blurb: 'A comic about the life and novels of Mario Vargas Llosa, written by Carlos Enrique Freyre and drawn by four artists: Jesús Castro, Domenica Pagano, Omar Carrillo and me. I organized the three other comic artists through production, building an art style that felt shared yet let each one stay unique. I also did the layout, inking and coloring of the third chapter.',
     todo: 'add the cover or a page',
   },
   {
@@ -390,6 +403,7 @@ export const projects = [
           'Even small actions take cognitive effort, so users need an easy starting point to trigger a motivation cascade. Action: the home page opens with a zero-effort action, checking activities and completing lessons.',
           'A longer onboarding brings better-matched users and smarter guidance. Action: a dynamic onboarding of about 15 minutes, with questions tailored to each person, so every user gets a flow made for their needs.',
         ],
+        flow: ['Goals', 'Programs', 'Stages', 'Activities'],
       },
     ],
   },

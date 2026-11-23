@@ -421,6 +421,15 @@ function linesCard(list) {
   return el;
 }
 
+// "What I do" card: an intro line + role blocks (page.intro, page.roles).
+function rolesCard(p) {
+  const el = document.createElement('article');
+  el.className = 'card lines-card roles-card'; el.dataset.id = 'roles-' + p.id;
+  el.style.setProperty('--r', '-0.5deg'); el.style.transform = 'rotate(var(--r))';
+  el.innerHTML = `<div class="kind">what I do</div>${p.intro ? `<p class="intro">${esc(p.intro)}</p>` : ''}<div class="roles">${p.roles.map((r) => `<div><b>${esc(r.h)}</b><p>${esc(r.text)}</p></div>`).join('')}</div>`;
+  return el;
+}
+
 function pageShell(id, { no, title, note, tint, cols }) {
   const el = document.createElement('section');
   el.className = 'page'; el.id = id;
@@ -545,6 +554,7 @@ function buildPage(p) {
     for (const pr of list.filter((x) => !x.line)) body.appendChild(cardEl(pr));
     const lines = list.filter((x) => x.line);
     if (lines.length) body.appendChild(linesCard(lines));
+    if (p.roles) body.appendChild(rolesCard(p));
     const picks = ['planet', 'rocket', 'ufo', 'orbit', 'constellation', 'satellite', 'sparkle', 'eye'];
     const a = picks[Math.floor(r() * picks.length)], b = picks[Math.floor(r() * picks.length)];
     el.append(
@@ -852,7 +862,7 @@ function openSheet(p) {
     <span class="role">${esc(p.role)}</span>
     <p>${esc(p.blurb)}</p>
     ${p.facts ? `<ul>${p.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
-    ${(p.sections || []).map((s) => `<section class="sec"><h3>${esc(s.h)}</h3>${s.text ? `<p>${esc(s.text)}</p>` : ''}${s.items ? `<ul class="insights">${s.items.map((t) => { const i = t.indexOf(' Action: '); return i < 0 ? `<li>${esc(t)}</li>` : `<li>${esc(t.slice(0, i))}<span class="act"><b>Action:</b> ${esc(t.slice(i + 9))}</span></li>`; }).join('')}</ul>` : ''}${s.gallery ? galleryHtml(s.gallery, p.title) : ''}${s.note ? `<p class="note">${esc(s.note)}</p>` : ''}</section>`).join('')}
+    ${(p.sections || []).map((s) => `<section class="sec"><h3>${esc(s.h)}</h3>${s.text ? `<p>${esc(s.text)}</p>` : ''}${s.items ? `<ul class="insights">${s.items.map((t) => { const i = t.indexOf(' Action: '); return i < 0 ? `<li>${esc(t)}</li>` : `<li>${esc(t.slice(0, i))}<span class="act"><b>Action:</b> ${esc(t.slice(i + 9))}</span></li>`; }).join('')}</ul>` : ''}${s.loop ? loopSvg(s.loop) : ''}${s.flow ? flowHtml(s.flow) : ''}${s.gallery ? galleryHtml(s.gallery, p.title) : ''}${s.note ? `<p class="note">${esc(s.note)}</p>` : ''}</section>`).join('')}
     ${p.gallery ? galleryHtml(p.gallery, p.title) : ''}
     ${(C.press || []).some((x) => x.project === p.id) ? `<div class="press"><b>featured in</b>${C.press.filter((x) => x.project === p.id).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.outlet)} ↗</a>`).join('')}</div>` : ''}
     ${p.links ? `<div class="links">${p.links.map((l) => `<a class="cta dark" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>` : ''}
@@ -865,6 +875,27 @@ function openSheet(p) {
   $('.close', sheet).addEventListener('click', closeSheet);
   $('.close', sheet).focus();
   history.replaceState(null, '', '#' + p.id);
+}
+// Core loop: nodes on a circle, clockwise from the top, with arrows between.
+function loopSvg(steps) {
+  const n = steps.length, cx = 210, cy = 170, R = 118, r = 50;
+  const ang = (i) => -Math.PI / 2 + (i * 2 * Math.PI) / n;
+  const pt = (a, rad = R) => [cx + rad * Math.cos(a), cy + rad * Math.sin(a)];
+  const gap = (r + 10) / R;
+  const wrap = (t) => { const out = []; let line = ''; for (const w of t.split(' ')) { if ((line + ' ' + w).trim().length > 11 && line) { out.push(line); line = w; } else line = (line + ' ' + w).trim(); } out.push(line); return out; };
+  let arcs = '', nodes = '';
+  steps.forEach((t, i) => {
+    const [x, y] = pt(ang(i));
+    const [x1, y1] = pt(ang(i) + gap), [x2, y2] = pt(ang(i + 1) - gap);
+    arcs += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} A${R} ${R} 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}" marker-end="url(#loop-head)"/>`;
+    const ls = wrap(t);
+    nodes += `<g class="node${i === 0 ? ' first' : ''}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}"/><text x="${x.toFixed(1)}" y="${(y - (ls.length - 1) * 7.5 + 4).toFixed(1)}">${ls.map((l, k) => `<tspan x="${x.toFixed(1)}" dy="${k ? 15 : 0}">${esc(l)}</tspan>`).join('')}</text></g>`;
+  });
+  return `<figure class="loop"><svg viewBox="0 0 420 340" role="img" aria-label="Core loop: ${esc(steps.join(', then '))}, then back to the start"><defs><marker id="loop-head" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L8 5L1 9"/></marker></defs><g class="arcs">${arcs}</g>${nodes}<text class="mid" x="${cx}" y="${cy + 5}">core loop</text></svg></figure>`;
+}
+// Step-by-step chain: A → B → C.
+function flowHtml(steps) {
+  return `<div class="flow" role="list">${steps.map((t, i) => `${i ? '<span class="arrow" aria-hidden="true">→</span>' : ''}<span class="step" role="listitem">${esc(t)}</span>`).join('')}</div>`;
 }
 function galleryHtml(list, title) {
   return `<div class="gallery">${list.map((g) => { const src = g.src || g; return `<a href="${esc(src)}" target="_blank" rel="noopener"${g.wide ? ' class="wide"' : ''}><img src="${esc(src)}" alt="${esc(title)} image" loading="lazy"></a>`; }).join('')}</div>`;

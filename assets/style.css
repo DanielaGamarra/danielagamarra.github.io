@@ -189,6 +189,12 @@ body.flow .hud, body.cv-on .hud { display: none; }
 .sheet-studio { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 700 18px var(--hand); color: var(--pencil); }
 .sheet-studio .studio-badge { position: static; transform: rotate(-3deg); }
 .lines-card { cursor: default; }
+.roles-card { width: 680px; }
+.roles-card .intro { font: italic 400 22px/1.3 var(--serif); margin: 8px 0 14px; }
+.roles-card .roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px 22px; }
+.roles-card .roles div { border-top: 1px dashed var(--rule); padding-top: 10px; }
+.roles-card .roles b { font: 400 24px/1.05 var(--serif); }
+.roles-card .roles p { font-size: 14px; line-height: 1.55; margin: 6px 0 0; }
 .lines-card:hover { transform: rotate(var(--r, 0deg)) !important; }
 .plist { list-style: none; margin: 8px 0 0; padding: 0; }
 .plist li { border-top: 1px dashed var(--rule); padding: 10px 0; }
@@ -402,6 +408,18 @@ body.cv-on .bar { background: linear-gradient(var(--paper) 70%, transparent); }
 .sheet .insights { list-style: none; padding: 0; display: grid; gap: 12px; }
 .sheet .insights li { font-size: 15px; line-height: 1.6; padding-left: 14px; border-left: 3px solid var(--lime); }
 .sheet .insights .act { display: block; margin-top: 4px; }
+.sheet .loop { margin: 14px auto 4px; max-width: 420px; }
+.sheet .loop svg { display: block; width: 100%; height: auto; }
+.sheet .loop .arcs path { fill: none; stroke: var(--pencil); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.sheet .loop marker path { fill: none; stroke: var(--pencil); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.sheet .loop circle { fill: var(--paper-2); stroke: var(--ink); stroke-width: 1.6; }
+.sheet .loop .first circle { stroke: var(--lime); stroke-width: 3; }
+.sheet .loop text { font: 400 12px var(--mono); fill: var(--ink); text-anchor: middle; }
+.sheet .loop text.mid { font: 700 20px var(--hand); fill: var(--red); }
+.sheet .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 14px 0 4px; }
+.sheet .flow .step { font: 400 13px var(--mono); padding: 7px 12px; border: 1.6px solid var(--ink); border-radius: 999px; background: var(--paper-2); }
+.sheet .flow .step:first-child { border-color: var(--lime); border-width: 3px; }
+.sheet .flow .arrow { font: 700 20px var(--hand); color: var(--red); }
 .sheet .insights .act b { font: 700 18px var(--hand); color: var(--red); margin-right: 4px; }
 
 /* cover: logo in ASCII + hola line beside it */
