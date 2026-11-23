@@ -38,12 +38,12 @@ export const site = {
     { label: 'LinkedIn', handle: 'daniela-gamarra-saenz', url: 'https://www.linkedin.com/in/daniela-gamarra-saenz' },
   ],
   // Hero text. Pretext lays it out live around the cat.
-  hero: 'I make queer animated stories, games, comics and the tools to build them. Ten years of drawing by hand, now directing with a human-first AI pipeline: the artist leads, the tools follow. This is my digibook, a digital sketchbook. Drag the cat, flip through the pages, doodle in the margins.',
+  hero: 'I make queer animated stories, games, comics and the tools to build them. More than ten years of drawing by hand, now directing with a human-first AI pipeline: the artist leads, the tools follow. This is my digibook, a digital sketchbook. Drag the cat, flip through the pages, doodle in the margins.',
   heroMarks: ['queer animated stories', 'games', 'comics', 'tools', 'human-first AI pipeline', 'digibook'],
   // About text (from the portfolio brief, kept as written).
-  about: "Hola! I'm Daga, an award-winning visual developer and director from Peru, now based in Toronto, and queer too. Ten years across comics, webtoons, illustration and games. I ran my own game studio and led a two-year production with an 11-person team. Back home, I was recognized for women's leadership in intellectual property and as a standout young creator. Now I make AI-assisted animation and lead AI-assisted art workflows in games.",
+  about: "Hola! I'm Daga, an award-winning visual developer and director from Peru, now based in Toronto, and queer too. More than ten years across comics, webtoons, illustration and games. I ran my own game studio and led a two-year production with an 11-person team. Back home, I was recognized for women's leadership in intellectual property and as a standout young creator. Now I make AI-assisted animation and lead AI-assisted art workflows in games.",
   stats: [
-    { n: '10', label: 'years drawing for a living' },
+    { n: '10+', label: 'years drawing for a living' },
     { n: '50k', label: 'on TikTok' },
     { n: '10k', label: 'on Instagram' },
     { n: '11', label: 'person team, led for two years' },
