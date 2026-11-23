@@ -317,14 +317,24 @@ export const projects = [
     id: 'mod', page: 'comics', featured: true,
     title: 'MOD · Machine of Dreams',
     kind: 'My own webtoon IP · hand-drawn, no AI',
-    role: 'Writer & artist',
+    role: 'Writer, main comic artist & art manager',
     year: 'ongoing',
     motif: '🧠',
     img: 'assets/img/mod-machine-of-dreams.jpg', pos: '50% 30%',
     tagline: 'What do you dream about when no one else is watching?',
     blurb: 'My most personal story, drawn fully by hand. No AI, ever. Paris, September 21, 2075. MOD, the quantum computer that can open the door between the real world and the world of dreams, is out of control, and Paris is sunk in an endless dream. Mida and the DreamHackers, the ones who stay lucid in the dream, try to take back their city, not knowing they are about to face the truths hidden deep in the human unconscious.',
     facts: ['3 pilot episodes published: 1:1 Mida · 1:2 Petra · 1:3 Limbo between dreams', 'Published in Spanish on WEBTOON Canvas'],
-    links: [{ label: 'read it on WEBTOON', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' }],
+    links: [{ label: 'read it on WEBTOON (Spanish)', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' }],
+    sections: [
+      {
+        h: 'Panels as optical illusions',
+        text: 'A webcomic that dives into the subconscious mind, quantum computers and climate change. Experimental gutter work and transitions give it a unique art style that brings optical illusions into the reading: long panels that blend one scene into the next as you scroll.',
+      },
+      {
+        h: 'Making it',
+        text: 'I did the character and environment design. A short timeline pushed me to experiment more with transitions and new ways to weave panels into the storytelling. I designed and painted the covers for all three chapters and took on the role of Art Manager, organizing two more artists who lettered the script into the speech bubbles and added sound effects. Finally, I worked with the editor to produce a printed version of the comic.',
+      },
+    ],
   },
   {
     id: 'rosa-cuchillo', page: 'comics',
