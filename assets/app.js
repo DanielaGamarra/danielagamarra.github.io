@@ -852,7 +852,8 @@ function openSheet(p) {
     <span class="role">${esc(p.role)}</span>
     <p>${esc(p.blurb)}</p>
     ${p.facts ? `<ul>${p.facts.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
-    ${p.gallery ? `<div class="gallery">${p.gallery.map((g) => `<a href="${esc(g)}" target="_blank" rel="noopener"><img src="${esc(g)}" alt="${esc(p.title)} screen" loading="lazy"></a>`).join('')}</div>` : ''}
+    ${(p.sections || []).map((s) => `<section class="sec"><h3>${esc(s.h)}</h3>${s.text ? `<p>${esc(s.text)}</p>` : ''}${s.items ? `<ul class="insights">${s.items.map((t) => { const i = t.indexOf(' Action: '); return i < 0 ? `<li>${esc(t)}</li>` : `<li>${esc(t.slice(0, i))}<span class="act"><b>Action:</b> ${esc(t.slice(i + 9))}</span></li>`; }).join('')}</ul>` : ''}${s.gallery ? galleryHtml(s.gallery, p.title) : ''}${s.note ? `<p class="note">${esc(s.note)}</p>` : ''}</section>`).join('')}
+    ${p.gallery ? galleryHtml(p.gallery, p.title) : ''}
     ${(C.press || []).some((x) => x.project === p.id) ? `<div class="press"><b>featured in</b>${C.press.filter((x) => x.project === p.id).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.outlet)} ↗</a>`).join('')}</div>` : ''}
     ${p.links ? `<div class="links">${p.links.map((l) => `<a class="cta dark" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>` : ''}
     ${p.todo ? `<div class="todo">${esc(p.todo)}</div>` : ''}`;
@@ -864,6 +865,9 @@ function openSheet(p) {
   $('.close', sheet).addEventListener('click', closeSheet);
   $('.close', sheet).focus();
   history.replaceState(null, '', '#' + p.id);
+}
+function galleryHtml(list, title) {
+  return `<div class="gallery">${list.map((g) => { const src = g.src || g; return `<a href="${esc(src)}" target="_blank" rel="noopener"${g.wide ? ' class="wide"' : ''}><img src="${esc(src)}" alt="${esc(title)} image" loading="lazy"></a>`; }).join('')}</div>`;
 }
 function embedUrl(u) {
   const y = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/);

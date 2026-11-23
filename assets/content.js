@@ -10,6 +10,9 @@
 //          picture. Use it for client work until images are approved.
 //  - pos:  where to crop the picture in its frame, e.g. '50% 20%'.
 //  - gallery: more pictures, shown in the project page.
+//  - sections: [{ h, text, items[], gallery[], note }] process chapters on the
+//          project page (challenge, research, etc). A gallery item can be
+//          { src, wide: true } to fill the whole row.
 //  - also: other pages the project shows on too, e.g. ['studio'].
 //  - todo: a pencil note shown on the card until you fill it in.
 //          Delete the todo line when the info is final.
@@ -162,15 +165,42 @@ export const projects = [
     id: 'calling', page: 'games', featured: true,
     title: 'The Calling',
     kind: 'Interactive experience · career guidance · Indaga Studios',
-    role: 'Creative Director',
+    role: 'Creative Director, Lead Designer',
     year: '2021–2025',
     motif: '🧭',
     img: 'assets/img/the-calling.jpg',
     video: 'https://www.youtube.com/watch?v=iAFNo7Z261w',
     tagline: 'Where are you going? What are you looking for?',
     blurb: 'Discover your vocational path with a video game where you live a magical adventure and face important questions to understand your vocation and your path in life. A production of Indaga Studios and M.O.V.E.',
-    facts: ['A vocational education video game', 'An interactive career finder', 'Part of the M.O.V.E. digital ecosystem, built on Javier Echevarría\'s vocational guidance method'],
+    facts: ['A vocational education video game', 'An interactive career finder', 'Part of the M.O.V.E. digital ecosystem, built on Javier Echevarría\'s vocational guidance method', 'Made with Unity and Figma'],
     links: [{ label: 'movetuvocacion.com', url: 'https://www.movetuvocacion.com/' }],
+    sections: [
+      {
+        h: 'The challenge',
+        text: 'Design a career guidance experience that tests behavior and responses, then gives a guidance result. We ran many tests with students aged 15 to 18 who don\'t play video games.',
+      },
+      {
+        h: 'Research',
+        text: 'After aligning the product outcomes with stakeholders, I made a product development plan, from understanding the user to actionable design requirements. The stakeholders had worked with students for more than 30 years and had many ideas about them, so once we were aligned I ran focused research on the pain points of career guidance as a digital experience.',
+        items: [
+          'Gen Z is less digitally savvy than millennials. Modern products are so easy that Gen Z understands digital products outside social media even less than people think. Add a short attention span, and the game had to be linear, with no room for exploration. Action: transversal mechanics. One or two core mechanics keep the whole game consistent, all aligned with the design system.',
+          'Most users in Latin America have a mid-range computer and unstable internet. Only gamers are the exception. Action: a web-based game, with each scene capped at 35 MB. That limit shaped every area of the game, especially art and UI.',
+          'Choosing a career is one of the most stressful moments in a young person\'s life, and any failure in the experience can cause emotional distress beyond the game itself. Action: minigames. We turned the guidance method into varied minigames inside a linear journey. Each one gives a partial insight, because the journey is about self-discovery, not just the final result. I ran design sessions to create intuitive minigames that collect the method\'s data without overwhelming players with tutorials.',
+        ],
+      },
+      {
+        h: 'User flow',
+        text: 'As Lead Designer, I worked with a junior designer to keep improving the experience: intuitive, instructional, and still an immersive game world, since most of the game is UI. The core loop: explore, talk to a character, play a vocational minigame, update your career profile.',
+      },
+      {
+        h: 'Collaborative iteration',
+        text: 'I managed a team with very different levels of seniority. The key was making sure everyone, artists included, understood the design principles and how their work affected other areas. Level design was all hands: the whole team could see how each piece built the full experience.',
+      },
+      {
+        h: 'Testing & production',
+        text: 'We ran several rounds of testing with internal and external control groups. We built with a "build to think" mindset, polishing every part of the game from day one. After each test we looked at two outcomes, design and technology, and I organized the team around what to keep, fix or completely change.',
+      },
+    ],
   },
   {
     id: 'thrive-table', page: 'games',
@@ -211,14 +241,41 @@ export const projects = [
     id: 'kadabra', page: 'games',
     title: 'Escuela Kadabra',
     kind: 'Educational game · Innova Schools',
-    role: 'Lead Artist',
+    role: 'UX/UI Designer, Lead Artist',
     year: '2019–2021',
     motif: '🎩',
     img: 'assets/img/escuela-kadabra.jpg',
     video: 'https://www.youtube.com/watch?v=9lFaFwQrFaA',
     tagline: 'An educational side-scroller narrative game for kids.',
-    facts: ['Reading comprehension minigames: vocabulary, decoding and inferential meaning', 'Explore the world of Eureka and the Ekai, mythical creatures who guide the learning'],
-    blurb: 'A learning game for kids in rural Latin America. I built and ran the full art pipeline, from vision to delivery, and mentored the junior designers.',
+    facts: ['Completion rate up from 0.38% to 30%', 'Reading comprehension minigames: vocabulary, decoding and inferential meaning', 'Explore the world of Eureka and the Ekai, mythical creatures who guide the learning', 'Made with Unity and Figma'],
+    blurb: 'I designed an educational experience for a critical issue in Latin America: low reading comprehension among children, which becomes a bigger challenge as they grow and meet more complex information. Escuela Kadabra uses a gamified approach to build essential communication skills, including vocabulary, decoding and inferential thinking. I designed the UX/UI, then took a second role as Lead Artist: I built and ran the full art pipeline, from vision to delivery, and mentored the junior designers.',
+    sections: [
+      {
+        h: 'The challenge',
+        text: 'Escuela Kadabra had many design challenges, especially in accessibility. I was part of the first research trip to central Peru to find business opportunities in education, and I worked alongside educators and learning psychologists.',
+      },
+      {
+        h: 'Two users: the mother and the child',
+        text: 'As the main designer, my first task was to understand the pain points of our users: children aged 8 to 11 in low-income regions of Latin America. After interviews and experiments, the team learned that the problems these kids face can\'t be solved by a direct product.',
+        items: [
+          'Proxy user: Latin American mothers. Because of the children\'s age, low family income, and a culture where kids get technology later than in North America, we had to understand the mother too: why would she give her child an educational product?',
+          'Mothers decide. In Latin America, mothers choose the educational products. To improve retention, we designed ads for mothers, and the app\'s first onboarding was for the mother, who then hands the phone to her child.',
+          'Children\'s digital behavior. Most of our players had barely used technology before. Besides deep research on children\'s usability and accessibility, we made the app extremely easy for someone who has never used an app or a game.',
+        ],
+      },
+      {
+        h: 'Scalability for low-end phones',
+        text: 'The app had to run on low-end devices, so the challenge was to make the simplest yet most immersive experience for kids and their parents. Our answer was a full pixel art style, and there I took another hat: Art Lead, with 2 in-house designers and artists, plus contractors abroad.',
+      },
+      {
+        h: 'Live game experience',
+        text: 'As the Experience Designer (UX/UI), I worked closely with the game designer and the educational designer on the first concept and test plans. One of my main goals was to keep the game fun: without that, retention would drop even if the product taught well. I advocated for the changes and features that kept kids engaged, and the completion rate grew from 0.38% to 30%. The core loop: explore, play a reading game, earn coins and unlock areas, upgrade your Ekai.',
+      },
+      {
+        h: 'Wireframes & sketches',
+        text: 'I did rapid prototyping with the education team to draft the game concept and its features together. Then I refined the pixel art UI and tested it many times with children aged 8 to 11, until it was both attractive and easy to use for the lower dexterity of younger players.',
+      },
+    ],
   },
   {
     id: 'azoove', page: 'games',
@@ -305,15 +362,36 @@ export const projects = [
   {
     id: 'thrivepal', page: 'product', featured: true,
     title: 'ThrivePal',
-    kind: 'Mobile app',
-    role: 'UX/UI designer, visual developer',
+    kind: 'Mobile app · AI visual development',
+    role: 'AI visual developer, UX/UI designer',
     year: '2024–now',
     motif: '🌱',
-    img: 'assets/img/thrivepal/cover.jpg',
+    img: 'assets/img/thrivepal/pillars-top.jpg',
     tagline: 'Habits that work: science-backed programs and daily guidance for personal growth.',
     gallery: ['assets/img/thrivepal/screen-1.jpg', 'assets/img/thrivepal/screen-2.jpg', 'assets/img/thrivepal/screen-3.jpg', 'assets/img/thrivepal/screen-4.jpg'],
     links: [{ label: 'App Store', url: 'https://apps.apple.com/us/app/thrivepal-habits-that-work/id6474622417' }, { label: 'thrivepal.com', url: 'https://www.thrivepal.com/' }],
-    blurb: 'Mobile-first UX/UI flows and visuals built from user research and behavioral insight. I set the art direction and brand guidelines, and designed generative AI production pipelines with Stable Diffusion, ComfyUI and Google AI Studio.',
+    blurb: 'I worked alongside field experts and engineers to design a personal development app that helps people reach their goals. I set the art direction and brand guidelines, designed the UX/UI, and built the generative AI production pipelines with Midjourney, Stable Diffusion, ComfyUI and Google AI Studio.',
+    sections: [
+      {
+        h: 'AI visual development',
+        text: 'Since the product is AI-driven, many of its processes are designed to be AI-driven too. I used Midjourney and refined my prompts to find a visual direction for all of the app\'s images. The paper cut style was the perfect fit: minimalist, delicate, easy to blend with vector images, and fast to produce.',
+        gallery: [{ src: 'assets/img/thrivepal/pillars.jpg', wide: true }, 'assets/img/thrivepal/mountain.jpg', 'assets/img/thrivepal/tiles.jpg', 'assets/img/thrivepal/forest.jpg', 'assets/img/thrivepal/shield.jpg', 'assets/img/thrivepal/focus-map.jpg'],
+        note: 'Real text is part of the core product and can\'t be shared yet.',
+      },
+      {
+        h: 'The challenge',
+        text: 'Design a minimalist mobile app that helps people identify, organize and plan their goals with an AI coach. It meant distilling large volumes of information into simple, actionable steps, guided by how the brain makes decisions.',
+      },
+      {
+        h: 'User research',
+        text: 'After aligning the product outcomes with stakeholders, I ran desktop research and user interviews, and reviewed the insights the team already had. The app is for everyone, but our primary users are women, who are often the first to adopt health and personal growth apps. The findings came from conversations with neuroscience experts, users and data-driven health tech specialists.',
+        items: [
+          'Even with strong willpower, the wrong plan leads to failure. Action: AI-trained programs that help each user plan their goals. In the UX/UI this meant narrowing a cascade of information into Goals > Programs > Stages > Activities, while keeping it easy to add, remove and edit.',
+          'Even small actions take cognitive effort, so users need an easy starting point to trigger a motivation cascade. Action: the home page opens with a zero-effort action, checking activities and completing lessons.',
+          'A longer onboarding brings better-matched users and smarter guidance. Action: a dynamic onboarding of about 15 minutes, with questions tailored to each person, so every user gets a flow made for their needs.',
+        ],
+      },
+    ],
   },
 
   // ---------------------------------------------------------------- studio

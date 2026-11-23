@@ -395,6 +395,14 @@ body.cv-on .bar { background: linear-gradient(var(--paper) 70%, transparent); }
 .sheet .gallery a { display: block; border: 1.5px solid var(--ink); border-radius: 4px; overflow: hidden; background: var(--paper-2); }
 .sheet .gallery img { display: block; width: 100%; height: auto; transition: transform .3s; }
 .sheet .gallery a:hover img { transform: scale(1.03); }
+.sheet .gallery a.wide { grid-column: 1 / -1; }
+.sheet .sec { margin: 26px 0 8px; padding-top: 16px; border-top: 1px dashed var(--rule); }
+.sheet .sec h3 { font: 400 30px/1.05 var(--serif); margin: 0 0 8px; }
+.sheet .sec .note { font: 400 12px var(--mono); color: var(--pencil); margin: 4px 0 0; }
+.sheet .insights { list-style: none; padding: 0; display: grid; gap: 12px; }
+.sheet .insights li { font-size: 15px; line-height: 1.6; padding-left: 14px; border-left: 3px solid var(--lime); }
+.sheet .insights .act { display: block; margin-top: 4px; }
+.sheet .insights .act b { font: 700 18px var(--hand); color: var(--red); margin-right: 4px; }
 
 /* cover: logo in ASCII + hola line beside it */
 .cover-head { position: relative; }
