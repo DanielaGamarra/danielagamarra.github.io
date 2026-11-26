@@ -585,12 +585,13 @@ export const projects = [
   },
 ];
 
-// Publications: books and comics in print or online. forthcoming: true puts it
-// under "forthcoming" (comics fairs like TCAF ask for recent + forthcoming).
+// Publications, grouped by type: 'physical' | 'digital' | 'art' | 'prints'
+// (empty groups are hidden). forthcoming: true marks one as coming soon
+// (comics fairs like TCAF ask for recent + forthcoming).
 export const publications = [
-  { year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
-  { year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Art production lead & comic artist (chapter 3) · script by Carlos Enrique Freyre', isbn: '9786124267123' },
-  { year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
+  { type: 'physical', year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
+  { type: 'physical', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Art production lead & comic artist (chapter 3) · script by Carlos Enrique Freyre', isbn: '9786124267123' },
+  { type: 'digital', year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
 ];
 
 export const awards = [

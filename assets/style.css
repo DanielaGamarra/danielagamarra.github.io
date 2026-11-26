@@ -328,6 +328,7 @@ body.cv-on .desk, body.cv-on .tabs, body.cv-on .hint, body.cv-on .palette { disp
 .cv .cv-role { font: italic 400 26px var(--serif); margin: 6px 0 4px; }
 .cv .cv-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
 .cv h2 { font: 700 13px var(--mono); text-transform: uppercase; letter-spacing: .12em; margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 1.5px solid var(--ink); }
+.cv h3 { font: 700 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--pencil); margin: 16px 0 6px; }
 .cv .row { display: grid; grid-template-columns: 160px 1fr; gap: 18px; margin-bottom: 16px; break-inside: avoid; }
 .cv .when { color: var(--pencil); font-size: 12px; padding-top: 3px; }
 .cv .what b { font: 400 22px/1.1 var(--serif); display: block; }

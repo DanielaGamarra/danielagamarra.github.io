@@ -20,11 +20,12 @@ if (LENS) {
 const here = (hash) => location.pathname + location.search + hash;
 // Publications (recent + forthcoming) for comics fairs and grant forms.
 const pubLine = (x) => [x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn].filter(Boolean).join(' · ');
+const PUB_TYPES = [['physical', 'physical publications 📚'], ['digital', 'digital 📱'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
+const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'physical') === k)]).filter(([, l]) => l.length);
+const pubYear = (x) => x.forthcoming ? 'soon' : (x.year || '····');
 function pubList() {
-  const recent = C.publications.filter((x) => !x.forthcoming), next = C.publications.filter((x) => x.forthcoming);
-  const li = (x) => `<li><span class="y">${esc(x.year || '····')}</span><span><span class="t">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)}</span><span class="b">${esc(pubLine(x))}</span></span></li>`;
-  return `<div class="sub">publications 📚</div><ul class="list">${recent.map(li).join('')}</ul>`
-    + (next.length ? `<div class="sub">forthcoming ✎</div><ul class="list">${next.map(li).join('')}</ul>` : '');
+  const li = (x) => `<li><span class="y">${esc(pubYear(x))}</span><span><span class="t">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)}</span><span class="b">${x.forthcoming ? 'forthcoming · ' : ''}${esc(pubLine(x))}</span></span></li>`;
+  return pubGroups().map(([label, l]) => `<div class="sub">${label}</div><ul class="list">${l.map(li).join('')}</ul>`).join('');
 }
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -1003,7 +1004,7 @@ function buildCV() {
     </header>
     <h2>Profile</h2><p>${esc(s.bio || s.about)}</p><p class="hand">${esc(s.tagline)}</p>
     <h2>Publications</h2>
-    ${C.publications.map((x) => `<div class="row"><div class="when">${esc(x.forthcoming ? 'forthcoming' : x.year)}</div><div class="what"><b>${esc(x.title)}</b><i>${esc(pubLine(x))}</i></div></div>`).join('')}
+    ${pubGroups().map(([label, l]) => `<h3>${esc(label.replace(/\s\S+$/u, ''))}</h3>${l.map((x) => `<div class="row"><div class="when">${esc(x.forthcoming ? 'forthcoming' : x.year)}</div><div class="what"><b>${esc(x.title)}</b><i>${esc(pubLine(x))}</i></div></div>`).join('')}`).join('')}
     <h2>Selected work</h2>
     ${sel.map((p) => `<div class="row"><div class="when">${esc(p.year || ' ')}</div><div class="what"><b>${esc(p.title)}</b><i>${esc(p.kind)} · ${esc(p.role)}</i><div>${esc(p.blurb)}</div></div></div>`).join('')}
     <h2>Experience</h2>
