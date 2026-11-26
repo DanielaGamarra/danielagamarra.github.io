@@ -585,6 +585,14 @@ export const projects = [
   },
 ];
 
+// Publications: books and comics in print or online. forthcoming: true puts it
+// under "forthcoming" (comics fairs like TCAF ask for recent + forthcoming).
+export const publications = [
+  { year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
+  { year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Art production lead & comic artist (chapter 3) · script by Carlos Enrique Freyre', isbn: '9786124267123' },
+  { year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
+];
+
 export const awards = [
   { year: '2023', title: 'Female creator of intellectual property', by: 'Peruvian Government Award' },
   { year: '2022', title: 'Young creators who shine', by: 'Peruvian Government Award' },
@@ -660,8 +668,12 @@ export const lenses = {
     ],
     pages: [['comics', [1, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
     projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus'],
+    titles: { awards: { title: 'publications & awards', note: 'in print + online' } },
+    bio: "Daniela Gamarra (DAGA) is a Peruvian comic artist and mangaka based in Toronto, drawing comics, webtoons and illustration by hand for more than ten years. She penciled and art-directed Rosa Cuchillo (Penguin Random House, 2021), the manga adaptation of Óscar Colchado's novel, and led art production on Mario. El universo Vargas Llosa (Penguin Random House, 2019), a finalist for Best illustrated book or comic at Peru's Premios Luces. She writes and draws MOD · Machine of Dreams, her own webtoon about dreams, quantum computers and climate change, with long panels that read as optical illusions. A Peruvian government award winner for creators of original IP, she studied Art & Graphic Design at PUCP, graduating first of her class.",
     talks: noAI, press: noAI, awards: noAI,
-    cv: { skills: ['Comics + manga', 'Penciling, inking, coloring', 'Lettering + page layout', 'Character + environment design', 'Cover design', 'Art direction', 'Art production management', 'Print preparation'],
+    cv: { selected: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion'],
+          experience: (x) => /Penguin|Kadabra|Content Creator/.test(x.org + x.role),
+          skills: ['Comics + manga', 'Penciling, inking, coloring', 'Lettering + page layout', 'Character + environment design', 'Cover design', 'Art direction', 'Art production management', 'Print preparation'],
           tools: ['Clip Studio Paint', 'Procreate', 'Adobe Suite', 'Figma'] },
   },
   direction: {

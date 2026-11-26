@@ -7,16 +7,25 @@ import * as C from './content.js';
 const LENS = window.LENS && C.lenses[window.LENS];
 if (LENS) {
   const keepIn = (arr, fn) => { const k = arr.filter(fn); arr.splice(0, arr.length, ...k); };
-  for (const k of ['role', 'tagline', 'hero', 'heroMarks', 'about', 'stats']) if (LENS[k]) C.site[k] = LENS[k];
-  const pages = LENS.pages.map(([id, at], i) => ({ ...C.pages.find((p) => p.id === id), at, no: String(i + 1).padStart(2, '0') }));
+  for (const k of ['role', 'tagline', 'hero', 'heroMarks', 'about', 'stats', 'bio']) if (LENS[k]) C.site[k] = LENS[k];
+  const pages = LENS.pages.map(([id, at], i) => ({ ...C.pages.find((p) => p.id === id), ...((LENS.titles || {})[id] || {}), at, no: String(i + 1).padStart(2, '0') }));
   C.pages.splice(0, C.pages.length, ...pages);
   const keep = new Set(LENS.projects);
   keepIn(C.projects, (p) => keep.has(p.id));
   for (const p of C.projects) if (LENS.move && LENS.move[p.id]) { p.page = LENS.move[p.id]; p.also = []; }
   for (const k of ['talks', 'press', 'awards']) if (LENS[k]) keepIn(C[k], LENS[k]);
   if (LENS.cv) for (const k of ['skills', 'tools']) if (LENS.cv[k]) C[k].splice(0, C[k].length, ...LENS.cv[k]);
+  if (LENS.cv && LENS.cv.experience) keepIn(C.experience, LENS.cv.experience);
 }
 const here = (hash) => location.pathname + location.search + hash;
+// Publications (recent + forthcoming) for comics fairs and grant forms.
+const pubLine = (x) => [x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn].filter(Boolean).join(' · ');
+function pubList() {
+  const recent = C.publications.filter((x) => !x.forthcoming), next = C.publications.filter((x) => x.forthcoming);
+  const li = (x) => `<li><span class="y">${esc(x.year || '····')}</span><span><span class="t">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)}</span><span class="b">${esc(pubLine(x))}</span></span></li>`;
+  return `<div class="sub">publications 📚</div><ul class="list">${recent.map(li).join('')}</ul>`
+    + (next.length ? `<div class="sub">forthcoming ✎</div><ul class="list">${next.map(li).join('')}</ul>` : '');
+}
 
 const NS = 'http://www.w3.org/2000/svg';
 const $ = (s, el = document) => el.querySelector(s);
@@ -537,6 +546,7 @@ function buildPage(p) {
       _\`) (\`_
     _/_______\\_
    /___________\\</pre>
+      ${pubList()}
       <div class="sub">awards ${'✦'}</div>
       <ul class="list">${C.awards.map((a) => `<li><span class="y">${esc(a.year || '★')}</span><span><span class="t">${esc(a.title)}</span><span class="b">${esc(a.by)}</span></span></li>`).join('')}</ul>
       <div class="sub">talks I gave 🎤</div>
@@ -558,6 +568,7 @@ function buildPage(p) {
           <p class="scribble" style="position:static;transform:rotate(-3deg);margin-top:14px;color:var(--blue)">open to directing, visual development + IP partnerships ✦</p>
         </div>
       </div>
+      ${C.site.bio ? `<div class="artist-bio"><div class="sub">artist bio</div><p>${esc(C.site.bio)}</p></div>` : ''}
       <p style="margin:34px 0 0;font-size:12px;color:var(--pencil)">© ${new Date().getFullYear()} ${esc(C.site.fullName)} · made by hand (and code) in Toronto · <a href="postest/">Postest</a></p>`;
     el.append(doodle('sparkle', { x: W - 120, y: 26, w: 46, rot: 10, cls: 'blue' }));
     bubble = new Bubble($('.bubble', body));
@@ -982,15 +993,17 @@ addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!sheetWrap.hi
 // ------------------------------------------------------------ CV mode
 function buildCV() {
   const s = C.site;
-  const sel = ['aota', 'behind', 'hd-web', 'appetite', 'cusco', 'mod'].map((id) => C.projects.find((p) => p.id === id)).filter(Boolean);
+  const sel = ((LENS && LENS.cv && LENS.cv.selected) || ['aota', 'behind', 'hd-web', 'appetite', 'cusco', 'mod']).map((id) => C.projects.find((p) => p.id === id)).filter(Boolean);
   $('#cv').innerHTML = `
     <div class="cv-actions"><button class="tool" data-close>← back to the digibook</button><button class="tool tool-cv" data-print>print / save PDF</button></div>
     <header style="margin-top:28px">
       <h1>${esc(s.fullName)} <em>· ${esc(s.name)}</em></h1>
       <div class="cv-role">${esc(s.role)}</div>
-      <div class="cv-meta"><span>${esc(s.location)}</span><a href="mailto:${esc(s.email)}">${esc(s.email)}</a>${s.links.map((l) => `<a href="${esc(l.url)}">${esc(l.label)} ${esc(l.handle)}</a>`).join('')}<a href="https://danielagamarra.github.io/">danielagamarra.github.io</a></div>
+      <div class="cv-meta"><span>${esc(s.location)}</span><a href="mailto:${esc(s.email)}">${esc(s.email)}</a>${s.links.map((l) => `<a href="${esc(l.url)}">${esc(l.label)} ${esc(l.handle)}</a>`).join('')}<a href="${esc(location.origin + location.pathname)}">${esc((location.host + location.pathname).replace(/\/$/, ''))}</a></div>
     </header>
-    <h2>Profile</h2><p>${esc(s.about)}</p><p class="hand">${esc(s.tagline)}</p>
+    <h2>Profile</h2><p>${esc(s.bio || s.about)}</p><p class="hand">${esc(s.tagline)}</p>
+    <h2>Publications</h2>
+    ${C.publications.map((x) => `<div class="row"><div class="when">${esc(x.forthcoming ? 'forthcoming' : x.year)}</div><div class="what"><b>${esc(x.title)}</b><i>${esc(pubLine(x))}</i></div></div>`).join('')}
     <h2>Selected work</h2>
     ${sel.map((p) => `<div class="row"><div class="when">${esc(p.year || ' ')}</div><div class="what"><b>${esc(p.title)}</b><i>${esc(p.kind)} · ${esc(p.role)}</i><div>${esc(p.blurb)}</div></div></div>`).join('')}
     <h2>Experience</h2>
