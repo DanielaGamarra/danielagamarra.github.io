@@ -720,12 +720,12 @@ export const lenses = {
         img: 'assets/img/comics/short/why-so-sad-01.jpg', pos: '50% 40%',
         blurb: 'Short stories I write and draw for Instagram, from one-page jokes to small episodes. Swipe-sized comics about loneliness, friendship and finding your people.',
         sections: [
+          { h: 'Single panels and covers', gallery: ['assets/img/illus/no-secrets-panel.jpg', 'assets/img/illus/simple-beast-cover.jpg'] },
           { h: 'Why are you so sad? (2024)', text: 'A small story drawn in Vancouver: a stranger who has never heard of life.', gallery: ['assets/img/comics/short/why-so-sad-01.jpg', 'assets/img/comics/short/why-so-sad-02.jpg', 'assets/img/comics/short/why-so-sad-03.jpg', 'assets/img/comics/short/why-so-sad-04.jpg', 'assets/img/comics/short/why-so-sad-05.jpg', 'assets/img/comics/short/why-so-sad-06.jpg'] },
           { h: 'Humanitarium, Ep. 2: GAN (2021)', text: 'GAN, the first subject who was able to stay alive in the solitude of space, until one day something else came.', gallery: ['assets/img/comics/short/humanitarium-ep2-01.jpg', 'assets/img/comics/short/humanitarium-ep2-02.jpg', 'assets/img/comics/short/humanitarium-ep2-03.jpg', 'assets/img/comics/short/humanitarium-ep2-04.jpg', 'assets/img/comics/short/humanitarium-ep2-05.jpg', 'assets/img/comics/short/humanitarium-ep2-06.jpg', 'assets/img/comics/short/humanitarium-ep2-07.jpg', 'assets/img/comics/short/humanitarium-ep2-08.jpg', 'assets/img/comics/short/humanitarium-ep2-09.jpg', 'assets/img/comics/short/humanitarium-ep2-10.jpg'] },
           { h: 'Each other (2020)', text: 'Humans are here to help each other. Drawn during lockdown, for anyone who felt alone.', gallery: ['assets/img/comics/short/each-other-01.jpg', 'assets/img/comics/short/each-other-02.jpg', 'assets/img/comics/short/each-other-03.jpg', 'assets/img/comics/short/each-other-04.jpg'] },
           { h: 'I remember (2019)', gallery: ['assets/img/comics/short/i-remember-01.jpg', 'assets/img/comics/short/i-remember-02.jpg', 'assets/img/comics/short/i-remember-03.jpg', 'assets/img/comics/short/i-remember-04.jpg', 'assets/img/comics/short/i-remember-05.jpg'] },
           { h: 'Mask (2017)', text: 'In Spanish: \u201cNo tengo nada que ponerme\u2026\u201d In English: \u201cI have nothing to wear\u2026\u201d', gallery: ['assets/img/comics/short/mask-01.jpg'] },
-          { h: 'Single panels and covers', gallery: ['assets/img/illus/no-secrets-panel.jpg', 'assets/img/illus/simple-beast-cover.jpg'] },
         ] },
       { id: '24-hours-of-rain', page: 'comics', title: '24 Hours of Rain', kind: 'illustrated book · work in progress', role: 'Writer & artist', motif: '☔',
         img: 'assets/img/table/24hor-sketches.jpg',
