@@ -29,7 +29,7 @@ if (PLAIN) document.documentElement.classList.add('plain');
 // Publications (recent + forthcoming) for comics fairs and grant forms.
 const FAIR_TXT = 'for sale at fairs'; // the tag on things Daga sells at her fair table
 const pubLine = (x) => [x.format, x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn, x.fair && FAIR_TXT].filter(Boolean).join(' · ');
-const PUB_TYPES = [['editorial', 'editorial publications 📚'], ['self', 'self-published ✍'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
+const PUB_TYPES = [['editorial', 'editorial publications 📚'], ['self', 'self publications ✍'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
 const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'editorial') === k)]).filter(([, l]) => l.length);
 const pubYear = (x) => x.year || (x.forthcoming ? 'soon' : '····');
 function pubList() {
@@ -606,6 +606,7 @@ function buildPage(p) {
     loadWriting($('.posts', body));
   } else {
     const list = [...C.projects.filter((x) => x.page === p.id), ...C.projects.filter((x) => (x.also || []).includes(p.id))].filter((x) => !x.draft);
+    if (p.order) list.sort((a, b) => ((p.order.indexOf(a.id) + 1) || 99) - ((p.order.indexOf(b.id) + 1) || 99)); // a page can set its card order
     for (const pr of list.filter((x) => !x.line)) body.appendChild(cardEl(pr));
     const lines = list.filter((x) => x.line);
     if (lines.length) body.appendChild(linesCard(lines));

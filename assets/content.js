@@ -695,12 +695,12 @@ export const lenses = {
     projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'infinity-zine', 'loose-lines', 'art-prints', 'stickers', 'illus', 'short-comics', '24-hours-of-rain'],
     // only on this page: the things at her fair table (names as on the Pro Plaza merchandise list)
     extraProjects: [
-      { id: 'infinity-zine', page: 'table', title: 'The Infinity Zine', kind: 'interchangeable story cards · coming 2027', role: 'Artist', motif: '♾', fair: true,
+      { id: 'infinity-zine', page: 'table', also: ['comics'], title: 'The Infinity Zine', kind: 'interchangeable story cards · coming 2027', role: 'Artist', motif: '♾', fair: true,
         img: 'assets/img/table/infinity-zine-cards.jpg',
         tagline: '30 square cards, 5 × 5 in, in a sleeve or box · full layout 25 × 30 in',
         blurb: '30 connected original ink illustrations of my own creatures and worlds, as 30 interchangeable story cards. The cards connect on every side, so readers arrange them to create their own story. A full 5 × 6 layout alone has more than 10³² possible arrangements.',
         sections: [{ h: 'All 31 drawings, in order', text: 'They connect on every side: any arrangement joins up.', gallery: ['assets/img/table/infinity-01-ring.jpg', 'assets/img/table/infinity-02-mindless.jpg', 'assets/img/table/infinity-03-bait.jpg', 'assets/img/table/infinity-04-freeze.jpg', 'assets/img/table/infinity-05-build.jpg', 'assets/img/table/infinity-06-husky.jpg', 'assets/img/table/infinity-07-enchanted.jpg', 'assets/img/table/infinity-08-frail.jpg', 'assets/img/table/infinity-09-swing.jpg', 'assets/img/table/infinity-10-pattern.jpg', 'assets/img/table/infinity-11-snow.jpg', 'assets/img/table/infinity-12-dragon.jpg', 'assets/img/table/infinity-13-ash.jpg', 'assets/img/table/infinity-14-overgrown.jpg', 'assets/img/table/infinity-15-legend.jpg', 'assets/img/table/infinity-16-wild.jpg', 'assets/img/table/infinity-17-ornament.jpg', 'assets/img/table/infinity-18-misfit.jpg', 'assets/img/table/infinity-19-sling.jpg', 'assets/img/table/infinity-20-treat.jpg', 'assets/img/table/infinity-21-treasure.jpg', 'assets/img/table/infinity-22-ghost.jpg', 'assets/img/table/infinity-23-ancient.jpg', 'assets/img/table/infinity-24-dizzy.jpg', 'assets/img/table/infinity-25-tasty.jpg', 'assets/img/table/infinity-26-dark.jpg', 'assets/img/table/infinity-27-coat.jpg', 'assets/img/table/infinity-28-ride.jpg', 'assets/img/table/infinity-29-injured.jpg', 'assets/img/table/infinity-30-catch.jpg', 'assets/img/table/infinity-31-ripe.jpg'] }] },
-      { id: 'loose-lines', page: 'table', title: 'Loose Lines', kind: 'sketchbook zines (3 volumes) · coming 2027', role: 'Artist', motif: '✎', fair: true,
+      { id: 'loose-lines', page: 'table', also: ['comics'], title: 'Loose Lines', kind: 'sketchbook zines (3 volumes) · coming 2027', role: 'Artist', motif: '✎', fair: true,
         img: 'assets/img/table/loose-lines.jpg',
         tagline: 'Digest, 5.5 × 8.5 in, 16-24 pages each, cream paper',
         blurb: "DAGA's sketchbook collection: raw, unfiltered drawings, studies, characters, thoughts and ideas straight from my sketchbooks, from first lines to finished ideas, including the first concepts behind some of my current stories (and maybe a few future ones... shh), plus new pieces.",
@@ -727,7 +727,7 @@ export const lenses = {
         sections: [{ h: 'Process sketches, chapter by chapter', text: 'No finished art yet: these are the first sketches from my notebook.', gallery: ['assets/img/table/24hor-01.jpg', 'assets/img/table/24hor-02.jpg', 'assets/img/table/24hor-03.jpg', 'assets/img/table/24hor-04.jpg', 'assets/img/table/24hor-05.jpg', 'assets/img/table/24hor-06.jpg', 'assets/img/table/24hor-07.jpg', 'assets/img/table/24hor-08.jpg', 'assets/img/table/24hor-09.jpg', 'assets/img/table/24hor-10.jpg', 'assets/img/table/24hor-11.jpg', 'assets/img/table/24hor-12.jpg', 'assets/img/table/24hor-13.jpg'] }] },
     ],
     override: {
-      distortion: { title: 'Distortion', kind: 'manga / graphic novel · coming 2027', year: '', todo: null,
+      distortion: { also: ['comics'], title: 'Distortion', kind: 'manga / graphic novel · coming 2027', year: '', todo: null,
         tagline: 'B5 book (18.2 × 25.7 cm), ~48 pages, printed · self-published 2027',
         blurb: "Every time Maya turns 16, a strange force called the Distortion ends her life and she starts over, reliving the same years with her grandpa and her best friends. When her grandpa gives her a mirror necklace, she finally finds a way to fight back. A hand-drawn manga about loss, change and being brave enough to live a life you don't need to repeat.", sections: [{ h: 'Pages from the book', gallery: ['assets/img/table/distortion-page-02.jpg', 'assets/img/table/distortion-page-03.jpg', 'assets/img/table/distortion-page-10.jpg', 'assets/img/table/distortion-page-24.jpg'] }] },
       mod: { kind: 'My own webtoon IP', blurb: (b) => b.replace('My most personal story, drawn fully by hand. No AI, ever. ', 'My most personal story. '), gallery: ['assets/img/comics/mod-phones-1.jpg', 'assets/img/comics/mod-phones-2.jpg', 'assets/img/comics/mod-phones-3.jpg', 'assets/img/comics/mod-phones-4.jpg'] },
@@ -737,7 +737,7 @@ export const lenses = {
     },
     move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial', distortion: 'table' },
     titles: {
-      comics: { title: 'self-published', note: 'my own IP: webtoons, comics, zines + prints', roles: null }, // no "what I do" card here
+      comics: { title: 'self publications', note: 'my own IP: webtoons, comics, zines + prints', roles: null, order: ['mod', 'distortion', 'infinity-zine', 'loose-lines', '24-hours-of-rain', 'short-comics', 'illus'] }, // no "what I do" card here
       table: { title: 'at my table', note: 'coming 2027 · for sale at fairs', cols: 2, tint: 'blue',
         list: [
           ['Sketch commissions', 'live hand-drawn sketches of my original characters, or custom sketches, drawn at the table · postcard format (4 × 6 in), thick paper'],
