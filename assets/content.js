@@ -707,7 +707,7 @@ export const lenses = {
         facts: ['Vol. 1 · Lima (2018-2020)', 'Vol. 2 · Lima/Vancouver (2021-2023)', 'Vol. 3 · Vancouver (2024-2026)'],
         sections: [{ h: 'The covers', gallery: ['assets/img/table/loose-lines-vol1.jpg', 'assets/img/table/loose-lines-vol2.jpg', 'assets/img/table/loose-lines-vol3.jpg'] }, { h: 'Inside the zines', gallery: ['assets/img/table/loose-lines-vol1-spread1.jpg', 'assets/img/table/loose-lines-vol1-spread2.jpg', 'assets/img/table/loose-lines-vol2-spread1.jpg', 'assets/img/table/loose-lines-vol2-spread2.jpg', 'assets/img/table/loose-lines-vol3-spread1.jpg', 'assets/img/table/loose-lines-vol3-spread2.jpg'] }] },
       { id: 'art-prints', page: 'table', title: 'Art prints', kind: 'prints · coming 2027', role: 'Artist', motif: '🖼', fair: true,
-        img: 'assets/img/table/prints.jpg',
+        img: 'assets/img/table/prints-card.jpg',
         tagline: 'A4 (21 × 29.7 cm) and square prints · The Infinity Zine full layout as a 25 × 30 in poster',
         blurb: 'Prints of my original artwork.',
         sections: [{ h: 'The prints', gallery: ['assets/img/table/print-dream-head.jpg', 'assets/img/table/print-striped-figure.jpg', 'assets/img/table/print-bird-head.jpg', 'assets/img/table/print-blue-field.jpg', 'assets/img/table/print-ink-girl.jpg', 'assets/img/table/print-magic-within.jpg', 'assets/img/table/print-floating-islands.jpg', 'assets/img/table/print-red-blue.jpg'] }] },
