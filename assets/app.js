@@ -996,7 +996,9 @@ function flowHtml(steps) {
   return `<div class="flow" role="list">${steps.map((t, i) => `${i ? '<span class="arrow" aria-hidden="true">→</span>' : ''}<span class="step" role="listitem">${esc(t)}</span>`).join('')}</div>`;
 }
 function galleryHtml(list, title) {
-  return `<div class="gallery">${list.map((g) => { const src = g.src || g; return `<a href="${esc(src)}" target="_blank" rel="noopener"${g.wide ? ' class="wide"' : ''}><img src="${esc(src)}" alt="${esc(title)} image" loading="lazy"></a>`; }).join('')}</div>`;
+  return `<div class="gallery">${list.map((g) => { const src = g.src || g; const img = `<img src="${esc(src)}" alt="${esc(title)} image" loading="lazy">`;
+    // manga version: no new tab, the image just grows a little in place
+    return PLAIN ? `<figure class="g${g.wide ? ' wide' : ''}" tabindex="0">${img}</figure>` : `<a href="${esc(src)}" target="_blank" rel="noopener"${g.wide ? ' class="wide"' : ''}>${img}</a>`; }).join('')}</div>`;
 }
 function embedUrl(u) {
   const y = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([\w-]{6,})/);
