@@ -64,10 +64,10 @@ export const pages = [
     // "What I do" card on this page.
     intro: "I'm an award-winning comic & manga artist and art director. I have a deep passion for visual narrative and design, and an obsession with pushing each visual medium to make versatile, high-quality, memorable stories.",
     roles: [
-      { h: 'Comic artist', text: 'Visual development of the style, storyboarding, penciling, inking, coloring, lettering, page layout, cover design.' },
+      { h: 'Comic artist', text: 'Visual development of the style, storyboarding, penciling, inking, coloring, page layout, cover design.' },
       { h: 'Art direction', text: 'Stakeholder alignment, art style direction, character and environment design, color script, team communication, art quality assurance, team feedback, and teaching junior artists to grow their skills.' },
       { h: 'Art production manager', text: 'Setting the production pipeline, finding risks, and improving processes.' },
-      { h: 'Graphic designer', text: 'Cover design, lettering, dialogue, layout and print preparation for comics.' },
+      { h: 'Graphic designer', text: 'Cover design, layout and print preparation for comics.' },
     ] },
   { id: 'product', no: '05', title: 'product design',   note: 'apps people use', at: [-1, 0], cols: 2, tint: 'blue' },
   { id: 'studio',  no: '06', title: 'studio & ventures', note: 'building my own things', at: [-1, -1], cols: 2, tint: 'peach' },
@@ -661,25 +661,30 @@ export const lenses = {
   // Was /comics/ (that folder now redirects here). plain: no doodles or scribbles.
   'manga-publications': {
     plain: true,
+    links: ['Instagram', 'TikTok'], // contact rows shown (no LinkedIn, no CV row)
     title: 'Comics & manga', role: 'Comic Artist, Mangaka & Illustrator',
     tagline: 'Comics, webtoons and manga, drawn by hand.',
-    hero: 'I draw comics, webtoons and manga by hand. More than ten years of penciling, inking, coloring and lettering stories, from graphic novels with Penguin Random House to my own webtoon, MOD. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.',
-    heroMarks: ['comics', 'webtoons', 'manga', 'by hand', 'MOD', 'digibook'],
+    hero: 'I draw comics, webtoons and manga. More than ten years of penciling, inking and coloring stories, from graphic novels with Penguin Random House to my own webtoon, MOD, and other publications like DISTORTION, zines and prints. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.',
+    heroMarks: ['comics', 'webtoons', 'manga', 'MOD', 'DISTORTION', 'zines', 'prints', 'digibook'],
     about: "Hola! I'm Daga, an award-winning comic and manga artist from Peru, now based in Toronto, and queer too. More than ten years of comics, webtoons and illustration, drawn by hand: graphic novels with Penguin Random House, my own webtoon MOD, and a lot of personal art. I also art-direct comic teams, from style to print.",
     stats: [
       { n: '10+', label: 'years drawing for a living' },
       { n: '2', label: 'graphic novels with Penguin Random House' },
-      { n: '50k', label: 'on TikTok' },
-      { n: '10k', label: 'on Instagram' },
+      { n: '50k + 10k', label: 'on TikTok + Instagram' },
     ],
-    pages: [['comics', [1, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
+    pages: [['comics', [1, 0]], ['editorial', [2, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
     projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus'],
-    titles: { awards: { title: 'publications & awards', note: 'in print + online' } },
+    move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial' },
+    titles: {
+      comics: { title: 'self-published', note: 'my own IP: webtoons, comics, zines + prints' },
+      editorial: { title: 'editorial publications', note: 'with Penguin Random House', cols: 2, tint: 'blue' },
+      awards: { title: 'publications & awards', note: 'in print + online' },
+    },
     bio: "Daniela Gamarra (DAGA) is a Peruvian comic artist and mangaka based in Toronto, drawing comics, webtoons and illustration by hand for more than ten years. She penciled and art-directed Rosa Cuchillo (Penguin Random House, 2021), the manga adaptation of Óscar Colchado's novel, and led art production on Mario. El universo Vargas Llosa (Penguin Random House, 2019), a finalist for Best illustrated book or comic at Peru's Premios Luces. She writes and draws MOD · Machine of Dreams, her own webtoon about dreams, quantum computers and climate change, with long panels that read as optical illusions. A Peruvian government award winner for creators of original IP, she studied Art & Graphic Design at PUCP, graduating first of her class.",
     talks: noAI, press: noAI, awards: noAI,
     cv: { selected: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion'],
           experience: (x) => /Penguin|Kadabra|Content Creator/.test(x.org + x.role),
-          skills: ['Comics + manga', 'Penciling, inking, coloring', 'Lettering + page layout', 'Character + environment design', 'Cover design', 'Art direction', 'Art production management', 'Print preparation'],
+          skills: ['Comics + manga', 'Penciling, inking, coloring', 'Page layout', 'Character + environment design', 'Cover design', 'Art direction', 'Art production management', 'Print preparation'],
           tools: ['Clip Studio Paint', 'Procreate', 'Adobe Suite', 'Figma'] },
   },
   direction: {

@@ -469,3 +469,7 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .artist-bio p { font: 400 17px/1.55 var(--serif); margin: 6px 0 0; }
 .tags span.fair { background: var(--lime); color: var(--on-lime); }
 .plain .cat { display: none; }
+.link-pair { display: flex; align-items: center; gap: 10px; }
+.link-pair small { display: flex; flex-direction: column; gap: 4px; width: 90px; flex: none; }
+.link-pair small a { font: 700 12px var(--mono); color: var(--pencil); text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
+.link-pair small a:hover { color: var(--ink); }

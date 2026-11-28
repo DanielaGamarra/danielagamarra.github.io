@@ -8,7 +8,8 @@ const LENS = window.LENS && C.lenses[window.LENS];
 if (LENS) {
   const keepIn = (arr, fn) => { const k = arr.filter(fn); arr.splice(0, arr.length, ...k); };
   for (const k of ['role', 'tagline', 'hero', 'heroMarks', 'about', 'stats', 'bio']) if (LENS[k]) C.site[k] = LENS[k];
-  const pages = LENS.pages.map(([id, at], i) => ({ ...C.pages.find((p) => p.id === id), ...((LENS.titles || {})[id] || {}), at, no: String(i + 1).padStart(2, '0') }));
+  // a lens can add its own page: give it a full entry in titles (title, note, cols, tint)
+  const pages = LENS.pages.map(([id, at], i) => ({ id, cols: 2, ...C.pages.find((p) => p.id === id), ...((LENS.titles || {})[id] || {}), at, no: String(i + 1).padStart(2, '0') }));
   C.pages.splice(0, C.pages.length, ...pages);
   const keep = new Set(LENS.projects);
   keepIn(C.projects, (p) => keep.has(p.id));
@@ -16,8 +17,11 @@ if (LENS) {
   for (const k of ['talks', 'press', 'awards']) if (LENS[k]) keepIn(C[k], LENS[k]);
   if (LENS.cv) for (const k of ['skills', 'tools']) if (LENS.cv[k]) C[k].splice(0, C[k].length, ...LENS.cv[k]);
   if (LENS.cv && LENS.cv.experience) keepIn(C.experience, LENS.cv.experience);
+  if (LENS.links) C.site.links = C.site.links.filter((l) => LENS.links.includes(l.label));
 }
 const here = (hash) => location.pathname + location.search + hash;
+// same handle on several networks (Instagram + TikTok @in.daga) = one contact row
+const linkGroups = () => Object.values(C.site.links.reduce((m, l) => ((m[l.handle] = m[l.handle] || []).push(l), m), {}));
 const PLAIN = !!(LENS && LENS.plain); // no doodles, scribbles or cat (Daga will draw her own)
 if (PLAIN) document.documentElement.classList.add('plain');
 // Publications (recent + forthcoming) for comics fairs and grant forms.
@@ -510,7 +514,7 @@ function buildCover() {
     <div class="cover-cta">
       ${C.pages.some((x) => x.id === 'films') ? `<a class="cta dark" href="#films" data-go="films">▶ watch</a>` : `<a class="cta dark" href="#${esc(C.pages[0].id)}" data-go="${esc(C.pages[0].id)}">▶ see the work</a>`}
       <a class="cta" href="#about" data-go="about">contact ✉</a>
-      <a class="cta" href="#cv" data-cv>read it as a CV</a>
+      ${PLAIN ? '' : '<a class="cta" href="#cv" data-cv>read it as a CV</a>'}
     </div>
     <div class="stats">${C.site.stats.map((s) => `<div class="stat"><b>${esc(s.n)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>`;
   el.append(
@@ -568,8 +572,10 @@ function buildPage(p) {
         <div class="contact">
           <p style="font:400 26px/1.25 var(--serif);margin:0 0 8px">${esc(C.site.tagline)}</p>
           <a href="mailto:${esc(C.site.email)}"><small>email</small><span>${esc(C.site.email)}</span></a>
-          ${C.site.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener"><small>${esc(l.label)}</small><span>${esc(l.handle)}</span></a>`).join('')}
-          <a href="#cv" data-cv><small>CV</small><span>read · print · save PDF</span></a>
+          ${linkGroups().map((g) => g.length === 1
+            ? `<a href="${esc(g[0].url)}" target="_blank" rel="noopener"><small>${esc(g[0].label)}</small><span>${esc(g[0].handle)}</span></a>`
+            : `<div class="link-pair"><small>${g.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</small><a href="${esc(g[0].url)}" target="_blank" rel="noopener"><span>${esc(g[0].handle)}</span></a></div>`).join('')}
+          ${PLAIN ? '' : '<a href="#cv" data-cv><small>CV</small><span>read · print · save PDF</span></a>'}
           <p class="scribble" style="position:static;transform:rotate(-3deg);margin-top:14px;color:var(--blue)">open to directing, visual development + IP partnerships ✦</p>
         </div>
       </div>
