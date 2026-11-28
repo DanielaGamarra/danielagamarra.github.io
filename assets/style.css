@@ -522,3 +522,6 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 @media (max-width: 760px) { .cover-art { grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0 26px; } .cover-art button { height: 120px; } }
 /* galleries: each image keeps its own height, no empty strip under shorter ones */
 .sheet .gallery { align-items: start; }
+/* MOD phone pages: two per row so the panels read */
+.sheet .gallery:has(img[src*="mod-phones"]) { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 560px) { .sheet .gallery:has(img[src*="mod-phones"]) { grid-template-columns: 1fr; } }
