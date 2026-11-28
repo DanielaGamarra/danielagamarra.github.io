@@ -746,6 +746,11 @@ const tabs = $('#tabs');
 function buildTabs() {
   const items = [{ id: 'cover', no: '00', title: 'cover', tint: 'lime' }, ...C.pages];
   tabs.innerHTML = items.map((p) => `<a class="tab" href="#${p.id}" data-go="${p.id}" data-tint="${p.tint}"><b>${p.no}</b><span>${esc(p.title)}</span></a>`).join('');
+  // a lens can make one tab pulse on a visitor's first visit (manga version: "at my table"), until it is clicked
+  const pid = LENS && LENS.pulseTab, key = 'daga-pulse-' + pid;
+  let seen = true; try { seen = !!localStorage.getItem(key); localStorage.setItem(key, '1'); } catch {}
+  const t = pid && !seen && $(`.tab[data-go="${pid}"]`, tabs);
+  if (t) { t.classList.add('pulse'); t.addEventListener('click', () => t.classList.remove('pulse'), { once: true }); }
 }
 let activeRaf = 0;
 function scheduleActive() { if (!activeRaf) activeRaf = requestAnimationFrame(() => { activeRaf = 0; updateActive(); }); }

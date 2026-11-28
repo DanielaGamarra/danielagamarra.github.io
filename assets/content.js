@@ -674,6 +674,7 @@ export const lenses = {
     title: 'Comics & manga', role: 'Mangaka, Comic Artist & Illustrator',
     tagline: 'Manga, comics, webtoons and my own art: zines, prints and stickers.',
     open: 'open to commissions, client work + IP development', // contact page note
+    pulseTab: 'table', // this tab pulses on a first visit
     hero: "I draw manga, comics and webtoons, and a lot of my own art. More than ten years of penciling, inking and coloring stories, from graphic novels with Penguin Random House to my own webtoon, MOD. Now I make books and art you can hold: DISTORTION, The Infinity Zine, sketchbook zines, prints and stickers. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.",
     heroMarks: ['manga', 'comics', 'webtoons', 'my own art', 'MOD', 'DISTORTION', 'The Infinity Zine', 'sketchbook zines', 'prints', 'stickers', 'digibook'],
     // artist bio (third person, for fair applications) shown in the speech bubble + CV profile
