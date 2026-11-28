@@ -501,3 +501,4 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .sheet .gallery :is(a, .g):has(img[src*="/print-"]) img { box-shadow: 0 12px 26px rgba(0,0,0,.5), 0 2px 4px rgba(0,0,0,.35); }
 .sheet .gallery :is(a, .g):has(img[src*="/print-red-blue"]) { grid-column: span 2; }
 .sheet .gallery:has(img[src*="/print-"]) { gap: 28px; padding: 10px 6px 18px; align-items: center; }
+.plain .trophy { display: none; } /* manga version: no ASCII trophy */
