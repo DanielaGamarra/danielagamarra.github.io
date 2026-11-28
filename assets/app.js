@@ -589,7 +589,7 @@ function buildPage(p) {
             ? `<a href="${esc(g[0].url)}" target="_blank" rel="noopener"><small>${esc(g[0].label)}</small><span>${esc(g[0].handle)}</span></a>`
             : `<div class="link-pair"><small>${g.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</small><a href="${esc(g[0].url)}" target="_blank" rel="noopener"><span>${esc(g[0].handle)}</span></a></div>`).join('')}
           ${PLAIN ? '' : '<a href="#cv" data-cv><small>CV</small><span>read · print · save PDF</span></a>'}
-          <p class="scribble" style="position:static;transform:rotate(-3deg);margin-top:14px;color:var(--blue)">open to directing, visual development + IP partnerships ✦</p>
+          <p class="scribble" style="position:static;transform:rotate(-3deg);margin-top:14px;color:var(--blue)">${esc((LENS && LENS.open) || 'open to directing, visual development + IP partnerships')} ✦</p>
         </div>
       </div>
       ${C.site.bio ? `<div class="artist-bio"><div class="sub">artist bio</div><p>${esc(C.site.bio)}</p></div>` : ''}
