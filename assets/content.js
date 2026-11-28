@@ -675,6 +675,13 @@ export const lenses = {
     tagline: 'Manga, comics, webtoons and my own art: zines, prints and stickers.',
     open: 'open to commissions, client work + IP development', // contact page note
     pulseTab: 'table', // this tab pulses on a first visit
+    thumbs: true, // cards load small copies from assets/img/thumbs
+    coverArt: [ // a strip of art on the cover: image, project it opens, alt text
+      ['assets/img/comics/rosa-cover-wrap.jpg', 'rosa-cuchillo', 'Rosa Cuchillo cover'],
+      ['assets/img/table/distortion-page-24.jpg', 'distortion', 'Distortion page: a girl among floating mirrors'],
+      ['assets/img/table/infinity-zine-cards.jpg', 'infinity-zine', 'The Infinity Zine cards'],
+      ['assets/img/table/loose-lines-vol2-spread2.jpg', 'loose-lines', 'Loose Lines sketchbook spread'],
+    ],
     hero: "I draw manga, comics and webtoons, and a lot of my own art. More than ten years of penciling, inking and coloring stories, from graphic novels with Penguin Random House to my own webtoon, MOD. Now I make books and art you can hold: DISTORTION, The Infinity Zine, sketchbook zines, prints and stickers. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.",
     heroMarks: ['manga', 'comics', 'webtoons', 'my own art', 'MOD', 'DISTORTION', 'The Infinity Zine', 'sketchbook zines', 'prints', 'stickers', 'digibook'],
     // artist bio (third person, for fair applications) shown in the speech bubble + CV profile

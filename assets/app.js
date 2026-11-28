@@ -422,6 +422,7 @@ const isIndaga = (p) => p.indaga || /Indaga Studios/.test(p.kind || '');
 const studioBadge = (p) => isIndaga(p) ? '<span class="studio-badge" title="Made at Indaga Studios" role="img" aria-label="Made at Indaga Studios"><i></i></span>' : '';
 const tagsHtml = (p) => p.tags ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
 // fair: true = an orange price tag on the image's top right
+const thumbOf = (src) => (LENS && LENS.thumbs && src) ? 'assets/img/thumbs/' + src.split('/').pop() : src;
 const fairTag = (p) => p.fair ? `<span class="fair-tag-wrap"><span class="fair-tag">${FAIR_TXT}</span></span>` : '';
 function cardEl(p) {
   const el = document.createElement('article');
@@ -432,7 +433,7 @@ function cardEl(p) {
   el.style.setProperty('--r', ((r() - 0.5) * 2.4).toFixed(2) + 'deg');
   el.style.transform = 'rotate(var(--r))';
   el.innerHTML = `
-    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}${fairTag(p)}</div>
+    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(thumbOf(p.img))}" alt="${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}${fairTag(p)}</div>
     <div class="kind">${esc(p.kind)}${p.video ? ' · <b class="play">▶ watch</b>' : ''}</div>
     ${tagsHtml(p)}
     <h3>${esc(p.title)}</h3>
@@ -507,6 +508,7 @@ function buildCover() {
       <p class="cover-hola"><span class="h">Hola, I'm ${esc(C.site.name)}</span><span class="n">(${esc(C.site.fullName)})</span></p>
     </div>
     <div class="cover-role"><span class="r"><em>${esc(C.site.role)}</em></span><span class="loc">📍 ${esc(C.site.location)}</span></div>
+    ${LENS && LENS.coverArt ? `<div class="cover-art">${LENS.coverArt.map(([src, pid, alt]) => `<button type="button" data-open="${esc(pid)}" aria-label="Open ${esc(alt)}"><img src="${esc(thumbOf(src))}" alt="${esc(alt)}"></button>`).join('')}</div>` : ''}
     <div class="flow" aria-label="${esc(C.site.hero)}">
       <div class="cat" role="img" aria-label="Berlin the cat, draggable">
         <svg viewBox="0 0 200 180" aria-hidden="true">
@@ -537,6 +539,7 @@ function buildCover() {
     doodle('planet', { x: 980, y: 140, w: 90, rot: -12 }),
     scribble('← flip the pages', { x: 1012, y: 250, rot: 5, color: 'var(--red)' }),
   );
+  $$('.cover-art [data-open]', body).forEach((b) => b.addEventListener('click', () => { if (!dragMoved) openSheet(C.projects.find((p) => p.id === b.dataset.open)); }));
   heroAscii = new Ascii($('.ascii-name', body), {
     font: 8, mode: 'alpha', noise: 0.03, radius: 90, push: 26, seed: 'daga', always: true, glitch: true,
     // Daga's logo mark in ASCII (drawn a few times, offset, to thicken the strokes)
