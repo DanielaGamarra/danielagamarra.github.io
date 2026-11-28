@@ -5,7 +5,7 @@ import json, re, pathlib
 R = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://danielagamarra.github.io/'
 LENSES = {
-  'manga-publications': ('Comic Artist, Mangaka & Illustrator', 'Daga (Daniela Gamarra): comic artist, mangaka and illustrator in Toronto. Comics, webtoons, manga, zines and prints: Rosa Cuchillo and Mario with Penguin Random House, MOD and DISTORTION.', 'assets/img/mod-machine-of-dreams.jpg'),
+  'manga-publications': ('Mangaka, Comic Artist & Illustrator', 'Daga (Daniela Gamarra): mangaka, comic artist and illustrator in Toronto. Comics, webtoons, manga, zines and prints: Rosa Cuchillo and Mario with Penguin Random House, MOD and DISTORTION.', 'assets/img/mod-machine-of-dreams.jpg'),
   'direction': ('Artist, Art & Creative Director', 'Daga (Daniela Gamarra): artist, art and creative director in Toronto. Comics, games and animated stories, from the first sketch to the team that ships it.', 'assets/og.jpg'),
   'narrative': ('Writer, Narrative Designer & Storyteller', 'Daga (Daniela Gamarra): writer and narrative designer in Toronto. Stories for comics, webtoons, games and animated shows.', 'assets/og.jpg'),
   'product':   ('Product Designer, Producer & Project Manager', 'Daga (Daniela Gamarra): product designer, producer and project manager in Toronto. Apps, tools and games from research to launch.', 'assets/og.jpg'),

@@ -11,9 +11,11 @@ if (LENS) {
   // a lens can add its own page: give it a full entry in titles (title, note, cols, tint)
   const pages = LENS.pages.map(([id, at], i) => ({ id, cols: 2, ...C.pages.find((p) => p.id === id), ...((LENS.titles || {})[id] || {}), at, no: String(i + 1).padStart(2, '0') }));
   C.pages.splice(0, C.pages.length, ...pages);
+  if (LENS.extraProjects) C.projects.push(...LENS.extraProjects);
   const keep = new Set(LENS.projects);
   keepIn(C.projects, (p) => keep.has(p.id));
   for (const p of C.projects) if (LENS.move && LENS.move[p.id]) { p.page = LENS.move[p.id]; p.also = []; }
+  for (const [id, o] of Object.entries(LENS.override || {})) { const p = C.projects.find((x) => x.id === id); if (p) for (const [k, v] of Object.entries(o)) p[k] = typeof v === 'function' ? v(p[k]) : v; }
   for (const k of ['talks', 'press', 'awards']) if (LENS[k]) keepIn(C[k], LENS[k]);
   if (LENS.cv) for (const k of ['skills', 'tools']) if (LENS.cv[k]) C[k].splice(0, C[k].length, ...LENS.cv[k]);
   if (LENS.cv && LENS.cv.experience) keepIn(C.experience, LENS.cv.experience);
@@ -25,7 +27,8 @@ const linkGroups = () => Object.values(C.site.links.reduce((m, l) => ((m[l.handl
 const PLAIN = !!(LENS && LENS.plain); // no doodles, scribbles or cat (Daga will draw her own)
 if (PLAIN) document.documentElement.classList.add('plain');
 // Publications (recent + forthcoming) for comics fairs and grant forms.
-const pubLine = (x) => [x.format, x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn, x.fair && 'in print at fairs'].filter(Boolean).join(' · ');
+const FAIR_TXT = 'on sale at fairs'; // the tag on things Daga sells at her fair table
+const pubLine = (x) => [x.format, x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn, x.fair && FAIR_TXT].filter(Boolean).join(' · ');
 const PUB_TYPES = [['editorial', 'editorial publications 📚'], ['self', 'self-published ✍'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
 const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'editorial') === k)]).filter(([, l]) => l.length);
 const pubYear = (x) => x.year || (x.forthcoming ? 'soon' : '····');
@@ -419,7 +422,7 @@ const isIndaga = (p) => p.indaga || /Indaga Studios/.test(p.kind || '');
 const studioBadge = (p) => isIndaga(p) ? '<span class="studio-badge" title="Made at Indaga Studios" role="img" aria-label="Made at Indaga Studios"><i></i></span>' : '';
 const tagsHtml = (p) => p.tags ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
 // fair: true = an orange price tag on the image's top right
-const fairTag = (p) => p.fair ? '<span class="fair-tag">in print at fairs</span>' : '';
+const fairTag = (p) => p.fair ? `<span class="fair-tag-wrap"><span class="fair-tag">${FAIR_TXT}</span></span>` : '';
 function cardEl(p) {
   const el = document.createElement('article');
   el.className = 'card' + (p.featured ? ' featured' : '');
@@ -448,6 +451,14 @@ function cardEl(p) {
 }
 
 // Client work without approved images: a plain list, title · role.
+// A page's plain text list (e.g. "also at my table"): name + one line, no image.
+function listCard(p) {
+  const el = document.createElement('article');
+  el.className = 'card lines-card'; el.dataset.id = 'list-' + p.id;
+  el.style.setProperty('--r', '-0.5deg'); el.style.transform = 'rotate(var(--r))';
+  el.innerHTML = `<div class="kind">also at my table</div><ul class="plist">${p.list.map(([t, d]) => `<li><b>${esc(t)}</b><small>${esc(d)}</small></li>`).join('')}</ul>`;
+  return el;
+}
 function linesCard(list) {
   const el = document.createElement('article');
   el.className = 'card lines-card'; el.dataset.id = 'lines-' + list[0].page;
@@ -595,6 +606,7 @@ function buildPage(p) {
     for (const pr of list.filter((x) => !x.line)) body.appendChild(cardEl(pr));
     const lines = list.filter((x) => x.line);
     if (lines.length) body.appendChild(linesCard(lines));
+    if (p.list) body.appendChild(listCard(p));
     if (p.roles) body.appendChild(rolesCard(p));
     const picks = ['planet', 'rocket', 'ufo', 'orbit', 'constellation', 'satellite', 'sparkle', 'eye'];
     const a = picks[Math.floor(r() * picks.length)], b = picks[Math.floor(r() * picks.length)];

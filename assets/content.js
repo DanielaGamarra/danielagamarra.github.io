@@ -492,7 +492,7 @@ export const projects = [
     motif: '🌀',
     img: 'assets/img/distortion.jpg', pos: '50% 38%',
     blurb: 'A comic series, shared in pieces on Instagram.',
-    fair: true, // "in print at fairs" chip
+    fair: true, // "on sale at fairs" tag
     todo: 'add a link',
   },
   {
@@ -593,13 +593,13 @@ export const projects = [
 ];
 
 // Publications, grouped by type: 'editorial' | 'self' | 'art' | 'prints'
-// format: 'print' | 'webcomic' | … · fair: true = Daga sells it in print at fairs
+// format: 'print' | 'webcomic' | … · fair: true = Daga sells it at fairs
 // (empty groups are hidden). forthcoming: true marks one as coming soon
 // (comics fairs like TCAF ask for recent + forthcoming).
 export const publications = [
   { type: 'editorial', format: 'print', year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
   { type: 'editorial', format: 'print', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Comic artist (chapter 3) & art direction, one of four artists · script by Carlos Enrique Freyre', isbn: '9786124267123' },
-  { type: 'self', format: 'original graphic novel, print', year: '2027', forthcoming: true, fair: true, title: 'DISTORTION', role: 'Writer & artist' },
+  { type: 'self', format: 'manga / graphic novel, B5, ~48 pages, print', year: '2027', forthcoming: true, fair: true, title: 'DISTORTION', role: 'Writer & artist' },
   { type: 'self', format: 'zine, print', year: '2027', forthcoming: true, fair: true, title: '24 Hours of Rain', role: 'Writer & artist' },
   { type: 'self', format: 'interchangeable story cards, print', year: '2027', forthcoming: true, fair: true, title: 'The Infinity Zine', role: '31 connected ink illustrations: readers arrange 30 cards to build their own story · 5 x 5 in cards, full layout 25 x 30 in' },
   { type: 'self', format: 'zines and mini-comics, print', year: '2027', forthcoming: true, fair: true, title: 'Original zines and mini-comics', role: 'Writer & artist' },
@@ -671,7 +671,7 @@ export const lenses = {
   'manga-publications': {
     plain: true,
     links: ['Instagram', 'TikTok'], // contact rows shown (no LinkedIn, no CV row)
-    title: 'Comics & manga', role: 'Comic Artist, Mangaka & Illustrator',
+    title: 'Comics & manga', role: 'Mangaka, Comic Artist & Illustrator',
     tagline: 'Comics, webtoons, manga, zines and prints.',
     hero: 'I draw comics, webtoons and manga. More than ten years of penciling, inking and coloring stories, from graphic novels with Penguin Random House to my own webtoon, MOD, and other publications like DISTORTION, zines and prints. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.',
     heroMarks: ['comics', 'webtoons', 'manga', 'MOD', 'DISTORTION', 'zines', 'prints', 'digibook'],
@@ -682,11 +682,38 @@ export const lenses = {
       { n: '2', label: 'graphic novels with Penguin Random House' },
       { n: '50k + 10k', label: 'on TikTok + Instagram' },
     ],
-    pages: [['editorial', [1, 0]], ['comics', [2, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
-    projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus'],
-    move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial' },
+    pages: [['editorial', [1, 0]], ['comics', [2, 0]], ['table', [1, 1]], ['awards', [0, 1]], ['about', [-1, 0]]],
+    projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'infinity-zine', '24-hours-of-rain', 'illus'],
+    // only on this page: the things at her fair table (names as on the Pro Plaza merchandise list)
+    extraProjects: [
+      { id: 'infinity-zine', page: 'table', title: 'The Infinity Zine', kind: 'interchangeable story cards · coming 2027', role: 'Artist', year: '2027', motif: '♾', fair: true,
+        img: 'assets/img/table/infinity-zine-cards.jpg',
+        tagline: '30 square cards, 5 × 5 in, in a sleeve or box · full layout 25 × 30 in',
+        blurb: 'Thirty connected ink illustrations of my own creatures and worlds, as thirty interchangeable story cards. The cards connect on every side, so readers arrange them to create their own story. A full 5 × 6 layout alone has more than 10³² possible arrangements.',
+        sections: [{ h: 'Some of the cards', gallery: ['assets/img/table/infinity-01-ring.jpg', 'assets/img/table/infinity-09-swing.jpg', 'assets/img/table/infinity-12-dragon.jpg', 'assets/img/table/infinity-13-ash.jpg', 'assets/img/table/infinity-14-overgrown.jpg', 'assets/img/table/infinity-29-injured.jpg'] }] },
+      { id: '24-hours-of-rain', page: 'table', title: '24 Hours of Rain', kind: 'zine · coming 2027', role: 'Writer & artist', year: '2027', motif: '☔', fair: true,
+        img: 'assets/img/table/24-hours-of-rain.jpg', pos: '50% 30%',
+        tagline: 'A5 zine (14.8 × 21 cm), printed',
+        blurb: 'Preview of my illustrated book: one rainy day told in 13 chapters about mirrors and the people we see in them.' },
+    ],
+    override: {
+      distortion: { title: 'Distortion', kind: 'manga / graphic novel · coming 2027', year: '2027', todo: null,
+        tagline: 'B5 book (18.2 × 25.7 cm), ~48 pages, printed · self-published 2027',
+        blurb: 'Original story: a girl is born again and again, always reaching twelve, always meeting the same fate, until something breaks. Black and white.' },
+      mod: { kind: 'My own webtoon IP', blurb: (b) => b.replace('My most personal story, drawn fully by hand. No AI, ever. ', 'My most personal story. ') },
+    },
+    move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial', distortion: 'table' },
     titles: {
       comics: { title: 'self-published', note: 'my own IP: webtoons, comics, zines + prints', roles: null }, // no "what I do" card here
+      table: { title: 'at my table', note: 'coming 2027 · on sale at fairs', cols: 2, tint: 'blue',
+        list: [
+          ['Sketch commissions', 'live sketches of my original characters, or custom sketches, drawn at the table · postcard format (4 × 6 in), thick paper'],
+          ['Original zines and mini-comics', 'short stories and thoughts · A6 / A5'],
+          ['Art prints', 'my original characters and art · A4 and 11 × 17 in, The Infinity Zine as a 25 × 30 in poster'],
+          ['Stickers', 'my original characters and art · 5 to 8 cm, die-cut'],
+          ['Postcards and bookmarks', 'of my original art · 4 × 6 in and 2 × 6 in'],
+          ['Original art', 'inked comic pages, illustrations and sketches'],
+        ] },
       editorial: { title: 'editorial publications', note: 'Penguin Random House', cols: 2, tint: 'blue' },
       awards: { title: 'publications & awards', note: 'in print + online' },
     },
