@@ -28,7 +28,7 @@ if (PLAIN) document.documentElement.classList.add('plain');
 const pubLine = (x) => [x.format, x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn, x.fair && 'in print at fairs'].filter(Boolean).join(' · ');
 const PUB_TYPES = [['editorial', 'editorial publications 📚'], ['self', 'self-published ✍'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
 const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'editorial') === k)]).filter(([, l]) => l.length);
-const pubYear = (x) => x.forthcoming ? 'soon' : (x.year || '····');
+const pubYear = (x) => x.year || (x.forthcoming ? 'soon' : '····');
 function pubList() {
   const li = (x) => `<li><span class="y">${esc(pubYear(x))}</span><span><span class="t">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)}</span><span class="b">${x.forthcoming ? 'forthcoming · ' : ''}${esc(pubLine(x))}</span></span></li>`;
   return pubGroups().map(([label, l]) => `<div class="sub">${label}</div><ul class="list">${l.map(li).join('')}</ul>`).join('');

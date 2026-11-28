@@ -5,7 +5,7 @@ import json, re, pathlib
 R = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://danielagamarra.github.io/'
 LENSES = {
-  'manga-publications': ('Comic Artist, Mangaka & Illustrator', 'Daga (Daniela Gamarra): comic artist, mangaka and illustrator in Toronto. Hand-drawn comics, webtoons and manga: MOD, Rosa Cuchillo and Mario with Penguin Random House.', 'assets/img/mod-machine-of-dreams.jpg'),
+  'manga-publications': ('Comic Artist, Mangaka & Illustrator', 'Daga (Daniela Gamarra): comic artist, mangaka and illustrator in Toronto. Comics, webtoons, manga, zines and prints: Rosa Cuchillo and Mario with Penguin Random House, MOD and DISTORTION.', 'assets/img/mod-machine-of-dreams.jpg'),
   'direction': ('Artist, Art & Creative Director', 'Daga (Daniela Gamarra): artist, art and creative director in Toronto. Comics, games and animated stories, from the first sketch to the team that ships it.', 'assets/og.jpg'),
   'narrative': ('Writer, Narrative Designer & Storyteller', 'Daga (Daniela Gamarra): writer and narrative designer in Toronto. Stories for comics, webtoons, games and animated shows.', 'assets/og.jpg'),
   'product':   ('Product Designer, Producer & Project Manager', 'Daga (Daniela Gamarra): product designer, producer and project manager in Toronto. Apps, tools and games from research to launch.', 'assets/og.jpg'),
@@ -25,6 +25,7 @@ for path, (role, desc, og) in LENSES.items():
     h = re.sub(r'<meta name="twitter:image" content="[^"]*">', f'<meta name="twitter:image" content="{SITE}{og}">', h, count=1)
     h = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="{SITE}{path}/">', h, count=1)
     h = re.sub(r'"jobTitle":"[^"]*"', f'"jobTitle":"{role}"', h, count=1)
+    h = re.sub(r'<noscript>.*?</noscript>', f'<noscript><p style="padding:24px;font:16px/1.5 sans-serif">Daga (Daniela Gamarra) · {role} · Toronto. This digibook needs JavaScript.</p></noscript>', h, count=1, flags=re.S)
     h = h.replace('<script type="module" src="assets/app.js"></script>', f"<script>window.LENS = {json.dumps(path)};</script>\n<script type=\"module\" src=\"assets/app.js\"></script>", 1)
     assert h.count('window.LENS') == 1 and '<base href="../">' in h, path
     (R / path).mkdir(exist_ok=True)

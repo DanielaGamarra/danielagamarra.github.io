@@ -503,11 +503,11 @@ export const projects = [
     year: '',
     motif: '🖌️',
     img: 'assets/img/illus/dream-head.jpg', pos: '50% 40%',
-    blurb: 'A selection of my personal and commissioned illustration: color pieces, ink work, Inktober and mosaic projects, and short comics.',
+    blurb: 'A selection of my personal and commissioned illustration: color pieces, ink work, The Infinity Zine, mosaics and short comics.',
     sections: [
       { h: 'Color', gallery: ['assets/img/illus/dream-head.jpg', 'assets/img/illus/blue-field.jpg', 'assets/img/illus/green-warrior.jpg', 'assets/img/illus/striped-figure.jpg', 'assets/img/illus/magic-within.jpg', 'assets/img/illus/bird-head.jpg', { src: 'assets/img/illus/red-blue.jpg', wide: true }] },
       { h: 'Ink', gallery: ['assets/img/illus/navy-ink-portrait.jpg', 'assets/img/illus/ink-girl.jpg', 'assets/img/illus/sketch-girl-sneakers.jpg', 'assets/img/illus/floating-islands.jpg'] },
-      { h: 'Inktober and mosaics', text: 'Inktober 2019: one ink drawing a day for 31 days, framed as one tall print, plus a symmetric 3x3 mosaic.', gallery: ['assets/img/illus/inktober-framed.jpg', 'assets/img/illus/inktober-2019-mosaic.jpg', 'assets/img/illus/mosaic-3x3.jpg'] },
+      { h: 'The Infinity Zine and mosaics', text: 'The Infinity Zine: 31 connected ink illustrations drawn in 2019. Every card joins its neighbours on all sides, so readers arrange 30 cards to build their own story. Shown framed as one tall print, plus a symmetric 3x3 mosaic.', gallery: ['assets/img/illus/infinity-zine-framed.jpg', 'assets/img/illus/infinity-zine-layout.jpg', 'assets/img/illus/mosaic-3x3.jpg'] },
       { h: 'Short comics', gallery: ['assets/img/illus/no-secrets-panel.jpg', 'assets/img/illus/panel-each-other.jpg', 'assets/img/illus/panel-woke-up.jpg', 'assets/img/illus/simple-beast-cover.jpg'] },
     ],
   },
@@ -599,7 +599,10 @@ export const projects = [
 export const publications = [
   { type: 'editorial', format: 'print', year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
   { type: 'editorial', format: 'print', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Comic artist (chapter 3) & art direction, one of four artists · script by Carlos Enrique Freyre', isbn: '9786124267123' },
-  { type: 'self', format: 'print', forthcoming: true, fair: true, title: 'DISTORTION', role: 'Writer & artist' },
+  { type: 'self', format: 'original graphic novel, print', year: '2027', forthcoming: true, fair: true, title: 'DISTORTION', role: 'Writer & artist' },
+  { type: 'self', format: 'zine, print', year: '2027', forthcoming: true, fair: true, title: '24 Hours of Rain', role: 'Writer & artist' },
+  { type: 'self', format: 'interchangeable story cards, print', year: '2027', forthcoming: true, fair: true, title: 'The Infinity Zine', role: '31 connected ink illustrations: readers arrange 30 cards to build their own story · 5 x 5 in cards, full layout 25 x 30 in' },
+  { type: 'self', format: 'zines and mini-comics, print', year: '2027', forthcoming: true, fair: true, title: 'Original zines and mini-comics', role: 'Writer & artist' },
   { type: 'self', format: 'webcomic', year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
 ];
 
@@ -673,7 +676,7 @@ export const lenses = {
     hero: 'I draw comics, webtoons and manga. More than ten years of penciling, inking and coloring stories, from graphic novels with Penguin Random House to my own webtoon, MOD, and other publications like DISTORTION, zines and prints. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.',
     heroMarks: ['comics', 'webtoons', 'manga', 'MOD', 'DISTORTION', 'zines', 'prints', 'digibook'],
     // artist bio (third person, for fair applications) shown in the speech bubble + CV profile
-    about: "Daniela Gamarra (DAGA) is a queer Peruvian comic artist and mangaka based in Toronto, drawing comics, webtoons, illustration and personal art for more than ten years. She penciled and art-directed Rosa Cuchillo (Penguin Random House, 2021), the manga adaptation of Óscar Colchado's novel, and led art production on Mario. El universo Vargas Llosa (Penguin Random House, 2019), a finalist for Best illustrated book or comic at Peru's Premios Luces. She writes and draws MOD · Machine of Dreams, her own webtoon about dreams, quantum computers and climate change, with long panels that read as optical illusions, and art-directs comic teams from style to print. A Peruvian government award winner for creators of original IP, she studied Art & Graphic Design at PUCP, graduating first of her class.",
+    about: "Daniela Gamarra (DAGA) is a queer Peruvian comic artist and mangaka based in Toronto, drawing comics, webtoons, illustration and personal art for more than ten years. She penciled and art-directed Rosa Cuchillo (Penguin Random House, 2021), the manga adaptation of Óscar Colchado's novel, and led art production on Mario. El universo Vargas Llosa (Penguin Random House, 2019), a finalist for Best illustrated book or comic at Peru's Premios Luces. She writes and draws MOD · Machine of Dreams, her own webtoon about dreams, quantum computers and climate change, with long panels that read as optical illusions, and DISTORTION, a graphic novel about a girl reborn again and again. She also art-directs comic teams from style to print. A Peruvian government award winner for creators of original IP, she studied Art & Graphic Design at PUCP, graduating first of her class.",
     stats: [
       { n: '10+', label: 'years drawing for a living' },
       { n: '2', label: 'graphic novels with Penguin Random House' },
