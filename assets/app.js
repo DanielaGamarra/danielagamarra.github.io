@@ -1139,6 +1139,12 @@ const HAND = `<g id="hand" aria-hidden="true"><g transform="translate(-20 -220)"
   <path class="h" d="M200 -10 C 170 20, 140 50, 118 76 C 100 96, 80 118, 62 140 C 54 150, 58 162, 70 160 C 84 150, 96 140, 108 132 C 116 140, 118 152, 110 160 C 102 168, 90 172, 80 176 C 70 180, 70 192, 82 192 C 110 186, 150 176, 190 160 C 210 152, 230 150, 260 152 L260 -10 Z"/>
   <path class="ln" d="M64 150 C 68 145, 74 147, 74 152 M120 100 C 127 105, 129 111, 126 118 M112 160 C 120 164, 128 166, 136 166 M128 180 C 134 177, 140 177, 146 179 M214 -10 C 224 40, 238 92, 260 126"/>
 </g></g>`;
+// plain lens: just the marker, no hand (Daga will draw her own)
+const MARKER = `<g id="hand" aria-hidden="true"><g transform="translate(-20 -220)">
+  <path class="nib" d="M20 220 L30 196 L44 210 Z"/>
+  <path class="h" d="M30 196 L130 96 L144 110 L44 210 Z"/><path class="ln" d="M52 174 L66 188"/>
+  <path class="cap" d="M130 96 L156 70 L170 84 L144 110 Z"/>
+</g></g>`;
 let trailLast = null, trailRun = 0, hand = null;
 function anchorOf(id) {
   const el = document.getElementById(id);
@@ -1154,7 +1160,7 @@ function drawTrail(id) {
   const a = anchorOf(id);
   if (!a || (trailLast && trailLast.id === id)) return;
   if (id === 'cover') { trailLast = a; return; } // no line on the cover, the trail just starts there
-  if (!hand) { trailLayer.insertAdjacentHTML('beforeend', HAND); hand = $('#hand', trailLayer); }
+  if (!hand) { trailLayer.insertAdjacentHTML('beforeend', PLAIN ? MARKER : HAND); hand = $('#hand', trailLayer); }
   const r = rng(id + trailRun), n = Math.max(4, Math.round((a.x1 - a.x0) / 70)), u = [];
   for (let i = 0; i <= n; i++) u.push([a.x0 + ((a.x1 - a.x0) * i) / n, a.y + (r() - 0.5) * 8 - (i === n ? 12 : 0)]);
   let d = smoothPath(u), conn = '';
