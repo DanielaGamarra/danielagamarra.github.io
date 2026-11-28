@@ -502,3 +502,8 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .sheet .gallery :is(a, .g):has(img[src*="/print-red-blue"]) { grid-column: span 2; }
 .sheet .gallery:has(img[src*="/print-"]) { gap: 28px; padding: 10px 6px 18px; align-items: center; }
 .plain .trophy { display: none; } /* manga version: no ASCII trophy */
+/* publisher logo in a page header (dark text on light theme, light text on dark theme) */
+.page-logo { display: block; height: 58px; width: auto; }
+.page-logo.logo-light { display: none; }
+[data-theme="dark"] .page-logo.logo-dark { display: none; }
+[data-theme="dark"] .page-logo.logo-light { display: block; }

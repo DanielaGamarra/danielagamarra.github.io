@@ -735,7 +735,7 @@ export const lenses = {
         list: [
           ['Sketch commissions', 'live hand-drawn sketches of my original characters, or custom sketches, drawn at the table · postcard format (4 × 6 in), thick paper'],
         ] },
-      editorial: { title: 'editorial publications', note: 'Penguin Random House', cols: 2, tint: 'blue' },
+      editorial: { title: 'editorial publications', note: 'Penguin Random House', logo: 'assets/img/logos/prh', cols: 2, tint: 'blue' },
       awards: { title: 'publications & awards', note: 'in print + online' },
     },
     talks: noAI, press: noAI, awards: noAI,

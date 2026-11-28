@@ -478,14 +478,14 @@ function rolesCard(p) {
   return el;
 }
 
-function pageShell(id, { no, title, note, tint, cols }) {
+function pageShell(id, { no, title, note, tint, cols, logo }) {
   const el = document.createElement('section');
   el.className = 'page'; el.id = id;
   el.setAttribute('aria-label', title);
   el.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <div class="tape" data-tint="${tint}" aria-hidden="true"></div>
-    <header class="page-head"><span class="page-no">${no}</span><h2 class="page-title">${titleHtml(title)}</h2><span class="page-note">${esc(note)}</span></header>
+    <header class="page-head"><span class="page-no">${no}</span><h2 class="page-title">${titleHtml(title)}</h2><span class="page-note">${logo ? `<img class="page-logo logo-dark" src="${esc(logo)}.svg" alt="${esc(note)}"><img class="page-logo logo-light" src="${esc(logo)}-light.svg" alt="${esc(note)}">` : esc(note)}</span></header>
     <div class="page-ascii" aria-hidden="true">${esc(rule(no, title))}</div>
     <div class="page-body"></div>`;
   el._cols = cols;
