@@ -496,3 +496,8 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .tab.pulse { transform: translateX(0); border-color: #ff9a2e; animation: tab-pulse 1.4s ease-in-out infinite; }
 @keyframes tab-pulse { 0%, 100% { box-shadow: -2px 2px 0 rgba(22,20,16,.15), 0 0 0 0 rgba(255,154,46,.7); } 50% { box-shadow: -2px 2px 0 rgba(22,20,16,.15), 0 0 0 9px rgba(255,154,46,0); } }
 @media (prefers-reduced-motion: reduce) { .tab.pulse { animation: none; box-shadow: 0 0 0 3px #ff9a2e; } }
+/* art prints: shown as real prints at their own ratio, no mat box, soft paper shadow */
+.sheet .gallery :is(a, .g):has(img[src*="/print-"]) { border: 0; background: transparent; overflow: visible; align-self: center; border-radius: 0; }
+.sheet .gallery :is(a, .g):has(img[src*="/print-"]) img { box-shadow: 0 12px 26px rgba(0,0,0,.5), 0 2px 4px rgba(0,0,0,.35); }
+.sheet .gallery :is(a, .g):has(img[src*="/print-red-blue"]) { grid-column: span 2; }
+.sheet .gallery:has(img[src*="/print-"]) { gap: 28px; padding: 10px 6px 18px; align-items: center; }
