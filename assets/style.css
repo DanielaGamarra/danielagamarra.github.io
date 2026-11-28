@@ -467,3 +467,5 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .sheet .press a { color: var(--ink); text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 3px; }
 .artist-bio { max-width: 760px; margin-top: 28px; }
 .artist-bio p { font: 400 17px/1.55 var(--serif); margin: 6px 0 0; }
+.tags span.fair { background: var(--lime); color: var(--on-lime); }
+.plain .cat { display: none; }

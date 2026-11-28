@@ -492,6 +492,7 @@ export const projects = [
     motif: '🌀',
     img: 'assets/img/distortion.jpg', pos: '50% 38%',
     blurb: 'A comic series, shared in pieces on Instagram.',
+    fair: true, // "in print at fairs" chip
     todo: 'add a link',
   },
   {
@@ -585,13 +586,15 @@ export const projects = [
   },
 ];
 
-// Publications, grouped by type: 'physical' | 'digital' | 'art' | 'prints'
+// Publications, grouped by type: 'editorial' | 'self' | 'art' | 'prints'
+// format: 'print' | 'webcomic' | … · fair: true = Daga sells it in print at fairs
 // (empty groups are hidden). forthcoming: true marks one as coming soon
 // (comics fairs like TCAF ask for recent + forthcoming).
 export const publications = [
-  { type: 'physical', year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
-  { type: 'physical', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Art production lead & comic artist (chapter 3) · script by Carlos Enrique Freyre', isbn: '9786124267123' },
-  { type: 'digital', year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
+  { type: 'editorial', format: 'print', year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
+  { type: 'editorial', format: 'print', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Art production lead & comic artist (chapter 3) · script by Carlos Enrique Freyre', isbn: '9786124267123' },
+  { type: 'self', format: 'print', forthcoming: true, fair: true, title: 'DISTORTION', role: 'Writer & artist' },
+  { type: 'self', format: 'webcomic', year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
 ];
 
 export const awards = [
@@ -652,13 +655,15 @@ export const languages = ['Spanish (native)', 'English (fluent)'];
 //  - pages: [pageId, [column, row]] in reading order (cover stays at 0,0)
 //  - projects: ids to show · move: { projectId: pageId } to show a project on
 //    another page in this lens · talks/press/awards: filters · cv: overrides
-// Branch rule: the comics lens is Daga's hand-drawn branch, ZERO AI anywhere.
+// Branch rule: the manga-publications lens is Daga's hand-drawn branch, ZERO AI anywhere.
 const noAI = (x) => !/\bAI\b|generative|midjourney|comfyui|google ai studio/i.test(JSON.stringify(x));
 export const lenses = {
-  comics: {
+  // Was /comics/ (that folder now redirects here). plain: no doodles or scribbles.
+  'manga-publications': {
+    plain: true,
     title: 'Comics & manga', role: 'Comic Artist, Mangaka & Illustrator',
     tagline: 'Comics, webtoons and manga, drawn by hand.',
-    hero: 'I draw comics, webtoons and manga by hand. More than ten years of penciling, inking, coloring and lettering stories, from graphic novels with Penguin Random House to my own webtoon, MOD. This is my digibook, a digital sketchbook. Drag the cat, flip through the pages, doodle in the margins.',
+    hero: 'I draw comics, webtoons and manga by hand. More than ten years of penciling, inking, coloring and lettering stories, from graphic novels with Penguin Random House to my own webtoon, MOD. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.',
     heroMarks: ['comics', 'webtoons', 'manga', 'by hand', 'MOD', 'digibook'],
     about: "Hola! I'm Daga, an award-winning comic and manga artist from Peru, now based in Toronto, and queer too. More than ten years of comics, webtoons and illustration, drawn by hand: graphic novels with Penguin Random House, my own webtoon MOD, and a lot of personal art. I also art-direct comic teams, from style to print.",
     stats: [

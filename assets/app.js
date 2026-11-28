@@ -18,10 +18,12 @@ if (LENS) {
   if (LENS.cv && LENS.cv.experience) keepIn(C.experience, LENS.cv.experience);
 }
 const here = (hash) => location.pathname + location.search + hash;
+const PLAIN = !!(LENS && LENS.plain); // no doodles, scribbles or cat (Daga will draw her own)
+if (PLAIN) document.documentElement.classList.add('plain');
 // Publications (recent + forthcoming) for comics fairs and grant forms.
-const pubLine = (x) => [x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn].filter(Boolean).join(' · ');
-const PUB_TYPES = [['physical', 'physical publications 📚'], ['digital', 'digital 📱'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
-const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'physical') === k)]).filter(([, l]) => l.length);
+const pubLine = (x) => [x.format, x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn, x.fair && 'in print at fairs'].filter(Boolean).join(' · ');
+const PUB_TYPES = [['editorial', 'editorial publications 📚'], ['self', 'self-published ✍'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
+const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'editorial') === k)]).filter(([, l]) => l.length);
 const pubYear = (x) => x.forthcoming ? 'soon' : (x.year || '····');
 function pubList() {
   const li = (x) => `<li><span class="y">${esc(pubYear(x))}</span><span><span class="t">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>` : esc(x.title)}</span><span class="b">${x.forthcoming ? 'forthcoming · ' : ''}${esc(pubLine(x))}</span></span></li>`;
@@ -91,6 +93,7 @@ const DOODLES = {
   hands: 'M20 90 L24 52 C 24 44, 32 44, 32 52 L32 30 C 32 22, 40 22, 40 30 L40 24 C 40 16, 48 16, 48 24 L48 30 C 48 22, 56 22, 56 30 L56 62 M64 18 L60 8 M72 22 L80 14 M76 32 L86 30',
 };
 function doodle(name, { x, y, w = 70, rot = 0, cls = '', loose = true } = {}) {
+  if (PLAIN) return document.createDocumentFragment();
   const s = document.createElementNS(NS, 'svg');
   s.setAttribute('viewBox', '0 0 100 100');
   s.setAttribute('aria-hidden', 'true');
@@ -101,6 +104,7 @@ function doodle(name, { x, y, w = 70, rot = 0, cls = '', loose = true } = {}) {
   return s;
 }
 function scribble(text, { x, y, rot = -4, color = '', size = 24 } = {}) {
+  if (PLAIN) return document.createDocumentFragment();
   const el = document.createElement('div');
   el.className = 'scribble loose';
   el.textContent = text;
@@ -296,7 +300,7 @@ class Flow {
     const { size, lh, rx, ry } = this.metrics();
     if (!this.pos) this.pos = { fx: 0.82, cy: FLOW ? 70 : 92 };
     const cx = Math.max(rx * 0.4, Math.min(W - rx * 0.4, this.pos.fx * W));
-    const cy = this.pos.cy;
+    const cy = PLAIN ? -1e4 : this.pos.cy; // plain lens: no cat, text runs full width
     this.cat.style.transform = `translate(${cx - this.cat.offsetWidth / 2}px, ${cy - this.cat.offsetHeight / 2}px)`;
     const prepared = this.prepared(size);
     const pad = FLOW ? 8 : 16, minSpan = FLOW ? 70 : 150;
@@ -409,7 +413,7 @@ const thumbs = [];
 // Projects made at Indaga Studios carry the studio logo.
 const isIndaga = (p) => p.indaga || /Indaga Studios/.test(p.kind || '');
 const studioBadge = (p) => isIndaga(p) ? '<span class="studio-badge" title="Made at Indaga Studios" role="img" aria-label="Made at Indaga Studios"><i></i></span>' : '';
-const tagsHtml = (p) => p.tags ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
+const tagsHtml = (p) => (p.tags || p.fair) ? `<div class="tags">${p.fair ? '<span class="fair">in print at fairs</span>' : ''}${(p.tags || []).map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
 function cardEl(p) {
   const el = document.createElement('article');
   el.className = 'card' + (p.featured ? ' featured' : '');
@@ -504,7 +508,7 @@ function buildCover() {
       </div>
     </div>
     <div class="cover-cta">
-      <a class="cta dark" href="#films" data-go="films">▶ watch</a>
+      ${C.pages.some((x) => x.id === 'films') ? `<a class="cta dark" href="#films" data-go="films">▶ watch</a>` : `<a class="cta dark" href="#${esc(C.pages[0].id)}" data-go="${esc(C.pages[0].id)}">▶ see the work</a>`}
       <a class="cta" href="#about" data-go="about">contact ✉</a>
       <a class="cta" href="#cv" data-cv>read it as a CV</a>
     </div>
@@ -861,7 +865,7 @@ $('#palette').addEventListener('click', (e) => {
 $('#btn-fit').addEventListener('click', fitAll);
 function setTheme(t) {
   document.documentElement.dataset.theme = t;
-  store.set('daga-theme', t);
+  try { sessionStorage.setItem('daga-theme', t); } catch {} // every new visit starts dark
   readTheme();
   const b = $('#btn-theme'); b.textContent = t === 'dark' ? '☀' : '☾'; b.title = t === 'dark' ? 'Paper (light) version' : 'Dark version';
   const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = t === 'dark' ? '#12110f' : '#14120f';
@@ -1077,7 +1081,7 @@ const BG_PICKS = ['planet', 'rocket', 'ufo', 'orbit', 'constellation', 'satellit
 const BG_NOTES = ['unexplored ✦', 'here be dragons', 'note to self: sleep', 'more pages soon', 'berlin was here', 'sector unmapped', 'x marks nothing', 'ideas go here'];
 const FEATURE_NOTES = { aota: 'start here!', 'hd-web': 'I built this', calling: 'watch the trailer!', mod: '100% by hand', indaga: 'my studio' };
 function seedSketch() {
-  if (FLOW) { sketchBg.innerHTML = ''; $$('.sketch-over').forEach((s) => s.remove()); return; }
+  if (FLOW || PLAIN) { sketchBg.innerHTML = ''; $$('.sketch-over').forEach((s) => s.remove()); return; }
   const rects = allPages().map((el) => el._rect);
   const r = rng('sketch'), out = [], spots = [];
   const B = { x: bounds.x - 520, y: bounds.y - 420, w: bounds.w + 1040, h: bounds.h + 840 };
