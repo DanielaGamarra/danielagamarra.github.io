@@ -692,7 +692,7 @@ export const lenses = {
         img: 'assets/img/table/infinity-zine-cards.jpg',
         tagline: '30 square cards, 5 × 5 in, in a sleeve or box · full layout 25 × 30 in',
         blurb: '30 connected original ink illustrations of my own creatures and worlds, as 30 interchangeable story cards. The cards connect on every side, so readers arrange them to create their own story. A full 5 × 6 layout alone has more than 10³² possible arrangements.',
-        sections: [{ h: 'Some of the cards, one by one', gallery: ['assets/img/table/infinity-01-ring.jpg', 'assets/img/table/infinity-09-swing.jpg', 'assets/img/table/infinity-12-dragon.jpg', 'assets/img/table/infinity-13-ash.jpg', 'assets/img/table/infinity-14-overgrown.jpg', 'assets/img/table/infinity-29-injured.jpg'] }] },
+        sections: [{ h: 'Some of the cards, one by one', gallery: ['assets/img/table/infinity-01-ring.jpg', 'assets/img/table/infinity-09-swing.jpg', 'assets/img/table/infinity-12-dragon.jpg', 'assets/img/table/infinity-13-ash.jpg', 'assets/img/table/infinity-14-overgrown.jpg', 'assets/img/table/infinity-28-ride.jpg', 'assets/img/table/infinity-29-injured.jpg', 'assets/img/table/infinity-30-catch.jpg', 'assets/img/table/infinity-31-ripe.jpg'] }] },
       { id: 'loose-lines', page: 'table', title: 'Loose Lines', kind: 'sketchbook zines (3 volumes) · coming 2027', role: 'Artist', motif: '✎', fair: true,
         img: 'assets/img/table/loose-lines.jpg',
         tagline: 'Digest, 5.5 × 8.5 in, 16-24 pages each, cream paper',
