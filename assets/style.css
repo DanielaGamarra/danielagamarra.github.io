@@ -507,3 +507,7 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .page-logo.logo-light { display: none; }
 [data-theme="dark"] .page-logo.logo-dark { display: none; }
 [data-theme="dark"] .page-logo.logo-light { display: block; }
+/* The Infinity Zine: cards sit edge to edge, no gaps or frames, so the lines join up */
+.sheet .gallery:has(img[src*="/infinity-0"]) { gap: 0; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.sheet .gallery :is(a, .g):has(img[src*="/infinity-"]) { border: 0; border-radius: 0; }
+.sheet .gallery :is(a, .g):has(img[src*="/infinity-"]):hover { box-shadow: 0 0 0 2px #ff9a2e, 6px 6px 0 #0b0a08; }
