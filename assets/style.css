@@ -474,3 +474,4 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .link-pair small a { font: 700 12px var(--mono); color: var(--pencil); text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
 .link-pair small a:hover { color: var(--ink); }
 #hand .cap { fill: var(--ink); stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; }
+.plain #btn-cv { display: none; }

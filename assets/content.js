@@ -666,13 +666,14 @@ export const lenses = {
     tagline: 'Comics, webtoons, manga, zines and prints.',
     hero: 'I draw comics, webtoons and manga. More than ten years of penciling, inking and coloring stories, from graphic novels with Penguin Random House to my own webtoon, MOD, and other publications like DISTORTION, zines and prints. This is my digibook, a digital sketchbook. Flip through the pages, or doodle in the margins.',
     heroMarks: ['comics', 'webtoons', 'manga', 'MOD', 'DISTORTION', 'zines', 'prints', 'digibook'],
-    about: "Hola! I'm Daga, an award-winning comic and manga artist from Peru, now based in Toronto, and queer too. More than ten years of comics, webtoons and illustration: graphic novels with Penguin Random House, my own webtoon MOD, and a lot of personal art. I also art-direct comic teams, from style to print.",
+    // artist bio (third person, for fair applications) shown in the speech bubble + CV profile
+    about: "Daniela Gamarra (DAGA) is a queer Peruvian comic artist and mangaka based in Toronto, drawing comics, webtoons, illustration and personal art for more than ten years. She penciled and art-directed Rosa Cuchillo (Penguin Random House, 2021), the manga adaptation of Óscar Colchado's novel, and led art production on Mario. El universo Vargas Llosa (Penguin Random House, 2019), a finalist for Best illustrated book or comic at Peru's Premios Luces. She writes and draws MOD · Machine of Dreams, her own webtoon about dreams, quantum computers and climate change, with long panels that read as optical illusions, and art-directs comic teams from style to print. A Peruvian government award winner for creators of original IP, she studied Art & Graphic Design at PUCP, graduating first of her class.",
     stats: [
       { n: '10+', label: 'years drawing for a living' },
       { n: '2', label: 'graphic novels with Penguin Random House' },
       { n: '50k + 10k', label: 'on TikTok + Instagram' },
     ],
-    pages: [['comics', [1, 0]], ['editorial', [2, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
+    pages: [['editorial', [1, 0]], ['comics', [2, 0]], ['awards', [0, 1]], ['about', [-1, 0]]],
     projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus'],
     move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial' },
     titles: {
@@ -680,7 +681,6 @@ export const lenses = {
       editorial: { title: 'editorial publications', note: 'Penguin Random House', cols: 2, tint: 'blue' },
       awards: { title: 'publications & awards', note: 'in print + online' },
     },
-    bio: "Daniela Gamarra (DAGA) is a Peruvian comic artist and mangaka based in Toronto, drawing comics, webtoons and illustration for more than ten years. She penciled and art-directed Rosa Cuchillo (Penguin Random House, 2021), the manga adaptation of Óscar Colchado's novel, and led art production on Mario. El universo Vargas Llosa (Penguin Random House, 2019), a finalist for Best illustrated book or comic at Peru's Premios Luces. She writes and draws MOD · Machine of Dreams, her own webtoon about dreams, quantum computers and climate change, with long panels that read as optical illusions. A Peruvian government award winner for creators of original IP, she studied Art & Graphic Design at PUCP, graduating first of her class.",
     talks: noAI, press: noAI, awards: noAI,
     cv: { selected: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion'],
           experience: (x) => /Penguin|Kadabra|Content Creator/.test(x.org + x.role),
