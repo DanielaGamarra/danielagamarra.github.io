@@ -520,3 +520,5 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .cover-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cover-art button:hover, .cover-art button:focus-visible { transform: translateY(-3px) rotate(-.6deg); box-shadow: 5px 5px 0 #0b0a08; }
 @media (max-width: 760px) { .cover-art { grid-template-columns: 1fr 1fr; } .cover-art button { height: 120px; } }
+/* galleries: each image keeps its own height, no empty strip under shorter ones */
+.sheet .gallery { align-items: start; }
