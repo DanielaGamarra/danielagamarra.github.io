@@ -27,7 +27,7 @@ const linkGroups = () => Object.values(C.site.links.reduce((m, l) => ((m[l.handl
 const PLAIN = !!(LENS && LENS.plain); // no doodles, scribbles or cat (Daga will draw her own)
 if (PLAIN) document.documentElement.classList.add('plain');
 // Publications (recent + forthcoming) for comics fairs and grant forms.
-const FAIR_TXT = 'on sale at fairs'; // the tag on things Daga sells at her fair table
+const FAIR_TXT = 'for sale at fairs'; // the tag on things Daga sells at her fair table
 const pubLine = (x) => [x.format, x.publisher, x.role, x.isbn && 'ISBN ' + x.isbn, x.fair && FAIR_TXT].filter(Boolean).join(' · ');
 const PUB_TYPES = [['editorial', 'editorial publications 📚'], ['self', 'self-published ✍'], ['art', 'art 🎨'], ['prints', 'prints 🖼']];
 const pubGroups = () => PUB_TYPES.map(([k, label]) => [label, C.publications.filter((x) => (x.type || 'editorial') === k)]).filter(([, l]) => l.length);

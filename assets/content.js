@@ -492,7 +492,7 @@ export const projects = [
     motif: '🌀',
     img: 'assets/img/distortion.jpg', pos: '50% 38%',
     blurb: 'A comic series, shared in pieces on Instagram.',
-    fair: true, // "on sale at fairs" tag
+    fair: true, // "for sale at fairs" tag
     todo: 'add a link',
   },
   {
@@ -705,7 +705,7 @@ export const lenses = {
     move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial', distortion: 'table' },
     titles: {
       comics: { title: 'self-published', note: 'my own IP: webtoons, comics, zines + prints', roles: null }, // no "what I do" card here
-      table: { title: 'at my table', note: 'coming 2027 · on sale at fairs', cols: 2, tint: 'blue',
+      table: { title: 'at my table', note: 'coming 2027 · for sale at fairs', cols: 2, tint: 'blue',
         list: [
           ['Sketch commissions', 'live sketches of my original characters, or custom sketches, drawn at the table · postcard format (4 × 6 in), thick paper'],
           ['Original zines and mini-comics', 'short stories and thoughts · A6 / A5'],
