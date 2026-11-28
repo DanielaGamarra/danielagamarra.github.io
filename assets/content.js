@@ -677,7 +677,7 @@ export const lenses = {
     projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'illus'],
     move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial' },
     titles: {
-      comics: { title: 'self-published', note: 'my own IP: webtoons, comics, zines + prints' },
+      comics: { title: 'self-published', note: 'my own IP: webtoons, comics, zines + prints', roles: null }, // no "what I do" card here
       editorial: { title: 'editorial publications', note: 'Penguin Random House', cols: 2, tint: 'blue' },
       awards: { title: 'publications & awards', note: 'in print + online' },
     },
