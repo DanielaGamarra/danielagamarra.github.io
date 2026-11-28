@@ -474,6 +474,7 @@ body.flow .sheet .sheet-motif.has-media { width: 120px; height: 96px; top: 20px;
 .link-pair small a:hover { color: var(--ink); }
 #hand .cap { fill: var(--ink); stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; }
 .plain #btn-cv { display: none; }
+.plain .todo { display: none; } /* manga version: no unfinished notes */
 /* "in print at fairs": an orange price tag pinned to the image's top right */
 .fair-tag { position: absolute; top: 12px; right: 10px; z-index: 2; transform: rotate(4deg);
   font: 700 11px/1 var(--mono); letter-spacing: .03em; color: #1a1208; background: #ff9a2e;

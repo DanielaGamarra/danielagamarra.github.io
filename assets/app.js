@@ -936,7 +936,7 @@ function openSheet(p) {
   sheet.innerHTML = `
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
-    <div class="thumb sheet-motif${p.img || p.video ? ' has-media' : ''}"><canvas aria-hidden="true"></canvas></div>
+    ${PLAIN ? '' : `<div class="thumb sheet-motif${p.img || p.video ? ' has-media' : ''}"><canvas aria-hidden="true"></canvas></div>`}
     ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}">${fairTag(p)}</div>` : ''}
     ${isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
