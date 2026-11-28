@@ -574,7 +574,7 @@ function buildPage(p) {
         </div>
       </div>
       ${C.site.bio ? `<div class="artist-bio"><div class="sub">artist bio</div><p>${esc(C.site.bio)}</p></div>` : ''}
-      <p style="margin:34px 0 0;font-size:12px;color:var(--pencil)">© ${new Date().getFullYear()} ${esc(C.site.fullName)} · made by hand (and code) in Toronto · <a href="postest/">Postest</a></p>`;
+      <p style="margin:34px 0 0;font-size:12px;color:var(--pencil)">© ${new Date().getFullYear()} ${esc(C.site.fullName)} · made by hand (and code) in Toronto${PLAIN ? '' : ' · <a href="postest/">Postest</a>'}</p>`;
     el.append(doodle('sparkle', { x: W - 120, y: 26, w: 46, rot: 10, cls: 'blue' }));
     bubble = new Bubble($('.bubble', body));
   } else if (p.id === 'writing') {
