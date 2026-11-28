@@ -476,7 +476,7 @@ export const projects = [
     id: 'mario-vargas-llosa', page: 'comics',
     title: 'Mario. El universo Vargas Llosa',
     kind: 'Comic · Reservoir Books, Penguin Random House',
-    role: 'Art production lead & comic artist',
+    role: 'Comic artist & art direction · one of four artists',
     year: '2019',
     motif: '📚',
     facts: ['Finalist, Best illustrated book or comic, Premios Luces 2019 (El Comercio)', 'ISBN 9786124267123'],
@@ -502,8 +502,14 @@ export const projects = [
     role: 'Illustrator',
     year: '',
     motif: '🖌️',
-    blurb: 'A selection of personal and commissioned illustration.',
-    todo: 'add 6–12 pieces',
+    img: 'assets/img/illus/dream-head.jpg', pos: '50% 40%',
+    blurb: 'A selection of my personal and commissioned illustration: color pieces, ink work, Inktober and mosaic projects, and short comics.',
+    sections: [
+      { h: 'Color', gallery: ['assets/img/illus/dream-head.jpg', 'assets/img/illus/blue-field.jpg', 'assets/img/illus/green-warrior.jpg', 'assets/img/illus/striped-figure.jpg', 'assets/img/illus/magic-within.jpg', 'assets/img/illus/bird-head.jpg', { src: 'assets/img/illus/red-blue.jpg', wide: true }] },
+      { h: 'Ink', gallery: ['assets/img/illus/navy-ink-portrait.jpg', 'assets/img/illus/ink-girl.jpg', 'assets/img/illus/sketch-girl-sneakers.jpg', 'assets/img/illus/floating-islands.jpg'] },
+      { h: 'Inktober and mosaics', text: 'Inktober 2019: one ink drawing a day for 31 days, framed as one tall print, plus a symmetric 3x3 mosaic.', gallery: ['assets/img/illus/inktober-framed.jpg', 'assets/img/illus/inktober-2019-mosaic.jpg', 'assets/img/illus/mosaic-3x3.jpg'] },
+      { h: 'Short comics', gallery: ['assets/img/illus/no-secrets-panel.jpg', 'assets/img/illus/panel-each-other.jpg', 'assets/img/illus/panel-woke-up.jpg', 'assets/img/illus/simple-beast-cover.jpg'] },
+    ],
   },
 
   // ---------------------------------------------------------------- product
@@ -592,7 +598,7 @@ export const projects = [
 // (comics fairs like TCAF ask for recent + forthcoming).
 export const publications = [
   { type: 'editorial', format: 'print', year: '2021', title: 'Rosa Cuchillo. La novela gráfica', publisher: 'Random Cómics, Penguin Random House', role: 'Penciler, main comic artist & art direction · story by Óscar Colchado', isbn: '9786124827327' },
-  { type: 'editorial', format: 'print', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Art production lead & comic artist (chapter 3) · script by Carlos Enrique Freyre', isbn: '9786124267123' },
+  { type: 'editorial', format: 'print', year: '2019', title: 'Mario. El universo Vargas Llosa', publisher: 'Reservoir Books, Penguin Random House', role: 'Comic artist (chapter 3) & art direction, one of four artists · script by Carlos Enrique Freyre', isbn: '9786124267123' },
   { type: 'self', format: 'print', forthcoming: true, fair: true, title: 'DISTORTION', role: 'Writer & artist' },
   { type: 'self', format: 'webcomic', year: 'online', title: 'MOD · Machine of Dreams, episodes 1:1 to 1:3', publisher: 'WEBTOON Canvas (Spanish)', role: 'Writer, comic artist & art manager', url: 'https://www.webtoons.com/es/canvas/mod-machine-of-dreams/list?title_no=521619' },
 ];

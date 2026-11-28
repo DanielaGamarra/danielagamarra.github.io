@@ -417,7 +417,9 @@ const thumbs = [];
 // Projects made at Indaga Studios carry the studio logo.
 const isIndaga = (p) => p.indaga || /Indaga Studios/.test(p.kind || '');
 const studioBadge = (p) => isIndaga(p) ? '<span class="studio-badge" title="Made at Indaga Studios" role="img" aria-label="Made at Indaga Studios"><i></i></span>' : '';
-const tagsHtml = (p) => (p.tags || p.fair) ? `<div class="tags">${p.fair ? '<span class="fair">in print at fairs</span>' : ''}${(p.tags || []).map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
+const tagsHtml = (p) => p.tags ? `<div class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : '';
+// fair: true = an orange price tag on the image's top right
+const fairTag = (p) => p.fair ? '<span class="fair-tag">in print at fairs</span>' : '';
 function cardEl(p) {
   const el = document.createElement('article');
   el.className = 'card' + (p.featured ? ' featured' : '');
@@ -427,7 +429,7 @@ function cardEl(p) {
   el.style.setProperty('--r', ((r() - 0.5) * 2.4).toFixed(2) + 'deg');
   el.style.transform = 'rotate(var(--r))';
   el.innerHTML = `
-    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}</div>
+    <div class="thumb"><canvas aria-hidden="true"></canvas>${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}>` : ''}${studioBadge(p)}${fairTag(p)}</div>
     <div class="kind">${esc(p.kind)}${p.video ? ' · <b class="play">▶ watch</b>' : ''}</div>
     ${tagsHtml(p)}
     <h3>${esc(p.title)}</h3>
@@ -935,7 +937,7 @@ function openSheet(p) {
     <div class="spiral" aria-hidden="true">${spiralStr}</div>
     <button class="close" aria-label="Close">✕</button>
     <div class="thumb sheet-motif${p.img || p.video ? ' has-media' : ''}"><canvas aria-hidden="true"></canvas></div>
-    ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}"></div>` : ''}
+    ${p.video && embedUrl(p.video) ? '' : p.img ? `<div class="sheet-img"><img src="${esc(p.img)}" alt="${esc(p.title)}">${fairTag(p)}</div>` : ''}
     ${isIndaga(p) ? `<div class="sheet-studio">${studioBadge(p)}<span>made at Indaga Studios</span></div>` : ''}
     <div class="kind">${esc(p.kind)}${p.year ? ` · ${esc(p.year)}` : ''}</div>
     ${tagsHtml(p)}
