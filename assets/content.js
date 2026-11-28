@@ -684,7 +684,7 @@ export const lenses = {
       { n: '50k + 10k', label: 'on TikTok + Instagram' },
     ],
     pages: [['editorial', [1, 0]], ['comics', [2, 0]], ['table', [1, 1]], ['awards', [0, 1]], ['about', [-1, 0]]],
-    projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'infinity-zine', 'loose-lines', 'art-prints', 'stickers', 'illus', '24-hours-of-rain'],
+    projects: ['mod', 'rosa-cuchillo', 'mario-vargas-llosa', 'distortion', 'infinity-zine', 'loose-lines', 'art-prints', 'stickers', 'illus', '24-hours-of-rain', 'black-spot'],
     // only on this page: the things at her fair table (names as on the Pro Plaza merchandise list)
     extraProjects: [
       { id: 'infinity-zine', page: 'table', title: 'The Infinity Zine', kind: 'interchangeable story cards · coming 2027', role: 'Artist', motif: '♾', fair: true,
@@ -708,6 +708,10 @@ export const lenses = {
         tagline: '5 to 8 cm, die-cut',
         blurb: 'Vinyl stickers of my original characters and art.',
         sections: [{ h: 'The set', gallery: ['assets/img/table/sticker-purple-goblin.png', 'assets/img/table/sticker-blue-figure.png', 'assets/img/table/sticker-smiley-scream.png', 'assets/img/table/sticker-knife-cosmos.png', 'assets/img/table/sticker-magic-within.png', 'assets/img/table/sticker-ink-girl.png', 'assets/img/table/sticker-mushroom-hat.png', 'assets/img/table/sticker-bird-head.png', 'assets/img/table/sticker-floating-islands.png'] }] },
+      { id: 'black-spot', page: 'editorial', title: 'The Black Spot', kind: 'comic · client work', role: 'Main comic artist', motif: '🏴',
+        img: 'assets/img/comics/blackspot-color.jpg', pos: '50% 30%',
+        blurb: "A graphic adaptation of Robert Louis Stevenson's Treasure Island, from a script by New York Times best-selling author Jonathan Hennessey. I was the main comic artist: here are my character studies and one page from pencils to inks to color. The project stopped at an early stage.",
+        sections: [{ h: 'From pencils to color', gallery: ['assets/img/comics/blackspot-pencils.jpg', 'assets/img/comics/blackspot-inks.jpg', 'assets/img/comics/blackspot-color.jpg'] }, { h: 'Character studies', gallery: ['assets/img/comics/blackspot-characters.jpg'] }] },
       { id: '24-hours-of-rain', page: 'comics', title: '24 Hours of Rain', kind: 'illustrated book · work in progress', role: 'Writer & artist', motif: '☔',
         img: 'assets/img/table/24hor-sketches.jpg',
         tagline: 'Work in progress: first sketches for the 13 chapters',
@@ -719,8 +723,8 @@ export const lenses = {
         tagline: 'B5 book (18.2 × 25.7 cm), ~48 pages, printed · self-published 2027',
         blurb: "Every time Maya turns 16, a strange force called the Distortion ends her life and she starts over, reliving the same years with her grandpa and her best friends. When her grandpa gives her a mirror necklace, she finally finds a way to fight back. A hand-drawn manga about loss, change and being brave enough to live a life you don't need to repeat." },
       mod: { kind: 'My own webtoon IP', blurb: (b) => b.replace('My most personal story, drawn fully by hand. No AI, ever. ', 'My most personal story. '), gallery: ['assets/img/comics/mod-phones-1.jpg', 'assets/img/comics/mod-phones-2.jpg', 'assets/img/comics/mod-phones-3.jpg', 'assets/img/comics/mod-phones-4.jpg'] },
-      'rosa-cuchillo': { gallery: ['assets/img/comics/rosa-cover-fan.jpg', 'assets/img/comics/rosa-spread-1.jpg', 'assets/img/comics/rosa-spread-2.jpg', 'assets/img/comics/rosa-spread-3.jpg', 'assets/img/comics/rosa-spread-4.jpg'] },
-      'mario-vargas-llosa': { img: 'assets/img/comics/mario-spread-2.jpg', pos: '50% 50%', gallery: ['assets/img/comics/mario-spread-1.jpg', 'assets/img/comics/mario-spread-2.jpg', 'assets/img/comics/mario-spread-3.jpg', 'assets/img/comics/mario-spread-4.jpg'] },
+      'rosa-cuchillo': { gallery: null, sections: [{ h: 'The book', gallery: ['assets/img/comics/rosa-cover-fan.jpg', 'assets/img/comics/rosa-spread-1.jpg', 'assets/img/comics/rosa-spread-2.jpg', 'assets/img/comics/rosa-spread-3.jpg', 'assets/img/comics/rosa-spread-4.jpg'] }, { h: 'Pages from the book', text: 'Penciled, inked and colored by me, in black, white and red.', gallery: ['assets/img/comics/rosa-page-01.jpg', 'assets/img/comics/rosa-page-02.jpg', 'assets/img/comics/rosa-page-05.jpg', 'assets/img/comics/rosa-page-06.jpg', 'assets/img/comics/rosa-page-10.jpg', 'assets/img/comics/rosa-page-12.jpg', 'assets/img/comics/rosa-page-14.jpg', 'assets/img/comics/rosa-page-16.jpg', 'assets/img/comics/rosa-page-17.jpg', 'assets/img/comics/rosa-page-25.jpg', 'assets/img/comics/rosa-page-27.jpg', 'assets/img/comics/rosa-page-28.jpg'] }] },
+      'mario-vargas-llosa': { img: 'assets/img/comics/mario-cover-thumb.jpg', pos: '50% 40%', gallery: ['assets/img/comics/mario-cover-fan.jpg', 'assets/img/comics/mario-spread-1.jpg', 'assets/img/comics/mario-spread-2.jpg', 'assets/img/comics/mario-spread-3.jpg', 'assets/img/comics/mario-spread-4.jpg'] },
     },
     move: { 'rosa-cuchillo': 'editorial', 'mario-vargas-llosa': 'editorial', distortion: 'table' },
     titles: {
@@ -729,7 +733,7 @@ export const lenses = {
         list: [
           ['Sketch commissions', 'live hand-drawn sketches of my original characters, or custom sketches, drawn at the table · postcard format (4 × 6 in), thick paper'],
         ] },
-      editorial: { title: 'editorial publications', note: 'Penguin Random House', cols: 2, tint: 'blue' },
+      editorial: { title: 'editorial publications', note: 'Penguin Random House + client comics', cols: 2, tint: 'blue' },
       awards: { title: 'publications & awards', note: 'in print + online' },
     },
     talks: noAI, press: noAI, awards: noAI,
